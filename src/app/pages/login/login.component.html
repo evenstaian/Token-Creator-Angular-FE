@@ -1,0 +1,57 @@
+<div class="content">
+    <div class="row" style="height: 100%;">
+        <div class="col-lg-6 d-flex align-items-center banner-login">
+            <div class="row caixa">
+                <div class="row justify-content-center login" >
+                    
+                    <div *ngIf="step1 && !step2" class="row step" >
+                        <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
+                            <div class="form-group">
+                                <input type="text" class="form-control text-center" placeholder="CPF"
+                                    formControlName="cpf" [textMask]="{mask: cpf_mask}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control text-center" placeholder="Senha"
+                                    formControlName="password" required>
+                            </div>
+                            <swal #swalWarning1 title="Atencão!" text={{errorMessage}}
+                                icon="warning">
+                            </swal>
+                            <button type="submit" class="btn btn-panda btn-block">Entrar</button>
+                        </form>
+                    </div>
+
+                    <div *ngIf="!step1 && step2" class="row step">
+                        <form [formGroup]="formCode" (ngSubmit)="login()">
+                            <p class="text-center">Agora você deve informar o código enviado para seu email cadastrado.</p>
+                            <div class="form-group">
+                                <input type="text" class="form-control text-center" placeholder="CÓDIGO"
+                                    formControlName="code" required>
+                            </div>
+                            <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
+                            <swal #swalWarning2 title="Atencão!" text={{errorMessage}}
+                                icon="warning">
+                            </swal>
+                            <swal #swalWarning3 title="Atencão!" text="Código reenviado! Tente novamente!"
+                                icon="success">
+                            </swal>
+                            <button type="submit" class="btn btn-panda btn-block">Entrar</button>
+                        </form>
+                    </div>
+
+                    <p class="help">Precisa de ajuda? <label
+                            style="font-weight: 700; ">Suporte Tokeniza Brasil</label></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fullscreen_shadow" *ngIf="loader">
+</div>
+
+<!--div class="fullscreen" *ngIf="loader">
+    <div class="box">
+        <app-loader></app-loader>
+    </div>
+</div-->

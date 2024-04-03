@@ -1,0 +1,21 @@
+service: tokeniza-brasil-ng
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+  - url: /
+    secure: always
+    static_files: cripto-lab-ng/index.html
+    upload: cripto-lab-ng/index.html
+
+  #  Routing rules for resources, css, js, images etc. Any file with format filename.ext
+  - url: /(.*\.(.+))$
+    secure: always
+    static_files: cripto-lab-ng/\1
+    upload: cripto-lab-ng/(.*\.(.+))$
+
+  #  Routing rule for Angular Routing
+  - url: /(.*)
+    secure: always
+    static_files: cripto-lab-ng/index.html
+    upload: cripto-lab-ng/index.html

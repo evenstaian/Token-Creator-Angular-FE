@@ -1,0 +1,5 @@
+<div class="error-box" [ngStyle]="{'border': (config.type==='error' ? 'solid 1px red' : 'solid 1px #4cbb17')}">
+    <p class="error-title text-center" [ngStyle]="{'color': (config.type==='error' ? 'red' : '#4cbb17')}">{{config.title}}</p>
+    <p class="error-text text-center" [ngStyle]="{'color': (config.type==='error' ? 'red' : '#4cbb17')}">{{config.subtitle}}</p>
+</div>
+  

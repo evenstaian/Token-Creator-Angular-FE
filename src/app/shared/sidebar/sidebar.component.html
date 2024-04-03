@@ -1,0 +1,67 @@
+<nav class="sidebar-nav" style="margin-top: 30px; background-color: #F3FCFF; color: #606060 !important">
+
+    <div style="margin-left: 15px; margin-right: 15px;" *ngIf="!showAllMenu">
+        <ngx-skeleton-loader
+            count="8"
+            animation="progress-dark"
+            [theme]="{ 
+            height: '30px',
+            'background-color': '#204fcf',
+            'margin-top': '25px'
+            }"
+        ></ngx-skeleton-loader>
+    </div>
+
+    <ul id="sidebarnav" *ngIf="showAllMenu">
+        <!-- First level menu -->
+        <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title"
+            *ngFor="let sidebarnavItem of sidebarnavItems"
+            [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+            <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div>
+
+            <a class="sidebar-link waves-effect waves-dark"
+                [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null"
+                [ngClass]="[sidebarnavItem.class]" *ngIf="!sidebarnavItem.extralink && sidebarnavItem.show === 1"
+                (click)="addExpandClass(sidebarnavItem.title)"
+                [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+
+                <i [ngClass]="[sidebarnavItem.icon]"></i>
+
+                <span class="hide-menu">{{sidebarnavItem.title}}</span>
+            </a>
+
+            <!-- Second level menu -->
+            <ul class="collapse first-level in">
+                <li class="sidebar-item" *ngFor="let sidebarnavSubItem of sidebarnavItem.submenu">
+                    <a class="sidebar-link waves-effect waves-dark" [routerLink]="sidebarnavSubItem.path"
+                        [routerLinkActive]="sidebarnavSubItem.length != 0 ? '' : 'active'" *ngIf="sidebarnavSubItem.show === 1">
+                        <i ></i>
+                        <div *ngIf="sidebarnavSubItem.new" style="padding: 3px; padding-left: 6px; padding-right: 6px; color: #fff; background-color: red; border-radius: 10px; float: left; margin-right: 10px; font-size: 10px;">Novo</div>
+                        <span class="hide-menu">{{sidebarnavSubItem.title}}</span>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+
+        <div class="sidebar-item" style="height:60px">
+            
+        </div>
+
+        <div id="logout" class="d-flex top-navbar navbar-expand-md navbar-light">
+            <div class="navbar-collapse collapse">
+            
+                <li class="sidebar-logout-item">
+                    <a class="sidebar-link waves-effect waves-dark"
+                    (click)="logout()">
+                        <i [ngClass]="['mdi mdi-logout']"></i>
+        
+                        <span class="hide-menu">SAIR DA CONTA</span>
+                    </a>
+                </li>
+
+        </div>
+        </div>
+
+    </ul>
+</nav>
