@@ -10,17 +10,17 @@ $themecolor-alt: #26c6da;
 $theme-light:#fff;
 $theme-dark:#212529;
 
-$skin1: #F3FCFF !important;//
-$skin2: linear-gradient(to right, #25922C, #D1C902) !important;///
+$skin1: #fff !important;//
+$skin2: #3d3d3d !important;///
 $skin6:$skin2;
 
 /*Topbar Colors*/
 
 $topbar:$skin2;
-$topbar-height:64px;
+$topbar-height:100px;
 $topbar-navlink-padding:0px 14px;
 $topbar-navlink-font-size:0.875rem;
-$topbar-navlink-height:64px;
+$topbar-navlink-height:100px;
 $topbar-navbrand-padding:0 10px 0 10px;
 
 /*Sidebar Colors*/
@@ -171,7 +171,7 @@ $enable-print-styles: true !default;
 // Settings for the  element.
 
 $main-body-bg: #fff!default;
-$body-bg: #eef5f9;
+$body-bg: #3D3D3D;
 $body-color: #3e5569 !default;
 $grid-gutter-width: 20px !default;
 

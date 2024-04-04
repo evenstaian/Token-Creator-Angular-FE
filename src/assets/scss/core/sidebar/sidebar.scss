@@ -140,6 +140,11 @@ sidebar navigation
             opacity: 0.3;
             text-transform: uppercase; i{line-height: 30px; margin:0 5px;}
         }
+
+        .item-name {
+            color: #9f18fd;
+            font-weight: 700;
+        }
     }
     >#sidebarnav >.sidebar-item >.sidebar-link:hover{
         /*background: rgba(0, 0, 0, 0.04);*/

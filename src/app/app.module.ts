@@ -53,6 +53,8 @@ import { CreateComponent } from './Modules/Titulos/create/create.component';
 import { ResponseBoxComponent } from './component/response-box/response-box.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
 import { BannerSlideshowComponent } from './component/banner-slideshow/banner-slideshow.component';
+import { CircularThumbImageComponent } from './component/circular-thumb-image/circular-thumb-image.component';
+import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -79,6 +81,8 @@ export function playerFactory() {
     SignupComponent,
     InsiderComponent,
     BannerSlideshowComponent,
+    CircularThumbImageComponent,
+    MyListComponent
   ],
   imports: [
     CommonModule,

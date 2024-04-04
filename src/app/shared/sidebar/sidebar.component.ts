@@ -9,7 +9,8 @@ import { Clean } from 'src/utils/clean';
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   showAllMenu = true;
@@ -48,23 +49,33 @@ export class SidebarComponent implements OnInit {
   createMenu() {
     this.sidebarnavItems = [
       {
-        path: '/listar',
-        title: 'Listar Títulos',
-        icon: 'mdi mdi-format-list-bulleted',
-        class: '',
+        path: '/my-tokens',
+        title: 'Tokens',
+        icon: '',
+        class: 'item-name',
         extralink: false,
         show: 1,
-        submenu: []
+        submenu: [
+          {
+            path: '/create_token',
+            title: 'Criar Token',
+            icon: 'mdi mdi-format-list-bulleted',
+            class: '',
+            extralink: false,
+            show: 1,
+            submenu: []
+          },
+          {
+            path: '/my-tokens',
+            title: 'Seus Tokens',
+            icon: 'mdi mdi-plus-box',
+            class: '',
+            extralink: false,
+            show: 1,
+            submenu: []
+          }
+        ]
       },
-      {
-        path: '/criar-titulo',
-        title: 'Criar Título',
-        icon: 'mdi mdi-plus-box',
-        class: '',
-        extralink: false,
-        show: 1,
-        submenu: []
-      }
     ]
   }
 }

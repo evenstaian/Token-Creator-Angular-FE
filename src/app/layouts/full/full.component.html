@@ -29,7 +29,7 @@
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- Light Logo text -->
-                        <img src="assets/images/vectors/ic_logo_blue.svg" style="margin: 15px; height: 50px; margin-bottom: 5px" class="light-logo" alt="homepage" />
+                        <img src="assets/images/vectors/ic_criptolab.svg" style="margin: 15px; height: 50px; margin-bottom: 5px" class="light-logo" alt="homepage" />
                     </span>
                 </a>
                 <!-- ============================================================== -->
@@ -74,26 +74,6 @@
         <!-- ============================================================== -->
         <app-breadcrumb></app-breadcrumb>
         <div class="container-fluid">
-            <div style="width: auto; font-family: 'Poppins'; line-height: 15px; margin-top: 10px; margin-bottom: 20px; padding: 15px; border-radius: 15px; border: solid 2px #5DA41E; color: #5DA41E;">
-                <p>Saldo de Real Tokenizado</p>
-                <p *ngIf="!showBalanceLoader" style="font-size: 30px; font-weight: 700;">{{rtBalance}} Rt</p>
-
-                <ngx-skeleton-loader
-                    count="1"
-                    animation="progress-light"
-                    [theme]="{ 
-                    height: '30px',
-                    width: '30%',
-                    'background-color': '#e2e2e2'
-                    }"
-
-                    *ngIf="showBalanceLoader"
-                ></ngx-skeleton-loader>
-
-                <div (click)="getBalance()" style="float: right;">
-                    <i class="mdi mdi-refresh"></i>
-                </div>
-            </div>
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->

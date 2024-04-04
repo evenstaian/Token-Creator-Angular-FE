@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.circular-image {
+    width: 50px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(#A511FF, #00C0C0);
+}
+
+.message {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 10px;
+}

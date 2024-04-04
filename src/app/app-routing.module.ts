@@ -8,6 +8,7 @@ import { AuthGuardIn } from '../services/guard/auth-in-guard.service'
 import { CreateComponent } from './Modules/Titulos/create/create.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
+import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 
 export const Approutes: Routes = [
   // {
@@ -39,6 +40,15 @@ export const Approutes: Routes = [
   },
 
   {
+    path: 'create_token',
+    component: InsiderComponent,
+    children: [
+
+    ],
+    canActivate: [AuthGuard]
+  },
+
+  {
     path: '',
     component: FullComponent,
     children: [
@@ -54,6 +64,10 @@ export const Approutes: Routes = [
       {
         path: 'criar-titulo',
         component: CreateComponent
+      },
+      {
+        path: 'my-tokens',
+        component: MyListComponent
       },
     ],
     canActivate: [AuthGuard]

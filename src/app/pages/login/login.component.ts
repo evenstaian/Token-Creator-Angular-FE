@@ -113,6 +113,7 @@ export class LoginComponent implements OnInit {
 
   logged(response: any){
     localStorage.setItem('auth_token', response.authToken);
+    localStorage.setItem('user_data', JSON.stringify(response.user));
     this.showLoader(false);
     this.router.navigate(['/criar-titulo']);
   }
