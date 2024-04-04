@@ -38,6 +38,7 @@ import { AuthGuardIn } from 'src/services/guard/auth-in-guard.service';
 import { RouteGuard } from 'src/services/guard/route-guard.service';
 
 import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 import { HttpErrorHandler } from 'src/services/http-handle-error.service';
 import { MessageService } from 'src/services/message.service';
 import { Clean } from 'src/utils/clean';
@@ -73,6 +74,7 @@ export function playerFactory() {
     LoginComponent,
     CreateComponent,
     ResponseBoxComponent,
+    SignupComponent,
   ],
   imports: [
     CommonModule,
