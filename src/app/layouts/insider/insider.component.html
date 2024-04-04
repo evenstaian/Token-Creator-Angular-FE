@@ -1,0 +1,40 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" [ngClass]="{'show-sidebar': showMobileMenu}" dir="ltr" data-theme="light" data-layout="vertical"
+    [attr.data-sidebartype]="sidebartype" data-sidebar-position="absolute" data-header-position="fixed"
+    data-boxed-layout="full">
+    
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" data-sidebarbg="skin1" (mouseover)="Logo()" (mouseout)="Logo()">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar" [perfectScrollbar]="config"> 
+            <div style="background-color: black;"></div>
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <router-outlet></router-outlet>
+            <!-- ============================================================== -->
+            <!-- End Start Page Content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
