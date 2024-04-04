@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private rotas: Router){}
 
     canActivate() :boolean {
-        if(localStorage.getItem('auth_token') != null){
+        if(localStorage.getItem('auth_token')){
             return true 
         }else{
             this.rotas.navigate(['/login']);
