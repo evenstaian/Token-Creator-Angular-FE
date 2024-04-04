@@ -1,44 +1,52 @@
-<div class="content">
-    <swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}}
-        icon={{alertIcon}}>
+<div class="content p-5">
+    <swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
     </swal>
 
-    <div class="row" style="height: 100%;">
-        <div class="col-lg-6 d-flex align-items-center banner-login">
-            <div class="row caixa">
-                <div class="row justify-content-center login" >
-                    
-                    <div *ngIf="step1 && !step2" class="row step" >
-                        <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
-                            <div class="form-group">
-                                <input type="email" class="form-control text-center" placeholder="Email"
-                                    formControlName="email" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control text-center" placeholder="Senha"
-                                    formControlName="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-panda btn-block">Entrar</button>
-                        </form>
-                    </div>
-
-                    <div *ngIf="!step1 && step2" class="row step">
-                        <form [formGroup]="formCode" (ngSubmit)="login()">
-                            <p class="text-center">Agora você deve informar o código enviado para seu email cadastrado.</p>
-                            <div class="form-group">
-                                <input type="text" class="form-control text-center" placeholder="CÓDIGO"
-                                    formControlName="code" required>
-                            </div>
-                            <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
-                            <button type="submit" class="btn btn-panda btn-block">Entrar</button>
-                        </form>
-                    </div>
-
-                    <p class="help">Precisa de ajuda? <label
-                            style="font-weight: 700; ">Suporte CriptoLab</label></p>
+    <div class="h-100 d-flex justify-content-center align-items-center">
+        <div style="width: 55rem;">
+            <div style="margin-bottom: 10rem;">
+                <img src="assets/images/CriptoLab.svg">
+            </div>
+            
+            <div *ngIf="step1 && !step2">
+                <div>
+                    <p>Entre na sua conta <br /> <span class="help">Informe seus dados abaixo</span></p>
                 </div>
+                <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="email" formControlName="email"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="senha"
+                            formControlName="password" required>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-panda px-4">Entrar</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div *ngIf="!step1 && step2">
+                <form [formGroup]="formCode" (ngSubmit)="login()">
+                    <p class="text-center">Agora você deve informar o código enviado para seu email cadastrado.</p>
+                    <div class="form-group">
+                        <input type="text" class="form-control text-center" placeholder="CÓDIGO" formControlName="code"
+                            required>
+                    </div>
+                    <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-panda px-4">Entrar</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div style="margin-top: 10rem;">
+                <p class="help">Não tem uma conta? <label class="resend">Crie uma agora</label></p>
             </div>
         </div>
+        
+        
     </div>
 </div>
 
