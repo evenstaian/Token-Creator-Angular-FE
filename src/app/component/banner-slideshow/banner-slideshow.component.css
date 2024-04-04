@@ -2,3 +2,16 @@
     height: 100%;
     object-fit: cover;
 }
+
+.container {
+    position: relative; /* Para posicionar as divs filhas com posição absoluta */
+}
+
+.image-wrapper {
+    position: absolute; /* Para posicionar as divs uma sobre a outra */
+    top: 0;
+    left: -250px;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Centralize horizontalmente */
+    align-items: center; /* Centralize verticalmente */
+}
