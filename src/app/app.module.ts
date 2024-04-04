@@ -52,6 +52,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { CreateComponent } from './Modules/Titulos/create/create.component';
 import { ResponseBoxComponent } from './component/response-box/response-box.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
+import { BannerSlideshowComponent } from './component/banner-slideshow/banner-slideshow.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -77,6 +78,7 @@ export function playerFactory() {
     ResponseBoxComponent,
     SignupComponent,
     InsiderComponent,
+    BannerSlideshowComponent,
   ],
   imports: [
     CommonModule,

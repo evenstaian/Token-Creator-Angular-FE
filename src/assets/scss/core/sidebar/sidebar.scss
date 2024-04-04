@@ -16,7 +16,6 @@ Main sidebar
     top: 0px;
     
     z-index: 10;
-    padding-top: 64px;
     background: $sidebar;
     box-shadow: $shadow;
     transition: 0.2s ease-in;
@@ -27,6 +26,11 @@ sidebar navigation
 ******************/
 .scroll-sidebar {
     height: calc(100% - 20px);
+    position: relative;
+}
+
+.scroll-insider-sidebar {
+    height: 100%;
     position: relative;
 }
 
