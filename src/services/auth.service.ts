@@ -1,18 +1,18 @@
 import { Injectable, NgModule } from "@angular/core"
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpErrorResponse } from "@angular/common/http"
 import { HttpHeaders } from '@angular/common/http'
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from './http-handle-error.service';
 import { Constants } from "../utils/Constantes";
 
-const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-     // 'Authorization': ''
-    })
-  };
+enum RestMethods {
+    POST = 'POST',
+    GET = 'GET',
+    PATCH = 'PATCH',
+    DELETE = 'DELETE'
+}
 
 @Injectable()
 export class Auth {
@@ -21,41 +21,65 @@ export class Auth {
     apiUrlImg = "//Constants.API_IMAGENS"
 
     //Endpoints
-    pre_login = 'pre_login';
-    login = 'login';
-    logout = 'logout';
+    _preLogin = 'pre_login';
+    _login = 'login';
+    _logout = 'logout';
 
-    private handleError: HandleError;
-
-    public getHttpOptions(){
-        let auth_token = localStorage.getItem('auth_token');
-        var httpOptions
-        return httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type':  'application/json',
-                //'Authorization': auth_token
-            })
-          };
+    constructor(private http: HttpClient){
     }
 
-    constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler){
-        this.handleError = httpErrorHandler.createHandleError('AuthService');
+    private handleError(error: HttpErrorResponse): Observable<any> {
+        let errorMessage = 'An unknown error occurred';
+        if (error.error instanceof ErrorEvent) {
+            errorMessage = `Error: ${error.error.message}`;
+        } else {
+            switch (error.status) {
+                case 400:
+                    return throwError(error.error.error);
+            }
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        return throwError(errorMessage);
     }
 
-    public preLoginAdmin(cpf: string, password: string): Observable<Object | null>{
-        //console.log("entrou em admin", this.http.post(this.apiUrl+this.login, {cpf, password}))
-        return this.http.post(this.apiUrl+this.pre_login, {cpf, password})
-        .pipe(
-            catchError(this.handleError('preloginPL', null))
-        )
+    private getAuthTokenHeader(): HttpHeaders {
+        const authToken = localStorage.getItem('auth_token');
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': authToken ? authToken : ''
+        });
     }
 
-    public loginAdmin(cpf: string, password: string, code: string): Observable<Object | null>{
-        //console.log("entrou em admin", this.http.post(this.apiUrl+this.login, {cpf, password}))
-        return this.http.post(this.apiUrl+this.login, {cpf, password, code})
-        .pipe(
-            catchError(this.handleError('loginPL', null))
-        )
+    private performRequest(method: RestMethods, endpoint: string, body: any): Observable<any> {
+        const httpOptionsWithAuthToken = {
+            headers: this.getAuthTokenHeader()
+        };
+
+        let requestObservable: Observable<any>;
+        let moduleString: string = "/login/"
+
+        switch (method) {
+            case RestMethods.POST:
+                requestObservable = this.http.post(`${this.apiUrl}${moduleString}${endpoint}`, body, httpOptionsWithAuthToken);
+                break;
+            case RestMethods.GET:
+                requestObservable = this.http.get(`${this.apiUrl}${moduleString}${endpoint}`, httpOptionsWithAuthToken);
+                break;
+            default:
+                throw new Error(`Unsupported HTTP method: ${method}`);
+        }
+
+        return requestObservable.pipe(
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        );
+    }
+
+    public preLogin(email: string, password: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._preLogin, { email, password });
+    }
+
+    public login(identifier: string, password: string, otpCode: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._login, { identifier, password, otpCode });
     }
 
 }

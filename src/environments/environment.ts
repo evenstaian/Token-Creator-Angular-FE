@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: `https://tokeniza-titulos-service-dot-pandapay.rj.r.appspot.com/`
+  apiUrl: `https://criptolab-auth-service-dot-pandapay.rj.r.appspot.com`
 };
 
 /*

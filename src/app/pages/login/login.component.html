@@ -1,14 +1,18 @@
 <div class="content">
+    <swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}}
+        icon="success">
+    </swal>
+
     <div class="row" style="height: 100%;">
         <div class="col-lg-6 d-flex align-items-center banner-login">
             <div class="row caixa">
                 <div class="row justify-content-center login" >
                     
                     <div *ngIf="step1 && !step2" class="row step" >
-                        <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
+                        <form [formGroup]="formLogin" (ngSubmit)="login()">
                             <div class="form-group">
-                                <input type="text" class="form-control text-center" placeholder="CPF"
-                                    formControlName="cpf" [textMask]="{mask: cpf_mask}" required>
+                                <input type="text" class="form-control text-center" placeholder="Email"
+                                    formControlName="email" required>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control text-center" placeholder="Senha"

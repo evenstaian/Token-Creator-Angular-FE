@@ -15,12 +15,16 @@ import { NETWORK_TYPES, STATUS } from 'criptolab-types';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
   @ViewChild('swalWarning1') private atencaoSwalLogin: SwalComponent
   @ViewChild('swalWarning2') private atencaoSwalCode: SwalComponent
   @ViewChild('swalWarning3') private atencaoSwalCodeError: SwalComponent
 
+  alertTitle="TEste"
+  alertMessage="Teste"
+
   public formLogin: FormGroup = new FormGroup({
-    'cpf': new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+    'email': new FormControl(null),
     'password': new FormControl(null)
   })
 
@@ -62,30 +66,26 @@ export class LoginComponent implements OnInit {
 
   public login(){
     this.showLoader(true);
-    this.auth.loginAdmin(this.cpf, this.password, this.formCode.value.code)
-      .subscribe(data =>{
-        if (data != null) {
-          this.resposta_dados = data;
-          if (this.resposta_dados.code === 200) {
-            this.dados_conta = this.resposta_dados.data
-            localStorage.setItem('auth_token', this.dados_conta.user.token);
-            localStorage.setItem('dados_conta', JSON.stringify(this.dados_conta))
-            this.showLoader(false);
-            this.router.navigate(['/']);
-          }else{
-            this.showLoader(false);
-            this.errorMessage = this.resposta_dados.message
-            setTimeout(() => {
-              this.atencaoSwalCode.fire();
-            }, 200);
-          }
-        }
+    this.auth.login(this.formLogin.value.email, this.formLogin.value.password, this.formCode.value.code || " ")
+      .subscribe(data => {
+        const response: any = data;
+        localStorage.setItem('auth_token', response.authToken);
+        this.showLoader(false);
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log(error)
+        this.showLoader(false);
+        this.errorMessage = error
+        setTimeout(() => {
+          this.alertSwal.fire();
+        }, 200);
       })
   }
 
   resendCode(){
     this.showLoader(true);
-    this.auth.preLoginAdmin(this.cpf, this.password)
+    this.auth.preLogin(this.cpf, this.password)
       .subscribe(data =>{
         if (data != null) {
           let datas : any = data;
