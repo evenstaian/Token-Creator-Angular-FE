@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { trigger, transition, style, animate } from '@angular/animations';
 import {
   animate,
   state,
@@ -58,12 +57,6 @@ const VOID = 'void';
 
 export class BannerSlideshowComponent implements OnInit {
 
-  // images: string[] = [
-  //   "assets/images/big/monas.jpeg",
-  //   "assets/images/big/monkey_red.jpeg",
-  //   "assets/images/big/isometric.jpeg",
-  //   "assets/images/big/canudo.jpeg"
-  // ];
   lastIndex = 0;
   currentIndex = 0;
 
@@ -89,9 +82,7 @@ export class BannerSlideshowComponent implements OnInit {
   counter = 0;
   animating = false;
   stop = false;
-  pauseTime = 1000; // time to show image before continuing animation (ms)
-
-  // constructor() { }
+  pauseTime = 1000;
 
   ngOnInit(): void {
 

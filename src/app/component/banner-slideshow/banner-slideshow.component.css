@@ -4,14 +4,14 @@
 }
 
 .container {
-    position: relative; /* Para posicionar as divs filhas com posição absoluta */
+    position: relative;
 }
 
 .image-wrapper {
-    position: absolute; /* Para posicionar as divs uma sobre a outra */
+    position: absolute;
     top: 0;
     left: -250px;
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Centralize horizontalmente */
-    align-items: center; /* Centralize verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
