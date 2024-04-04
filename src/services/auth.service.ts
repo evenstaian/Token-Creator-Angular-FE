@@ -23,6 +23,8 @@ export class Auth {
     //Endpoints
     _preLogin = 'pre_login';
     _login = 'login';
+    _preSignup = 'pre_signup';
+    _signup = 'signup';
     _logout = 'logout';
 
     constructor(private http: HttpClient){
@@ -80,6 +82,14 @@ export class Auth {
 
     public login(identifier: string, password: string, otpCode: string): Observable<Object | null>{
         return this.performRequest(RestMethods.POST, this._login, { identifier, password, otpCode });
+    }
+
+    public preSignup(email: string, password: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._preSignup, { email, password });
+    }
+
+    public signup(email: string, password: string, name: string, otpCode: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._signup, { email, name, password, otpCode });
     }
 
 }

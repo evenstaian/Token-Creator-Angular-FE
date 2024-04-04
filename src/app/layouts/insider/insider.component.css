@@ -1,0 +1,11 @@
+.container {
+    height: 100%; /* altura da div mãe */
+    overflow: hidden; /* oculta o conteúdo que ultrapassa os limites */
+    display: flex; 
+    justify-content: center; 
+    overflow: hidden;
+}
+
+.child {
+    position: relative; 
+}

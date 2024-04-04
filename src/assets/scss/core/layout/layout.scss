@@ -20,6 +20,17 @@
     min-height: calc(100vh - 180px);
 }
 
+.page-wrapper-nopadding {
+    background: $body-bg;
+    position: relative;
+    transition: 0.2s ease-in;
+}
+
+.page-wrapper-nopadding>.container-fluid {
+    min-height: 100%;
+    padding: 0;
+}
+
 /*******************
  Footer
 *******************/
@@ -44,6 +55,9 @@
         .page-wrapper {
             margin-left: $sidebar-width-full;
         }
+        .page-wrapper-nopadding {
+            margin-left: $sidebar-width-full;
+        }
     }
     /*Sidebar position*/
     &[data-sidebar-position="fixed"] {
@@ -63,6 +77,9 @@
         }
         .page-wrapper {
             padding-top: $topbar-height;
+        }
+        .page-wrapper-nopadding {
+            padding-top: 0;
         }
     }
 }

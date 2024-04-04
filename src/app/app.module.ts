@@ -38,6 +38,7 @@ import { AuthGuardIn } from 'src/services/guard/auth-in-guard.service';
 import { RouteGuard } from 'src/services/guard/route-guard.service';
 
 import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 import { HttpErrorHandler } from 'src/services/http-handle-error.service';
 import { MessageService } from 'src/services/message.service';
 import { Clean } from 'src/utils/clean';
@@ -50,6 +51,8 @@ import { ChartsModule } from 'ng2-charts';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { CreateComponent } from './Modules/Titulos/create/create.component';
 import { ResponseBoxComponent } from './component/response-box/response-box.component';
+import { InsiderComponent } from './layouts/insider/insider.component';
+import { BannerSlideshowComponent } from './component/banner-slideshow/banner-slideshow.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -73,6 +76,9 @@ export function playerFactory() {
     LoginComponent,
     CreateComponent,
     ResponseBoxComponent,
+    SignupComponent,
+    InsiderComponent,
+    BannerSlideshowComponent,
   ],
   imports: [
     CommonModule,

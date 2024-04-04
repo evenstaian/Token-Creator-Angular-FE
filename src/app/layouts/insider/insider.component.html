@@ -1,0 +1,20 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" [ngClass]="{'show-sidebar': showMobileMenu}" dir="ltr" data-theme="light" data-layout="vertical"
+    [attr.data-sidebartype]="sidebartype" data-sidebar-position="absolute" data-header-position="fixed"
+    data-boxed-layout="full">
+    
+    <aside class="left-sidebar" data-sidebarbg="skin1">
+        <!-- Sidebar scroll-->
+        <div class="container"> 
+            <app-banner-slideshow class="child"></app-banner-slideshow>
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper-nopadding">
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

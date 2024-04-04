@@ -1,0 +1,17 @@
+.fullscreen-image {
+    height: 100%;
+    object-fit: cover;
+}
+
+.container {
+    position: relative;
+}
+
+.image-wrapper {
+    position: absolute;
+    top: 0;
+    left: -250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
