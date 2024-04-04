@@ -74,8 +74,8 @@ export class Auth {
         );
     }
 
-    public preLogin(email: string, password: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._preLogin, { email, password });
+    public preLogin(identifier: string, password: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._preLogin, { identifier, password });
     }
 
     public login(identifier: string, password: string, otpCode: string): Observable<Object | null>{

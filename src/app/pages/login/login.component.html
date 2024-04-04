@@ -1,6 +1,6 @@
 <div class="content">
     <swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}}
-        icon="success">
+        icon={{alertIcon}}>
     </swal>
 
     <div class="row" style="height: 100%;">
@@ -9,18 +9,15 @@
                 <div class="row justify-content-center login" >
                     
                     <div *ngIf="step1 && !step2" class="row step" >
-                        <form [formGroup]="formLogin" (ngSubmit)="login()">
+                        <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
                             <div class="form-group">
-                                <input type="text" class="form-control text-center" placeholder="Email"
+                                <input type="email" class="form-control text-center" placeholder="Email"
                                     formControlName="email" required>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control text-center" placeholder="Senha"
                                     formControlName="password" required>
                             </div>
-                            <swal #swalWarning1 title="Atencão!" text={{errorMessage}}
-                                icon="warning">
-                            </swal>
                             <button type="submit" class="btn btn-panda btn-block">Entrar</button>
                         </form>
                     </div>
@@ -33,12 +30,6 @@
                                     formControlName="code" required>
                             </div>
                             <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
-                            <swal #swalWarning2 title="Atencão!" text={{errorMessage}}
-                                icon="warning">
-                            </swal>
-                            <swal #swalWarning3 title="Atencão!" text="Código reenviado! Tente novamente!"
-                                icon="success">
-                            </swal>
                             <button type="submit" class="btn btn-panda btn-block">Entrar</button>
                         </form>
                     </div>

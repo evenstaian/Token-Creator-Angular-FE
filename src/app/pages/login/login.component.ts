@@ -16,10 +16,8 @@ import { NETWORK_TYPES, STATUS } from 'criptolab-types';
 export class LoginComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
-  @ViewChild('swalWarning1') private atencaoSwalLogin: SwalComponent
-  @ViewChild('swalWarning2') private atencaoSwalCode: SwalComponent
-  @ViewChild('swalWarning3') private atencaoSwalCodeError: SwalComponent
 
+  alertIcon="warning"
   alertTitle="TEste"
   alertMessage="Teste"
 
@@ -61,7 +59,22 @@ export class LoginComponent implements OnInit {
   }
 
   public preLogin(): void {
-    this.router.navigate(['/criar-titulo']);
+    this.showLoader(true);
+    this.auth.preLogin(this.formLogin.value.email, this.formLogin.value.password)
+      .subscribe(data => {
+        const response: any = data;
+        if(response.user){
+          this.logged(response)
+          return
+        }
+
+        this.changeStep(false, true);
+      },
+      error => {
+        console.log(error)
+        this.showLoader(false);
+        this.showAlert(false, "Dados Incorretos", error);
+      })
   }
 
   public login(){
@@ -69,9 +82,24 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.formLogin.value.email, this.formLogin.value.password, this.formCode.value.code || " ")
       .subscribe(data => {
         const response: any = data;
-        localStorage.setItem('auth_token', response.authToken);
+        if(response.user){
+          this.logged(response)
+        }
+      },
+      error => {
+        console.log(error)
         this.showLoader(false);
-        this.router.navigate(['/']);
+        this.showAlert(false, "Dados Incorretos", error);
+      })
+  }
+
+  resendCode(){
+    this.showLoader(true);
+    this.auth.preLogin(this.formLogin.value.email, this.formLogin.value.password)
+      .subscribe(data => {
+        const response: any = data;
+        this.changeStep(false, true);
+        this.showLoader(false);
       },
       error => {
         console.log(error)
@@ -83,30 +111,30 @@ export class LoginComponent implements OnInit {
       })
   }
 
-  resendCode(){
-    this.showLoader(true);
-    this.auth.preLogin(this.cpf, this.password)
-      .subscribe(data =>{
-        if (data != null) {
-          let datas : any = data;
-         
-          if (datas.code === 200) {
-            this.showLoader(false);
-            this.atencaoSwalCodeError.fire()
-          } else {
-            this.showLoader(false);
-            
-          }
-        }
-      })
+  logged(response: any){
+    localStorage.setItem('auth_token', response.authToken);
+    this.showLoader(false);
+    this.router.navigate(['/criar-titulo']);
   }
 
   changeStep(step1: boolean, step2: boolean){
+    this.showLoader(false);
     this.step1 = step1;
     this.step2 = step2;
   }
 
   showLoader(status: boolean) {
     this.loader = status
+  }
+
+  showAlert(success: boolean, title: string, message: string){
+    this.showLoader(false);
+    this.alertIcon = success ? "success" : "warning";
+    this.alertTitle = title;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertSwal.fire();
+    }, 200);
   }
 }
