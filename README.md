@@ -1,9 +1,11 @@
-# TokenizaBrasil.gov - Angular Project
-
-Este é um projeto Angular desenvolvido para criar uma interface **Governo -> Rede DREX**, este projeto permite uma integração com a Web3 e controle de Acesso de funcionários do governo no acesso das carteiras permissionadas no Hyperledger Besu da RSFN.
-Para testes, não há ainda implementada uma camada de Authentication, pois consideramos que esta não é uma entrega prioritária para o Hackathon. Focamos no serviço cerne nesta PoC. Mas isto não significa que está fora de nosso Roadmap para proximas entregas.
+# CriptoLab Tokenizer - Angular Project
 
 ## Como Rodar Localmente
+
+### Configurações necessárias:
+- NodeJs 14
+- Python 2.7
+
 Certifique-se de ter o Node.js e o npm instalados em sua máquina. Clone este repositório e, em seguida, execute os seguintes comandos:
 
 ```bash

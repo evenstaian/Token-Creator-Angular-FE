@@ -1,4 +1,4 @@
-service: tokeniza-brasil-ng
+service: cripto-lab-ng
 runtime: python27
 api_version: 1
 threadsafe: true
