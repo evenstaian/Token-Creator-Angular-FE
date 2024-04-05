@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CircularThumbImageComponent implements OnInit {
 
-  @Input() imageUrl: string = "assets/images/users/4.jpg";
+  @Input() imageUrl: string = "assets/images/vectors/ic_user_placeholder.svg";
   @Input() hasMessage: boolean = true;
 
   userName: string;
