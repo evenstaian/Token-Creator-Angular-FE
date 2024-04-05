@@ -8,7 +8,7 @@ export class AuthGuardIn implements CanActivate {
 
     canActivate() :boolean {
         if(localStorage.getItem('auth_token')){
-            this.rotas.navigate(['/criar-titulo'])
+            this.rotas.navigate(['/my-tokens'])
             return false
         }else{
             return true

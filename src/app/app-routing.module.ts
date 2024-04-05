@@ -52,7 +52,7 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     children: [
-      { path: '', redirectTo: '/criar-titulo', pathMatch: 'full' },
+      { path: '', redirectTo: '/my-tokens', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
@@ -60,10 +60,6 @@ export const Approutes: Routes = [
       {
         path: 'component',
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
-      },
-      {
-        path: 'criar-titulo',
-        component: CreateComponent
       },
       {
         path: 'my-tokens',

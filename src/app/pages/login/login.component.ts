@@ -17,6 +17,16 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
+  pageTitles = {
+    title: "Entre na sua conta",
+    subtitle: "Informe seus dados abaixo"
+  }
+
+  step2Titles = {
+    title: "Informe o código de validação",
+    subtitle: "Agora você deve informar o código enviado para seu email cadastrado."
+  }
+
   alertIcon="warning"
   alertTitle="TEste"
   alertMessage="Teste"
@@ -60,6 +70,13 @@ export class LoginComponent implements OnInit {
 
   public preLogin(): void {
     this.showLoader(true);
+
+    if(!this.formLogin.value.email 
+      || !this.formLogin.value.password){
+      this.showAlert(false, "Informe todos os dados", "Não esqueça nenhum dado solicitado.");
+      return
+    }
+
     this.auth.preLogin(this.formLogin.value.email, this.formLogin.value.password)
       .subscribe(data => {
         const response: any = data;
@@ -104,10 +121,7 @@ export class LoginComponent implements OnInit {
       error => {
         console.log(error)
         this.showLoader(false);
-        this.errorMessage = error
-        setTimeout(() => {
-          this.alertSwal.fire();
-        }, 200);
+        this.showAlert(false, "Dados Incorretos", error);
       })
   }
 
@@ -115,7 +129,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('auth_token', response.authToken);
     localStorage.setItem('user_data', JSON.stringify(response.user));
     this.showLoader(false);
-    this.router.navigate(['/criar-titulo']);
+    this.router.navigate(['/my-tokens']);
   }
 
   changeStep(step1: boolean, step2: boolean){

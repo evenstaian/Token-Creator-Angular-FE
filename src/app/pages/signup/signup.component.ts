@@ -15,13 +15,24 @@ export class SignupComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
+  step1Titles = {
+    title: "Crie uma conta",
+    subtitle: "Informe seus dados abaixo"
+  }
+
+  step2Titles = {
+    title: "Confirme o acesso ao seu email",
+    subtitle: "Informe o código recebido no seu email"
+  }
+
   alertIcon: string;
   alertTitle: string;
   alertMessage: string;
 
   public formPreSignup: FormGroup = new FormGroup({
     'email': new FormControl(null),
-    'password': new FormControl(null)
+    'password': new FormControl(null),
+    'confirmPassword': new FormControl(null)
   })
 
   public formSignup: FormGroup = new FormGroup({
@@ -47,6 +58,19 @@ export class SignupComponent implements OnInit {
 
   public preSignup(): void {
     this.showLoader(true);
+
+    if(!this.formPreSignup.value.email 
+      || !this.formPreSignup.value.password 
+      || !this.formPreSignup.value.confirmPassword){
+      this.showAlert(false, "Informe todos os dados", "Não esqueça nenhum dado solicitado.");
+      return
+    }
+
+    if(this.formPreSignup.value.password != this.formPreSignup.value.confirmPassword){
+      this.showAlert(false, "Erro na Senha", "As senhas não conferem. Elas devem ser iguais!");
+      return
+    }
+
     this.auth.preSignup(this.formPreSignup.value.email, this.formPreSignup.value.password)
       .subscribe(data => {
         const response: any = data;
@@ -91,17 +115,15 @@ export class SignupComponent implements OnInit {
       error => {
         console.log(error)
         this.showLoader(false);
-        this.errorMessage = error
-        setTimeout(() => {
-          this.alertSwal.fire();
-        }, 200);
+        this.showAlert(false, "Dados Incorretos", error);
       })
   }
 
   logged(response: any){
     localStorage.setItem('auth_token', response.authToken);
+    localStorage.setItem('user_data', JSON.stringify(response.user));
     this.showLoader(false);
-    this.router.navigate(['/criar-titulo']);
+    this.router.navigate(['/my-tokens']);
   }
 
   changeStep(step1: boolean, step2: boolean){

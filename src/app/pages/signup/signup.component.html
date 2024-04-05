@@ -10,13 +10,18 @@
             
             <div *ngIf="step1 && !step2">
                 <form [formGroup]="formPreSignup" (ngSubmit)="preSignup()">
+                    <app-page-titles title="{{step1Titles.title}}" subtitle="{{step1Titles.subtitle}}"></app-page-titles>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="email" formControlName="email"
+                        <input type="email" class="form-control" placeholder="seu melhor email" formControlName="email"
                             required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="senha"
+                        <input type="password" class="form-control" placeholder="crie uma senha"
                             formControlName="password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="confirme sua senha"
+                            formControlName="confirmPassword" required>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-panda px-4">Prosseguir</button>
@@ -26,6 +31,7 @@
     
             <div *ngIf="!step1 && step2">
                 <form [formGroup]="formSignup" (ngSubmit)="signup()">
+                    <app-page-titles title="{{step2Titles.title}}" subtitle="{{step2Titles.subtitle}}"></app-page-titles>
                     <p class="text-center">Agora você deve informar o código enviado para seu email cadastrado.</p>
                     <div class="form-group">
                         <input type="text" class="form-control text-center" placeholder="seu nome"
@@ -41,7 +47,7 @@
             </div>
     
             <div style="margin-top: 10rem;">
-                <p class="help">Precisa de ajuda? <label class="resend">Suporte CriptoLab</label></p>
+                <p class="help">Já tem uma conta? <a class="resend" href="/login">Entre nela agora</a></p>
             </div>
         </div>
     </div>

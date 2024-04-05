@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyListComponent implements OnInit {
 
+  pageTitles = {
+    title: "Seus tokens",
+    subtitle: "Veja os tokens que você já criou"
+  }
+
   constructor() { }
 
   ngOnInit(): void {

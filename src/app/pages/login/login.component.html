@@ -9,9 +9,7 @@
             </div>
             
             <div *ngIf="step1 && !step2">
-                <div>
-                    <p>Entre na sua conta <br /> <span class="help">Informe seus dados abaixo</span></p>
-                </div>
+                <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
                 <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="email" formControlName="email"
@@ -29,7 +27,7 @@
     
             <div *ngIf="!step1 && step2">
                 <form [formGroup]="formCode" (ngSubmit)="login()">
-                    <p class="text-center">Agora você deve informar o código enviado para seu email cadastrado.</p>
+                    <app-page-titles title="{{step2Titles.title}}" subtitle="{{step2Titles.subtitle}}"></app-page-titles>
                     <div class="form-group">
                         <input type="text" class="form-control text-center" placeholder="CÓDIGO" formControlName="code"
                             required>
@@ -42,7 +40,7 @@
             </div>
     
             <div style="margin-top: 10rem;">
-                <p class="help">Não tem uma conta? <label class="resend">Crie uma agora</label></p>
+                <p class="help">Não tem uma conta? <a class="resend" href="/signup">Crie uma agora</a></p>
             </div>
         </div>
         
