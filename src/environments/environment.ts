@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: `https://criptolab-auth-service-dot-pandapay.rj.r.appspot.com`
+  apiUrl: `https://yo2on7kzh0.execute-api.us-east-2.amazonaws.com/production/app`
 };
 
 /*

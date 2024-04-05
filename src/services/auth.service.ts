@@ -58,7 +58,7 @@ export class Auth {
         };
 
         let requestObservable: Observable<any>;
-        let moduleString: string = "/login/"
+        let moduleString: string = "/auth/"
 
         switch (method) {
             case RestMethods.POST:
