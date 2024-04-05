@@ -59,7 +59,98 @@ export class MyListComponent implements OnInit {
           "TRANSFER",
           "BURN"
         ]
-      }
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
+      {
+        token: {
+          hashId: "asajajsajs1212",
+          imgUrl: "assets/images/vectors/ic_token.svg",
+          name: "NikeToken",
+          ticker: "NTK"
+        },
+        actions: [
+          "MINT",
+          "TRANSFER",
+          "BURN"
+        ]
+      },
     ]
   }
 
