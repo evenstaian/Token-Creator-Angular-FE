@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-circular-thumb-image',
@@ -7,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CircularThumbImageComponent implements OnInit {
 
+  @Input() imageUrl: string = "assets/images/users/4.jpg";
+  @Input() hasMessage: boolean = true;
+
   userName: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.hasMessage)
     this.getUserData()
   }
 

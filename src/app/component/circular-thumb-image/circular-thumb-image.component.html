@@ -1,4 +1,6 @@
 <div class="container">
-    <img class="circular-image" src="assets/images/users/4.jpg">
-    <span class="message">Olá, {{userName}}</span>
+    <img class="circular-image" src={{imageUrl}}>
+    <div *ngIf="hasMessage">
+        <span class="message">Olá, {{userName}}</span>
+    </div>
 </div>

@@ -1,3 +1,15 @@
 <div style="color: #fff">
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+
+    <div *ngFor="let myToken of myTokensList">
+        <app-circular-thumb-image imageUrl="{{myToken.token.imgUrl}}" [hasMessage]="false"></app-circular-thumb-image>
+        <p>{{myToken.token.name}} <br>{{myToken.token.ticker}}</p>
+
+        <div *ngFor="let action of myToken.actions">
+            <button style="color: #fff" [ngStyle]="{ 'background-color': ButtonsTypes[action].color }">{{action}}</button>
+        </div>
+        <div>
+            <p>Ver Detalhes</p>
+        </div>
+    </div>
 </div>
