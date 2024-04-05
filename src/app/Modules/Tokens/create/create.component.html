@@ -1,8 +1,8 @@
-<div style="color: #fff">
+<div class="wrapper w-100 px-5" style="color: #fff">
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
     <div *ngFor="let tokenType of TokenTypes">
-        <div class="item">
+        <div class="item" [ngClass]="{'enabled': tokenType.status == 'ACTIVED'}">
             {{tokenType.label}}
 
             <div class="soon-box" *ngIf="tokenType.status == 'SOON'">
