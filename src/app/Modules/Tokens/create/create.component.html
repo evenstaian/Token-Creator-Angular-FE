@@ -1,0 +1,13 @@
+<div style="color: #fff">
+    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+
+    <div *ngFor="let tokenType of TokenTypes">
+        <div class="item">
+            {{tokenType.label}}
+
+            <div class="soon-box" *ngIf="tokenType.status == 'SOON'">
+                em breve
+            </div>
+        </div>
+    </div>
+</div>

@@ -49,7 +49,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AngularImageViewerModule } from 'angular-x-image-viewer';
 import { ChartsModule } from 'ng2-charts';
 import { UiSwitchModule } from 'ngx-toggle-switch';
-import { CreateComponent } from './Modules/Titulos/create/create.component';
+import { CreateComponent } from './Modules/Tokens/create/create.component';
 import { ResponseBoxComponent } from './component/response-box/response-box.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
 import { BannerSlideshowComponent } from './component/banner-slideshow/banner-slideshow.component';

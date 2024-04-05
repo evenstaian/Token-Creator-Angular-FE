@@ -5,7 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { AuthGuard } from '../services/guard/auth-guard.service';
 import { AuthGuardIn } from '../services/guard/auth-in-guard.service'
-import { CreateComponent } from './Modules/Titulos/create/create.component';
+import { CreateComponent } from './Modules/Tokens/create/create.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
@@ -40,10 +40,13 @@ export const Approutes: Routes = [
   },
 
   {
-    path: 'create_token',
+    path: 'create-token',
     component: InsiderComponent,
     children: [
-
+      {
+        path: '',
+        component: CreateComponent
+      },
     ],
     canActivate: [AuthGuard]
   },
