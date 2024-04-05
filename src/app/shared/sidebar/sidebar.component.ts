@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
         show: 1,
         submenu: [
           {
-            path: '/create_token',
+            path: '/create-token',
             title: 'Criar Token',
             icon: 'mdi mdi-format-list-bulleted',
             class: '',
