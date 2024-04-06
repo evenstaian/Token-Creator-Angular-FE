@@ -50,13 +50,13 @@ export class CreateComponent implements OnInit {
   TokenTypes = [
     {
       label: "Fan/Sport Token",
-      bannerImageUrl: "assets/images/big/nature.png",
+      bannerImageUrl: "assets/images/big/sport.png",
       form: this.ERC20_FORM,
       status: "ACTIVED"
     },
     {
       label: "Crédito de Carbono e ESG",
-      bannerImageUrl: "",
+      bannerImageUrl: "assets/images/big/nature.png",
       form: this.ERC20_FORM,
       status: "ACTIVED"
     },
@@ -73,9 +73,9 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDetails(){
-    this.sharedDataService.setData(this.TokenTypes[0].bannerImageUrl);
-    this.sharedDataService.setFormStructure(this.TokenTypes[0].form)
+  openDetails(tokenType: any){
+    this.sharedDataService.setData(tokenType.bannerImageUrl);
+    this.sharedDataService.setFormStructure(tokenType.form)
     this.router.navigate(['/create-token/details'])
   }
 
