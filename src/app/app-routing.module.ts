@@ -9,19 +9,9 @@ import { CreateComponent } from './Modules/Tokens/create/create.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
+import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
 
 export const Approutes: Routes = [
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  //   canActivate: [AuthGuardIn]
-  // },
-
-  // {
-  //   path: 'signup',
-  //   component: SignupComponent,
-  //   canActivate: [AuthGuardIn]
-  // },
   {
     path: '',
     component: InsiderComponent,
@@ -46,6 +36,10 @@ export const Approutes: Routes = [
       {
         path: '',
         component: CreateComponent
+      },
+      {
+        path: 'details',
+        component: CreateTokenDetailsComponent
       },
     ],
     canActivate: [AuthGuard]

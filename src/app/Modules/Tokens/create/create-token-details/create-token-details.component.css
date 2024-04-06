@@ -1,0 +1,36 @@
+.wrapper {
+    margin-top: 200px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 21px;
+    background-color: #545353;
+}
+
+form{
+    width: 100%;
+}
+   
+.form-control {
+    border: 1px solid #FFFFFF;
+    background-color: #545353;
+    border-radius: 0;
+    color: #FFFFFF;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    height: 3.5rem;
+}
+
+.form-control::placeholder {
+    color: #fff;
+}
+
+.form-control:focus {
+    border-color: aqua;
+}

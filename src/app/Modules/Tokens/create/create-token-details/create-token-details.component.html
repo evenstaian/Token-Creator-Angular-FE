@@ -1,0 +1,9 @@
+<div class="wrapper w-100 px-5" style="color: #fff">
+    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+
+    <form [formGroup]="form">
+        <div *ngFor="let field of formStructure" class="form-group">
+          <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label">
+        </div>
+      </form>
+</div>
