@@ -1,7 +1,6 @@
 service: cripto-lab-ng
-runtime: python27
-api_version: 1
-threadsafe: true
+runtime: python310
+
 handlers:
   - url: /
     secure: always
