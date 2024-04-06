@@ -7,6 +7,7 @@ import {
   trigger,
   AnimationEvent,
 } from '@angular/animations';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 const fade = [
   trigger('fade', [
@@ -19,7 +20,15 @@ const fade = [
 
 const zoom = [
   trigger('zoom', [
+    state('show', style({ transform: 'scale(1.2)' })),
     transition('hide => show', animate('7000ms', style({ transform: 'scale(1.2)', opacity: 1 }))),
+  ]),
+];
+
+const singleZoom = [
+  trigger('singleZoom', [
+    state('show', style({ transform: 'scale(1.2)' })),
+    transition('hide => show', animate('2000ms ease-in-out', style({ transform: 'scale(1.2)', opacity: 1 }))),
   ]),
 ];
 
@@ -32,26 +41,9 @@ const VOID = 'void';
   templateUrl: './banner-slideshow.component.html',
   styleUrls: ['./banner-slideshow.component.css'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0 }))
-      ])
-    ]),
-    trigger('zoomInOut', [
-      transition(':enter', [
-        style({ transform: 'scale(0.5)', opacity: 0 }),
-        animate('500ms', style({ transform: 'scale(1)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ transform: 'scale(0.5)', opacity: 0 }))
-      ])
-    ]),
     fade,
-    zoom
+    zoom,
+    singleZoom
   ]
 })
 
@@ -84,6 +76,23 @@ export class BannerSlideshowComponent implements OnInit {
   stop = false;
   pauseTime = 1000;
 
+  singleImageUrl: any = {
+    state: SHOW,
+  };
+
+  constructor(private sharedDataService: SharedDataService){
+    this.sharedDataService.bannerDetailsImageUrl.subscribe(data => {
+      this.singleImageUrl = {
+        url: data,
+        state: HIDE,
+      }
+
+      setTimeout(() => {
+        this.singleImageUrl.state = SHOW;
+      }, 200);
+    });
+  }
+
   ngOnInit(): void {
 
     setTimeout(() => {
@@ -113,7 +122,6 @@ export class BannerSlideshowComponent implements OnInit {
     if (this.stop) return (this.animating = false);
     this.images[this.lastIndex].state = HIDE;
     this.images[this.currentIndex].state = SHOW;
-    console.log(this.images[this.currentIndex])
   }
 
   mouseover() {

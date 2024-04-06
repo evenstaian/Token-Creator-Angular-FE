@@ -56,6 +56,7 @@ import { BannerSlideshowComponent } from './component/banner-slideshow/banner-sl
 import { CircularThumbImageComponent } from './component/circular-thumb-image/circular-thumb-image.component';
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { PageTitlesComponent } from './component/molecules/page-titles/page-titles.component';
+import { SharedDataService } from './shared/shared-data.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -104,7 +105,7 @@ export function playerFactory() {
     ChartsModule,
     UiSwitchModule
   ],
-  providers: [AuthGuard, AuthGuardIn, RouteGuard, HttpErrorHandler, MessageService, Clean, Requests,
+  providers: [AuthGuard, AuthGuardIn, RouteGuard, HttpErrorHandler, MessageService, Clean, Requests, SharedDataService,
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
