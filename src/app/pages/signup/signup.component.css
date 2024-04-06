@@ -6,6 +6,10 @@
     position: relative;
 }
 
+.wrapper {
+    margin-top: 200px;
+}
+
 form{
  width: 100%;
 }

@@ -42,7 +42,7 @@ export class CreateComponent implements OnInit {
     {
       label: "company",
       placeholder: "qual é o nome da sua empresa?",
-      type: "number",
+      type: "text",
       defaultValue: "",
     },
   ]

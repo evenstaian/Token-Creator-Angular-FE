@@ -1,51 +1,46 @@
-<div class="content p-5">
-    <swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
-    </swal>
+<swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
+</swal>
 
-    <div class="h-100 d-flex justify-content-center align-items-center">
-        <div style="width: 55rem;">
-            <div style="margin-bottom: 10rem;">
-                <img src="assets/images/CriptoLab.svg">
-            </div>
-            
-            <div *ngIf="step1 && !step2">
-                <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
-                <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="email" formControlName="email"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="senha"
-                            formControlName="password" required>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-panda px-4">Entrar</button>
-                    </div>
-                </form>
-            </div>
-    
-            <div *ngIf="!step1 && step2">
-                <form [formGroup]="formCode" (ngSubmit)="login()">
-                    <app-page-titles title="{{step2Titles.title}}" subtitle="{{step2Titles.subtitle}}"></app-page-titles>
-                    <div class="form-group">
-                        <input type="text" class="form-control text-center" placeholder="CÓDIGO" formControlName="code"
-                            required>
-                    </div>
-                    <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-panda px-4">Entrar</button>
-                    </div>
-                </form>
-            </div>
-    
-            <div style="margin-top: 10rem;">
-                <p class="help">Não tem uma conta? <a class="resend" href="/signup">Crie uma agora</a></p>
-            </div>
+<div class="wrapper w-100 px-5 d-flex justify-content-center align-items-center">
+    <div style="width: 100%">
+        
+        <div *ngIf="step1 && !step2">
+            <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+            <form [formGroup]="formLogin" (ngSubmit)="preLogin()">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="email" formControlName="email"
+                        required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="senha"
+                        formControlName="password" required>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-panda px-4">Entrar</button>
+                </div>
+            </form>
         </div>
-        
-        
+
+        <div *ngIf="!step1 && step2">
+            <form [formGroup]="formCode" (ngSubmit)="login()">
+                <app-page-titles title="{{step2Titles.title}}" subtitle="{{step2Titles.subtitle}}"></app-page-titles>
+                <div class="form-group">
+                    <input type="text" class="form-control text-center" placeholder="CÓDIGO" formControlName="code"
+                        required>
+                </div>
+                <p class="text-center">Não recebi. <span class="resend" (click)="resendCode()">Reenviar.</span></p>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-panda px-4">Entrar</button>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 5rem;">
+            <p class="help">Não tem uma conta? <a class="resend" href="/signup">Crie uma agora</a></p>
+        </div>
     </div>
+    
+    
 </div>
 
 <div class="fullscreen_shadow" *ngIf="loader">
