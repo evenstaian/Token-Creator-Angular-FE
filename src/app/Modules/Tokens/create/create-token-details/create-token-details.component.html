@@ -3,7 +3,12 @@
 
     <form [formGroup]="form">
         <div *ngFor="let field of formStructure" class="form-group">
-          <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label">
+            <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
+                <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label">
+            </ng-container>
+            <ng-template #textareaField>
+                <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder" [formControlName]="field.label"></textarea>
+            </ng-template>
         </div>
       </form>
 </div>

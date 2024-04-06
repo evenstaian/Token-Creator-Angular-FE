@@ -34,3 +34,7 @@ form{
 .form-control:focus {
     border-color: aqua;
 }
+
+.text-area{
+    height: 7rem;
+}

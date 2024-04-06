@@ -30,7 +30,19 @@ export class CreateComponent implements OnInit {
     {
       label: "description",
       placeholder: "qual a descrição?",
-      type: "text",
+      type: "textarea",
+      defaultValue: "",
+    },
+    {
+      label: "quantity",
+      placeholder: "qual é a quantidade emitida?",
+      type: "number",
+      defaultValue: "",
+    },
+    {
+      label: "company",
+      placeholder: "qual é o nome da sua empresa?",
+      type: "number",
       defaultValue: "",
     },
   ]
