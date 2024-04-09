@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-image-sender',
@@ -7,9 +8,15 @@ import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core'
 })
 export class ImageSenderComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+  @ViewChild('swalWarningDefault') private alertSwal: SwalComponent;
+  
   @Output() file: File;
 
   imageSrc;
+
+  alertIcon="warning"
+  alertTitle=""
+  alertMessage=""
 
   constructor() { }
 
@@ -18,6 +25,7 @@ export class ImageSenderComponent implements OnInit {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
+
     if(this.validateSupportedFile(file)){
       this.handleFile(file);
     }
@@ -31,8 +39,23 @@ export class ImageSenderComponent implements OnInit {
     }
   }
 
-  handleFile(file: File){
+  async handleFile(file: File){
     this.file = file;
+
+    const validateImageSize: any = await this.validateImageSize(file)
+    .then(valid => {
+      return valid;
+    })
+    .catch(error => {
+      console.error('Ocorreu um erro ao validar a imagem:', error);
+      return
+    });
+
+    if (!validateImageSize.status) {
+      this.showAlert(validateImageSize.status, "Erro na Imagem", validateImageSize.error)
+      return
+    }
+
     this.previewImage(file);
   }
 
@@ -60,9 +83,54 @@ export class ImageSenderComponent implements OnInit {
     }
   }
 
+  validateImageSize(file: File): Promise<{status: boolean, error: string | null}> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        const img = new Image();
+        img.src = e.target.result;
+  
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+  
+          if (width !== height) {
+            resolve({status: false, error: "A imagem enviada deve ser um quadrado"});
+            return;
+          }
+  
+          if (width < 350) {
+            resolve({status: false, error: "A imagem deve ser maior que 350px"});
+            return;
+          }
+
+          if (width > 800) {
+            resolve({status: false, error: "A imagem deve ser menor que 800px"});
+            return;
+          }
+  
+          resolve({status: true, error: null});
+        };
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  }
+
   handleClick() {
     if (this.fileInput) {
       this.fileInput.nativeElement.click();
     }
+  }
+
+  showAlert(success: boolean, title: string, message: string){
+    this.alertIcon = success ? "success" : "warning";
+    this.alertTitle = title;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertSwal.fire();
+    }, 200);
   }
 }

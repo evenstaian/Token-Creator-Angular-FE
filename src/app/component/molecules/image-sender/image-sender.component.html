@@ -1,4 +1,7 @@
 
+<swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
+</swal>
+
 <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)" accept="image/*">
 
 <div class="image-box" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
@@ -10,7 +13,7 @@
     </div>
 
     <p class="title">Arraste e solte uma imagem aqui ou <label>clique aqui</label> para selecionar uma imagem. <br>
-    <label class="subtitle">Tamanho recomendando: 350 x 350</label></p>
+    <label class="subtitle">Tamanho recomendando: 350 x 350 (tamanho máximo: 800px)</label></p>
 </div>
 
     

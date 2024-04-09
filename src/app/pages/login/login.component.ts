@@ -3,9 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Auth } from '../../../services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
-import { Router, Routes } from '@angular/router'
-
-import { NETWORK_TYPES, STATUS } from 'criptolab-types';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -59,9 +57,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: Auth,
     private router: Router) { 
-
-      console.log(NETWORK_TYPES.MUMBAI)
-      console.log(STATUS.enabled)
     }
 
   ngOnInit(): void {

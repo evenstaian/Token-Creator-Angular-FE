@@ -13,6 +13,10 @@
     background-color: #545353;
 }
 
+.image-sender {
+    margin-bottom: 20px;
+}
+
 form{
     width: 100%;
 }
