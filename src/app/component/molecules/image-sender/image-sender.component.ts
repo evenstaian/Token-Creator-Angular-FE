@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -10,7 +10,7 @@ export class ImageSenderComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent;
   
-  @Output() file: File;
+  @Output() file: EventEmitter<File> = new EventEmitter<File>();
 
   imageSrc;
 
@@ -40,8 +40,6 @@ export class ImageSenderComponent implements OnInit {
   }
 
   async handleFile(file: File){
-    this.file = file;
-
     const validateImageSize: any = await this.validateImageSize(file)
     .then(valid => {
       return valid;
@@ -57,6 +55,7 @@ export class ImageSenderComponent implements OnInit {
     }
 
     this.previewImage(file);
+    this.file.emit(file);
   }
 
   onDragOver(event: any) {

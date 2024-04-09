@@ -2,6 +2,10 @@
     margin-top: 200px;
 }
 
+.header-module {
+    margin-block: 20px;
+}
+
 .header-wrapper{
     display: flex;
     align-items: center;
@@ -40,4 +44,15 @@
 .subtitle {
     font-weight: 300;
     font-size: 14px;
+}
+
+.form-item-title {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.form-item-subtitle {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
 }

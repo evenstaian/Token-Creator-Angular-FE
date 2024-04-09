@@ -10,6 +10,8 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 })
 export class CreateTokenDetailsComponent implements OnInit {
 
+  imageFile: File;
+
   pageTitles = {
     title: "Crie seu token",
     subtitle: "Informe abaixo os dados do seu token"
@@ -38,10 +40,23 @@ export class CreateTokenDetailsComponent implements OnInit {
         }
         this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
       });
+
+      this.form.valueChanges.subscribe((values) => {
+        Object.keys(values).forEach((key) => {
+          const field = this.formStructure.find((f) => f.label === key);
+          if (field) {
+            field.defaultValue = values[key];
+          }
+        });
+      });
     });
   }
 
   ngOnInit(): void {
+  }
+
+  setImageFile(file: File){
+    this.imageFile = file;
   }
 
   makeFieldInvalid(fieldName: string): void {
@@ -57,6 +72,11 @@ export class CreateTokenDetailsComponent implements OnInit {
 
   goToNetworksPage(){
     if (this.form.valid) {
+      if(this.imageFile){
+        this.sharedDataService.setTokenImage(this.imageFile)
+      }
+
+      this.sharedDataService.setFormStructure(this.formStructure)
       this.router.navigate(['/create-token/networks']);
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {

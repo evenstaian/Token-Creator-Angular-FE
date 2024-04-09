@@ -2,7 +2,7 @@
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
     <form [formGroup]="form" (ngSubmit)="goToNetworksPage()">
-        <app-image-sender style="margin: 40px;"></app-image-sender>
+        <app-image-sender (file)="setImageFile($event)" style="margin: 40px;"></app-image-sender>
 
         <div *ngFor="let field of formStructure" class="form-group">
             <ng-container *ngIf="field.type !== 'textarea'; else textareaField">

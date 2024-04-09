@@ -1,21 +1,23 @@
 <div class="wrapper w-100 px-5" style="color: #fff">
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
-    <div class="header">
-        <div class="header-wrapper">
-            <div class="preview-box">
-                <img [src]="imageSrc" class="preview-image">
+    <div class="header-module">
+        <div class="header">
+            <div class="header-wrapper">
+                <div class="preview-box">
+                    <img [src]="imageSrc" class="preview-image">
+                </div>
+    
+                <p class="title">{{tokenName}}<br>
+                <label class="subtitle">{{tokenSymbol}}</label></p>
             </div>
-
-            <p class="title">{{tokenName}}<br>
-            <label class="subtitle">{{tokenSymbol}}</label></p>
         </div>
     </div>
 
     <div class="form-content">
         <div *ngFor="let form of formStructure">
-            <p class="title">{{form.placeholder}}<br>
-            <label class="subtitle">{{form.defaultValue}}</label></p>
+            <p class="form-item-title">{{form.placeholder}}<br>
+            <label class="form-item-subtitle">{{form.defaultValue}}</label></p>
         </div>
     </div>
 
