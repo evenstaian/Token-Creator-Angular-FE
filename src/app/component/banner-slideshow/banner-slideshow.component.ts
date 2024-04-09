@@ -54,7 +54,7 @@ export class BannerSlideshowComponent implements OnInit {
 
   images = [
     {
-      url: 'assets/images/big/monas.jpeg',
+      url: 'assets/images/big/white-monkey.png',
       state: HIDE,
     },
     {
