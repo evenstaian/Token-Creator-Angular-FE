@@ -10,6 +10,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { InsiderComponent } from './layouts/insider/insider.component';
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
+import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 
 export const Approutes: Routes = [
   {
@@ -40,6 +41,10 @@ export const Approutes: Routes = [
       {
         path: 'details',
         component: CreateTokenDetailsComponent
+      },
+      {
+        path: 'networks',
+        component: NetworksComponent
       },
     ],
     canActivate: [AuthGuard]

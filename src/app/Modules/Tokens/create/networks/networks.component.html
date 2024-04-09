@@ -1,0 +1,11 @@
+<div class="wrapper w-100 px-5" style="color: #fff">
+    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+
+    <div *ngFor="let networkType of NetworkTypes">
+        <div class="item enabled" (click)="proceed(networkType)">
+            <div class="token">
+                <img class="image" src="{{networkType.imageUrl}}">
+                <p>{{networkType.name}}</p></div>
+        </div>
+    </div>
+</div>

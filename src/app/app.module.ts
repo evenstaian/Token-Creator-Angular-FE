@@ -58,6 +58,7 @@ import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { PageTitlesComponent } from './component/molecules/page-titles/page-titles.component';
 import { SharedDataService } from './shared/shared-data.service';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
+import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -87,7 +88,8 @@ export function playerFactory() {
     CircularThumbImageComponent,
     MyListComponent,
     PageTitlesComponent,
-    CreateTokenDetailsComponent
+    CreateTokenDetailsComponent,
+    NetworksComponent
   ],
   imports: [
     CommonModule,

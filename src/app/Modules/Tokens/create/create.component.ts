@@ -20,30 +20,35 @@ export class CreateComponent implements OnInit {
       placeholder: "nome do seu token",
       type: "text",
       defaultValue: "",
+      required: true,
     },
     {
       label: "symbol",
       placeholder: "qual o símbolo? ex: BTC",
       type: "text",
       defaultValue: "",
+      required: true,
     },
     {
       label: "description",
       placeholder: "qual a descrição?",
       type: "textarea",
       defaultValue: "",
+      required: true,
     },
     {
       label: "quantity",
       placeholder: "qual é a quantidade emitida?",
       type: "number",
       defaultValue: "",
+      required: true,
     },
     {
       label: "company",
       placeholder: "qual é o nome da sua empresa?",
       type: "text",
       defaultValue: "",
+      required: true,
     },
   ]
 
