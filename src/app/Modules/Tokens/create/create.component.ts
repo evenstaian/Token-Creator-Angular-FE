@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
       placeholder: "nome do seu token",
       type: "text",
       defaultValue: "",
-      required: true,
+      required: false,
     },
     {
       label: "symbol",

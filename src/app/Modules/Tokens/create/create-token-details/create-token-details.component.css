@@ -37,9 +37,14 @@ form{
 }
 
 .form-control:focus {
-    border-color: aqua;
+    border-color: #A511FF;
 }
 
 .text-area{
     height: 7rem;
+}
+
+.required-message {
+    margin-top: 5px;
+    font-size: 10px;
 }
