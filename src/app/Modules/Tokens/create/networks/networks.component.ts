@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NETWORK_TYPES, STATUS } from 'criptolab-types';
 
@@ -19,7 +20,7 @@ export class NetworksComponent implements OnInit {
   NetworkTypes: any[];
   
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.NetworkTypes = this.toIterable(NETWORK_TYPES);
@@ -37,7 +38,7 @@ export class NetworksComponent implements OnInit {
   };
 
   proceed(networkType: any) {
-
+    this.router.navigate(['/create-token/confirmation']);
   }
 
 }

@@ -11,6 +11,7 @@ import { InsiderComponent } from './layouts/insider/insider.component';
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
+import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 
 export const Approutes: Routes = [
   {
@@ -45,6 +46,10 @@ export const Approutes: Routes = [
       {
         path: 'networks',
         component: NetworksComponent
+      },
+      {
+        path: 'confirmation',
+        component: CreateConfirmationComponent
       },
     ],
     canActivate: [AuthGuard]

@@ -60,6 +60,7 @@ import { SharedDataService } from './shared/shared-data.service';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 import { ImageSenderComponent } from './component/molecules/image-sender/image-sender.component';
+import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -92,6 +93,7 @@ export function playerFactory() {
     CreateTokenDetailsComponent,
     NetworksComponent,
     ImageSenderComponent,
+    CreateConfirmationComponent,
   ],
   imports: [
     CommonModule,
