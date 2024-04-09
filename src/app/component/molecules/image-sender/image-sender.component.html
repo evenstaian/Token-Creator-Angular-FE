@@ -6,18 +6,13 @@
 
 <div class="image-box" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
 (click)="handleClick()" style="cursor: pointer;">
+    <div class="wrapper">
+        <div class="preview-box">
+            <img [src]="imageSrc" class="preview-image">
+        </div>
 
-<div class="wrapper">
-    <div class="preview-box">
-        <img [src]="imageSrc" class="preview-image">
+        <p class="title">Arraste e solte uma imagem aqui ou <label>clique aqui</label> para selecionar uma imagem. <br>
+        <label class="subtitle">Tamanho recomendando: 350 x 350 (tamanho máximo: 800px)</label></p>
     </div>
-
-    <p class="title">Arraste e solte uma imagem aqui ou <label>clique aqui</label> para selecionar uma imagem. <br>
-    <label class="subtitle">Tamanho recomendando: 350 x 350 (tamanho máximo: 800px)</label></p>
 </div>
-
-    
-    
-
-  </div>
   

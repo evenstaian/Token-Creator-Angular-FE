@@ -25,9 +25,25 @@
 }
 
 .btn-panda:hover{
-    background-image: linear-gradient(90deg, #A511FF 0%, #00C0C0 100%);
+    background-image: linear-gradient(90deg, #00C0C0 0%, #A511FF 100%);
     color: #fff;
     font-weight: 700;
+}
+
+.btn-secondary{ 
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #A511FF 0%, #00C0C0 100%);
+    border-image-slice: 1;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-secondary:hover{
+    border-image: linear-gradient(90deg, #00C0C0 0%, #A511FF 100%);
+    border-image-slice: 1;
 }
 
 .panda-quadrado{
