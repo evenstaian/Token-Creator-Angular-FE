@@ -1,0 +1,20 @@
+
+<input type="file" style="display: none" #fileInput (change)="onFileSelected($event)" accept="image/*">
+
+<div class="image-box" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
+(click)="handleClick()" style="cursor: pointer;">
+
+<div class="wrapper">
+    <div class="preview-box">
+        <img [src]="imageSrc" class="preview-image">
+    </div>
+
+    <p class="title">Arraste e solte uma imagem aqui ou <label>clique aqui</label> para selecionar uma imagem. <br>
+    <label class="subtitle">Tamanho recomendando: 350 x 350</label></p>
+</div>
+
+    
+    
+
+  </div>
+  

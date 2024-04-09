@@ -2,6 +2,8 @@
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
     <form [formGroup]="form">
+        <app-image-sender></app-image-sender>
+        
         <div *ngFor="let field of formStructure" class="form-group">
             <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
                 <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label">
