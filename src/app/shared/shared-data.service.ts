@@ -5,14 +5,20 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedDataService {
+  private _tokenType = new BehaviorSubject<any>(null);
   private _bannerDetailsImageUrl = new BehaviorSubject<string>('');
   private _formStructure = new BehaviorSubject<any>('');
   private _tokenImage = new BehaviorSubject<any>('');
+  public tokenType = this._tokenType.asObservable();
   public bannerDetailsImageUrl = this._bannerDetailsImageUrl.asObservable();
   public formStructure = this._formStructure.asObservable();
   public tokenImage = this._tokenImage.asObservable();
 
   constructor() {}
+
+  setTokenType(tokenType: any) {
+    this._tokenType.next(tokenType);
+  }
 
   setData(data: string) {
     this._bannerDetailsImageUrl.next(data);
@@ -24,6 +30,10 @@ export class SharedDataService {
 
   setTokenImage(file: File) {
     this._tokenImage.next(file);
+  }
+
+  getTokenType(){
+    return this._tokenType.getValue();
   }
 
   getData() {

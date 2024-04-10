@@ -10,6 +10,9 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 })
 export class CreateTokenDetailsComponent implements OnInit {
 
+  tokenType: any;
+
+  networkType: any;
   imageFile: File;
 
   pageTitles = {
@@ -23,36 +26,77 @@ export class CreateTokenDetailsComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private sharedDataService: SharedDataService, private router: Router) { 
-    this.form = this.fb.group({});
     
-    this.sharedDataService.formStructure.subscribe(data => { 
-      this.formStructure = data;
 
-      if(!this.formStructure){
-        this.router.navigate(['/create-token']);
+    this.sharedDataService.tokenType.subscribe(data => {
+      if(!data){
         return
       }
 
-      this.formStructure.forEach(field => {
-        const validators: ValidatorFn[] = [];
-        if (field.required) {
-          validators.push(Validators.required);
-        }
-        this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
-      });
+      this.tokenType = data;
+      
+      this.formStructure = this.tokenType.form;
+      this.saveTokenTypeOnStorage()
+    })
+    
+    this.sharedDataService.formStructure.subscribe(data => { 
+      if(!data){
+        return
+      }
 
-      this.form.valueChanges.subscribe((values) => {
-        Object.keys(values).forEach((key) => {
-          const field = this.formStructure.find((f) => f.label === key);
-          if (field) {
-            field.defaultValue = values[key];
-          }
-        });
-      });
+      this.formStructure = data;
+      this.createForm()  
     });
   }
 
   ngOnInit(): void {
+    if(!this.tokenType){
+      this.tokenType = this.getTokenTypeFromStorage();
+      this.formStructure = this.tokenType.form;
+      this.createForm();
+    }
+  }
+
+  saveTokenTypeOnStorage(){
+    localStorage.setItem("token-type", JSON.stringify(this.tokenType));
+  }
+
+  getTokenTypeFromStorage(){
+    try {
+      const tokenTypeString = localStorage.getItem("token-type");
+      return JSON.parse(tokenTypeString);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  createForm(){
+    this.form = this.fb.group({});
+
+    if(!this.formStructure){
+      this.router.navigate(['/create-token']);
+      return
+    }
+
+    this.formStructure.forEach(field => {
+      const validators: ValidatorFn[] = [];
+      if (field.required) {
+        validators.push(Validators.required);
+      }
+      this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
+    });
+
+    this.form.valueChanges.subscribe((values) => {
+      Object.keys(values).forEach((key) => {
+        const field = this.formStructure.find((f) => f.label === key);
+        if (field) {
+          field.defaultValue = values[key];
+          this.tokenType.form = this.formStructure;
+
+          this.saveTokenTypeOnStorage()
+        }
+      });
+    });
   }
 
   setImageFile(file: File){

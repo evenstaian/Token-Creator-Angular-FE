@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { Router } from '@angular/router';
 
+import { TOKEN_STANDARD_TYPES } from 'criptolab-types';
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -55,19 +57,25 @@ export class CreateComponent implements OnInit {
   TokenTypes = [
     {
       label: "Fan/Sport Token",
+      identifier: "FST",
       bannerImageUrl: "assets/images/big/sport.png",
+      type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
       status: "ACTIVED"
     },
     {
       label: "Crédito de Carbono e ESG",
+      identifier: "CCESG",
       bannerImageUrl: "assets/images/big/nature.png",
+      type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
       status: "ACTIVED"
     },
     {
       label: "Rewards/Cashback Token",
+      identifier: "RCT",
       bannerImageUrl: "",
+      type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
       status: "SOON"
     }
@@ -79,6 +87,7 @@ export class CreateComponent implements OnInit {
   }
 
   openDetails(tokenType: any){
+    this.sharedDataService.setTokenType(tokenType);
     this.sharedDataService.setData(tokenType.bannerImageUrl);
     this.sharedDataService.setFormStructure(tokenType.form)
     this.router.navigate(['/create-token/details'])
