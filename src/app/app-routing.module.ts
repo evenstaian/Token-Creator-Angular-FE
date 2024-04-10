@@ -12,6 +12,7 @@ import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
+import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
 
 export const Approutes: Routes = [
   {
@@ -50,6 +51,10 @@ export const Approutes: Routes = [
       {
         path: 'confirmation',
         component: CreateConfirmationComponent
+      },
+      {
+        path: 'success',
+        component: CreateResponseComponent
       },
     ],
     canActivate: [AuthGuard]

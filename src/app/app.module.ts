@@ -42,7 +42,6 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { HttpErrorHandler } from 'src/services/http-handle-error.service';
 import { MessageService } from 'src/services/message.service';
 import { Clean } from 'src/utils/clean';
-import { Requests } from 'src/services/requests.services';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -61,6 +60,7 @@ import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-toke
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 import { ImageSenderComponent } from './component/molecules/image-sender/image-sender.component';
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
+import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -94,6 +94,7 @@ export function playerFactory() {
     NetworksComponent,
     ImageSenderComponent,
     CreateConfirmationComponent,
+    CreateResponseComponent,
   ],
   imports: [
     CommonModule,
@@ -113,7 +114,14 @@ export function playerFactory() {
     ChartsModule,
     UiSwitchModule
   ],
-  providers: [AuthGuard, AuthGuardIn, RouteGuard, HttpErrorHandler, MessageService, Clean, Requests, SharedDataService,
+  providers: [
+    AuthGuard, 
+    AuthGuardIn, 
+    RouteGuard, 
+    HttpErrorHandler, 
+    MessageService, 
+    Clean, 
+    SharedDataService,
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy

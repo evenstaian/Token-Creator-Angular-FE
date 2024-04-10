@@ -1,11 +1,8 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { ROUTES } from './menu-items';
+import { Component, OnInit } from '@angular/core';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Requests } from 'src/services/requests.services';
 import { Clean } from 'src/utils/clean';
-//declare var $: any;
 
 @Component({
   selector: 'app-sidebar',
@@ -32,7 +29,6 @@ export class SidebarComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private requests: Requests,
     private sessionStorage: Clean
   ) { }
 
@@ -59,7 +55,7 @@ export class SidebarComponent implements OnInit {
           {
             path: '/create-token',
             title: 'Criar Token',
-            icon: 'mdi mdi-format-list-bulleted',
+            icon: 'mdi mdi-plus-box',
             class: '',
             extralink: false,
             show: 1,
@@ -68,7 +64,7 @@ export class SidebarComponent implements OnInit {
           {
             path: '/my-tokens',
             title: 'Seus Tokens',
-            icon: 'mdi mdi-plus-box',
+            icon: 'mdi mdi-format-list-bulleted',
             class: '',
             extralink: false,
             show: 1,

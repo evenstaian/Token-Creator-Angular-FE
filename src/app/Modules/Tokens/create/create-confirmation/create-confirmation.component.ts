@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { AppService } from '../../../../../services/app.service'
 
 @Component({
   selector: 'app-create-confirmation',
   templateUrl: './create-confirmation.component.html',
-  styleUrls: ['./create-confirmation.component.css']
+  styleUrls: ['./create-confirmation.component.css'],
+  providers: [AppService]
 })
 export class CreateConfirmationComponent implements OnInit {
 
+  tokenType: any;
   formStructure: any;
 
   imageSrc;
@@ -54,6 +57,14 @@ export class CreateConfirmationComponent implements OnInit {
       this.imageSrc = reader.result;
     };
     reader.readAsDataURL(file);
+  }
+
+  createToken(){
+    if(!this.tokenType){
+      return
+    }
+
+    this.router.navigate(['/success']);
   }
 
 }

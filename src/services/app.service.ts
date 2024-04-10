@@ -4,24 +4,21 @@ import { HttpHeaders } from '@angular/common/http'
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpErrorHandler} from './http-handle-error.service';
 import { Constants } from "../utils/Constantes";
 import { RestMethods } from "./types/enum/RestMethods";
+import { HttpErrorHandler } from "./http-handle-error.service";
 
 @Injectable()
-export class Auth {
+export class AppService {
 
     apiUrl = Constants.API_URL
-    apiUrlImg = "//Constants.API_IMAGENS"
 
     //Endpoints
-    _preLogin = 'pre_login';
-    _login = 'login';
-    _preSignup = 'pre_signup';
-    _signup = 'signup';
-    _logout = 'logout';
+    _createERC20 = 'createERC20';
+    _createERC721 = 'createERC721';
 
-    constructor(private http: HttpClient, private errorHandler: HttpErrorHandler){
+
+    constructor(private http: HttpClient, private errorHandler: HttpErrorHandler ){
     }
 
     private getAuthTokenHeader(): HttpHeaders {
@@ -38,7 +35,7 @@ export class Auth {
         };
 
         let requestObservable: Observable<any>;
-        let moduleString: string = "/auth/"
+        let moduleString: string = "/app/"
 
         switch (method) {
             case RestMethods.POST:
@@ -56,20 +53,12 @@ export class Auth {
         );
     }
 
-    public preLogin(identifier: string, password: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._preLogin, { identifier, password });
+    public createERC20(network: string, form: any, imageFile?: File): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._createERC20, { network, form });
     }
 
-    public login(identifier: string, password: string, otpCode: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._login, { identifier, password, otpCode });
-    }
-
-    public preSignup(email: string, password: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._preSignup, { email, password });
-    }
-
-    public signup(email: string, password: string, name: string, otpCode: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._signup, { email, name, password, otpCode });
+    public createERC721(network: string, form: any, imageFile?: File): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._createERC721, { network, form });
     }
 
 }

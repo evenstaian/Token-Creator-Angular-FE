@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { Requests } from 'src/services/requests.services';
 
 @Component({
   selector: 'app-insider',
@@ -13,7 +12,7 @@ export class InsiderComponent implements OnInit {
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(public router: Router, private request: Requests) { }
+  constructor(public router: Router) { }
 
   public innerWidth: number = 0;
   public defaultSidebar: string = '';
