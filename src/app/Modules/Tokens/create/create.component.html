@@ -2,7 +2,7 @@
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
     <div *ngFor="let tokenType of TokenTypes">
-        <div class="item" [ngClass]="{'enabled': tokenType.status == 'ACTIVED'}" (click)="openDetails(tokenType)">
+        <div class="item" [ngClass]="{'enabled': tokenType.status == 'ENABLED'}" (mouseenter)="onHover(tokenType)" (click)="openDetails(tokenType)">
             {{tokenType.label}}
 
             <div class="soon-box" *ngIf="tokenType.status == 'SOON'">

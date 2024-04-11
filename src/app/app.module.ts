@@ -61,6 +61,7 @@ import { NetworksComponent } from './Modules/Tokens/create/networks/networks.com
 import { ImageSenderComponent } from './component/molecules/image-sender/image-sender.component';
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
+import { SoundService } from '../services/sound/sound.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -122,6 +123,7 @@ export function playerFactory() {
     MessageService, 
     Clean, 
     SharedDataService,
+    SoundService,
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy

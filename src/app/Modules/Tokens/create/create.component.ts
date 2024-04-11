@@ -2,7 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { Router } from '@angular/router';
 
-import { TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { TOKEN_STANDARD_TYPES, STATUS } from 'criptolab-types';
+import { SoundService } from 'src/services/sound/sound.service';
 
 @Component({
   selector: 'app-create',
@@ -61,7 +62,7 @@ export class CreateComponent implements OnInit {
       bannerImageUrl: "assets/images/big/sport.png",
       type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
-      status: "ACTIVED"
+      status: STATUS.enabled,
     },
     {
       label: "Crédito de Carbono e ESG",
@@ -69,7 +70,7 @@ export class CreateComponent implements OnInit {
       bannerImageUrl: "assets/images/big/nature.png",
       type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
-      status: "ACTIVED"
+      status: STATUS.enabled,
     },
     {
       label: "Rewards/Cashback Token",
@@ -77,16 +78,30 @@ export class CreateComponent implements OnInit {
       bannerImageUrl: "",
       type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
-      status: "SOON"
+      status: STATUS.soon,
     }
   ]
 
-  constructor(private sharedDataService: SharedDataService, private router: Router) { }
+  constructor(
+    private sharedDataService: SharedDataService, 
+    private router: Router,
+    private soundService: SoundService) { }
 
   ngOnInit(): void {
   }
 
+  onHover(tokenType: any): void {
+    if(tokenType.status != STATUS.enabled){
+      return
+    }
+    this.soundService.playHoverSound(this.soundService.SoundTypes.SELECTION);
+  }
+
   openDetails(tokenType: any){
+    if(tokenType.status != STATUS.enabled){
+      this.soundService.playHoverSound(this.soundService.SoundTypes.ERROR);
+      return
+    }
     this.sharedDataService.setTokenType(tokenType);
     this.sharedDataService.setData(tokenType.bannerImageUrl);
     this.sharedDataService.setFormStructure(tokenType.form)

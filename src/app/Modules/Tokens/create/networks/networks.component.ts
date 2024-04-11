@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NETWORK_TYPES, STATUS } from 'criptolab-types';
+import { SoundService } from 'src/services/sound/sound.service';
 
 @Component({
   selector: 'app-networks',
@@ -20,12 +21,14 @@ export class NetworksComponent implements OnInit {
   NetworkTypes: any[];
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private soundService: SoundService) { }
 
   ngOnInit(): void {
     this.NetworkTypes = this.toIterable(NETWORK_TYPES);
-    console.log(this.NetworkTypes)
-    console.log(STATUS.enabled)
+  }
+
+  onHover(){
+    this.soundService.playHoverSound(this.soundService.SoundTypes.SELECTION);
   }
 
   toIterable = (networkTypes: any): any[] => {
