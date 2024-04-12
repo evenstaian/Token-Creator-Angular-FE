@@ -1,3 +1,6 @@
+<swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
+</swal>
+
 <div class="wrapper w-100 px-5" style="color: #fff">
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
@@ -24,4 +27,7 @@
     <div class="d-flex justify-content-end">
         <button (click)="createToken()" class="btn btn-panda px-4">LANÇAR</button>
     </div>
+</div>
+
+<div class="fullscreen_shadow" *ngIf="loader">
 </div>

@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { AppService } from '../../../../../services/app.service'
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-create-confirmation',
   templateUrl: './create-confirmation.component.html',
   styleUrls: ['./create-confirmation.component.css'],
-  providers: [AppService]
+  providers: [
+    AppService
+  ]
 })
 export class CreateConfirmationComponent implements OnInit {
+
+  @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
   tokenType: any;
   formStructure: any;
@@ -24,6 +29,11 @@ export class CreateConfirmationComponent implements OnInit {
     title: "Está tudo certo?",
     subtitle: "Confirme todos os dados do seu token antes de lançá-lo"
   }
+
+  loader: boolean = false;
+  alertIcon="warning"
+  alertTitle;
+  alertMessage;
 
   constructor(
     private sharedDataService: SharedDataService, 
@@ -82,23 +92,52 @@ export class CreateConfirmationComponent implements OnInit {
 
   createToken(){
     if(!this.tokenType){
+      this.showAlert(false, "Falha na Criação", "Ocorreu um erro interno ao criar seu token. Tente novamente mais tarde")
       return
     }
 
     if(!this.networkType){
+      this.showAlert(false, "Falha na Criação", "Ocorreu um erro interno ao criar seu token. Tente novamente mais tarde")
       return
     }
 
+    this.showLoader(true);
+
     this.appService.createERC20(this.networkType.name, this.formStructure, this.imageData).subscribe(data => {
-      const response: any = data;
+      const response: {
+        contractAddress?: string
+        name?: string
+        symbol?: string
+        description?: string
+        company?: string
+        supply?: any
+        owner?: string
+        createdAt?: Date
+        available?: boolean 
+      } = data;
+
       console.log({response});
+      this.router.navigate(['/success']);
     },
     error => {
       console.log(error)
+      this.showAlert(false, "Falha na Criação", "Ocorreu um erro interno ao criar seu token. Tente novamente mais tarde")
     })
+  }
 
+  showAlert(success: boolean, title: string, message: string){
+    this.showLoader(false);
+    this.alertIcon = success ? "success" : "warning";
+    this.alertTitle = title;
+    this.alertMessage = message;
 
-    //this.router.navigate(['/success']);
+    setTimeout(() => {
+      this.alertSwal.fire();
+    }, 200);
+  }
+
+  showLoader(status: boolean) {
+    this.loader = status
   }
 
 }
