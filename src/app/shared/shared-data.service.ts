@@ -9,10 +9,12 @@ export class SharedDataService {
   private _bannerDetailsImageUrl = new BehaviorSubject<string>('');
   private _formStructure = new BehaviorSubject<any>('');
   private _tokenImage = new BehaviorSubject<any>('');
+  private _createResponse = new BehaviorSubject<any>(null);
   public tokenType = this._tokenType.asObservable();
   public bannerDetailsImageUrl = this._bannerDetailsImageUrl.asObservable();
   public formStructure = this._formStructure.asObservable();
   public tokenImage = this._tokenImage.asObservable();
+  public createResponse = this._createResponse.asObservable();
 
   constructor() {}
 
@@ -32,6 +34,10 @@ export class SharedDataService {
     this._tokenImage.next(file);
   }
 
+  setCreateResponse(data: any) {
+    this._createResponse.next(data);
+  }
+
   getTokenType(){
     return this._tokenType.getValue();
   }
@@ -46,5 +52,9 @@ export class SharedDataService {
 
   getImageData() {
     return this._formStructure.getValue();
+  }
+
+  getResponseData() {
+    return this._bannerDetailsImageUrl.getValue();
   }
 }

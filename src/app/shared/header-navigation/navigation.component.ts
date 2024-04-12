@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Clean } from 'src/utils/clean';
 //declare var $: any;
 
 @Component({
@@ -14,7 +16,8 @@ export class NavigationComponent {
 
   public showSearch = false;
 
-  constructor() {
+  constructor(private router: Router,
+    private sessionStorage: Clean) {
     this.verifyIfIsLogged()
   }
 
@@ -23,5 +26,10 @@ export class NavigationComponent {
     if(userData){
       this.isLogged = true;
     }
+  }
+
+  logout(){
+    this.sessionStorage.cleanAll()
+    this.router.navigate(['/login'])
   }
 }
