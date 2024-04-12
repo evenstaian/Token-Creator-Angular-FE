@@ -12,7 +12,7 @@ export class ImageSenderComponent implements OnInit {
   
   @Output() file: EventEmitter<File> = new EventEmitter<File>();
 
-  imageSrc;
+  imageSrc = "assets/images/icons/ic_token_image.svg";
 
   alertIcon="warning"
   alertTitle=""

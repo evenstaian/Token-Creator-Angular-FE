@@ -21,7 +21,7 @@ export class CreateConfirmationComponent implements OnInit {
   networkType: any;
 
   imageData: File;
-  imageSrc;
+  imageSrc: any = "assets/images/icons/ic_token_image.svg";
   tokenName: string = "Nome do Token"
   tokenSymbol: string = "NT"
 
