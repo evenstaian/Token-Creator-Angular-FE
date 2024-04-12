@@ -61,6 +61,7 @@ import { NetworksComponent } from './Modules/Tokens/create/networks/networks.com
 import { ImageSenderComponent } from './component/molecules/image-sender/image-sender.component';
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
+import { LoaderComponent } from './component/loader/loader.component';
 import { SoundService } from '../services/sound/sound.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -96,6 +97,7 @@ export function playerFactory() {
     ImageSenderComponent,
     CreateConfirmationComponent,
     CreateResponseComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,

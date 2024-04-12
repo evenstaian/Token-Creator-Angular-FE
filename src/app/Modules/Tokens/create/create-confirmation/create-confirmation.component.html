@@ -10,9 +10,18 @@
                 <div class="preview-box">
                     <img [src]="imageSrc" class="preview-image">
                 </div>
+
+                <div>
+                    <div>
+                        <p style="margin-bottom: 5px;" class="title">{{tokenName}}<br>
+                        <label class="subtitle">{{tokenSymbol}}</label></p>
+                    </div>
     
-                <p class="title">{{tokenName}}<br>
-                <label class="subtitle">{{tokenSymbol}}</label></p>
+                    <div *ngIf="networkType" class="d-flex network-info">
+                        <div class="network-box">{{networkType.name}}</div>
+                        <div class="network-box" [ngStyle]="{'background-color': networkType.isMainNet ? '#A511FF' : '#00C0C0'}">{{networkType.isMainNet ? "MAINNET" : "TESTNET"}}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -30,4 +39,10 @@
 </div>
 
 <div class="fullscreen_shadow" *ngIf="loader">
+</div>
+
+<div class="fullscreen" *ngIf="loader">
+    <div class="box">
+        <app-loader></app-loader>
+    </div>
 </div>
