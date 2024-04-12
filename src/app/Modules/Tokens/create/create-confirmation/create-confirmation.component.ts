@@ -38,6 +38,8 @@ export class CreateConfirmationComponent implements OnInit {
 
       this.tokenType = data;
       this.formStructure = this.tokenType.form;
+      this.networkType = this.tokenType.network;
+      this.saveTokenTypeOnStorage()
     })
 
     this.sharedDataService.formStructure.subscribe(data => {
@@ -74,15 +76,20 @@ export class CreateConfirmationComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  saveTokenTypeOnStorage(){
+    localStorage.setItem("token-type", JSON.stringify(this.tokenType));
+  }
+
   createToken(){
-    console.log("entrou")
     if(!this.tokenType){
       return
     }
 
-    console.log("passou")
+    if(!this.networkType){
+      return
+    }
 
-    this.appService.createERC20('MUMBAI', this.formStructure, this.imageData).subscribe(data => {
+    this.appService.createERC20(this.networkType.name, this.formStructure, this.imageData).subscribe(data => {
       const response: any = data;
       console.log({response});
     },

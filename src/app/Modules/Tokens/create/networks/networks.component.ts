@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NETWORK_TYPES, STATUS } from 'criptolab-types';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { SoundService } from 'src/services/sound/sound.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { SoundService } from 'src/services/sound/sound.service';
   styleUrls: ['./networks.component.css']
 })
 export class NetworksComponent implements OnInit {
+
+  tokenType: any;
 
   isMainNet: boolean = false;
 
@@ -21,10 +24,17 @@ export class NetworksComponent implements OnInit {
   NetworkTypes: any[];
   
 
-  constructor(private router: Router, private soundService: SoundService) { }
+  constructor(
+    private router: Router, 
+    private soundService: SoundService,
+    private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
     this.NetworkTypes = this.toIterable(NETWORK_TYPES);
+
+    this.sharedDataService.tokenType.subscribe(data => {
+      this.tokenType = data;
+    })
   }
 
   onHover(){
@@ -41,7 +51,11 @@ export class NetworksComponent implements OnInit {
   };
 
   proceed(networkType: any) {
-    this.router.navigate(['/create-token/confirmation']);
+    if(networkType){
+      this.tokenType.network = networkType;
+      this.sharedDataService.setTokenType(this.tokenType);
+      this.router.navigate(['/create-token/confirmation']);
+    }
   }
 
 }
