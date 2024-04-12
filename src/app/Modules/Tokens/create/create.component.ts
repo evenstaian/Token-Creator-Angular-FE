@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +24,7 @@ export class CreateComponent implements OnInit {
       placeholder: "nome do seu token",
       type: "text",
       defaultValue: "",
-      required: false,
+      required: true,
     },
     {
       label: "symbol",
@@ -59,7 +60,7 @@ export class CreateComponent implements OnInit {
     {
       label: "Fan/Sport Token",
       identifier: "FST",
-      bannerImageUrl: "assets/images/big/sport.png",
+      bannerImageUrl: "assets/images/big/basket.png",
       type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
       status: STATUS.enabled,
@@ -73,8 +74,40 @@ export class CreateComponent implements OnInit {
       status: STATUS.enabled,
     },
     {
+      label: "Utility Token",
+      identifier: "UT",
+      bannerImageUrl: "assets/images/big/bull.png",
+      type: TOKEN_STANDARD_TYPES.ERC20,
+      form: this.ERC20_FORM,
+      status: STATUS.enabled,
+    },
+    {
       label: "Rewards/Cashback Token",
       identifier: "RCT",
+      bannerImageUrl: "",
+      type: TOKEN_STANDARD_TYPES.ERC20,
+      form: this.ERC20_FORM,
+      status: STATUS.soon,
+    },
+    {
+      label: "NFT Colecionáveis",
+      identifier: "NFTC",
+      bannerImageUrl: "",
+      type: TOKEN_STANDARD_TYPES.ERC20,
+      form: this.ERC20_FORM,
+      status: STATUS.soon,
+    },
+    {
+      label: "Rewards/Cashback Token",
+      identifier: "NFT Badges / Prêmios",
+      bannerImageUrl: "NFTBP",
+      type: TOKEN_STANDARD_TYPES.ERC20,
+      form: this.ERC20_FORM,
+      status: STATUS.soon,
+    },
+    {
+      label: "NFT Arte / Música",
+      identifier: "NFTAM",
       bannerImageUrl: "",
       type: TOKEN_STANDARD_TYPES.ERC20,
       form: this.ERC20_FORM,
@@ -85,7 +118,17 @@ export class CreateComponent implements OnInit {
   constructor(
     private sharedDataService: SharedDataService, 
     private router: Router,
-    private soundService: SoundService) { }
+    private soundService: SoundService,
+    private location: Location) { 
+
+      this.location.subscribe((event) => {
+      console.log("chamou voltar", event)
+        if (event.type = 'popstate') {
+        console.log("chamou voltar entrou ")
+          this.sharedDataService.setData(null)
+        }
+      });
+    }
 
   ngOnInit(): void {
   }

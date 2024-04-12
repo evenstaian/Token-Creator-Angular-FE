@@ -25,9 +25,11 @@ export class CreateTokenDetailsComponent implements OnInit {
   form: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private sharedDataService: SharedDataService, private router: Router) { 
+  constructor(
+    private fb: FormBuilder, 
+    private sharedDataService: SharedDataService, 
+    private router: Router) { 
     
-
     this.sharedDataService.tokenType.subscribe(data => {
       if(!data){
         return
