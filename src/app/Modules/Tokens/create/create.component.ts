@@ -122,9 +122,7 @@ export class CreateComponent implements OnInit {
     private location: Location) { 
 
       this.location.subscribe((event) => {
-      console.log("chamou voltar", event)
         if (event.type = 'popstate') {
-        console.log("chamou voltar entrou ")
           this.sharedDataService.setData(null)
         }
       });

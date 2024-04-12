@@ -58,7 +58,11 @@ export class BannerSlideshowComponent implements OnInit {
       state: HIDE,
     },
     {
-      url: 'assets/images/big/monkey_red.jpeg',
+      url: 'assets/images/big/vangogh.png',
+      state: HIDE,
+    },
+    {
+      url: 'assets/images/big/monkey-yellow.png',
       state: HIDE,
     },
     {
@@ -66,9 +70,13 @@ export class BannerSlideshowComponent implements OnInit {
       state: HIDE,
     },
     {
+      url: 'assets/images/big/astronaut.png',
+      state: HIDE,
+    },
+    {
       url: 'assets/images/big/canudo.jpeg',
       state: HIDE,
-    }
+    },
   ];
 
   counter = 0;
