@@ -15,10 +15,10 @@ export class Auth {
     apiUrlImg = "//Constants.API_IMAGENS"
 
     //Endpoints
-    _preLogin = 'pre_login';
-    _login = 'login';
-    _preSignup = 'pre_signup';
-    _signup = 'signup';
+    _preLogin = 'login/pre_login';
+    _login = 'login/login';
+    _preSignup = 'signup/pre_signup';
+    _signup = 'signup/signup';
     _logout = 'logout';
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler){
@@ -38,7 +38,7 @@ export class Auth {
         };
 
         let requestObservable: Observable<any>;
-        let moduleString: string = "/auth/"
+        let moduleString: string = "/"
 
         switch (method) {
             case RestMethods.POST:

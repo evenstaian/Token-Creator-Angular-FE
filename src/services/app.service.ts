@@ -12,6 +12,7 @@ import { HttpErrorHandler } from "./http-handle-error.service";
 export class AppService {
 
     apiUrl = Constants.API_URL
+    apiTokenUrl = Constants.API_TOKEN_URL
 
     //Endpoints
     _createERC20 = 'createERC20';
@@ -24,7 +25,6 @@ export class AppService {
     private getAuthTokenHeader(): HttpHeaders {
         const authToken = localStorage.getItem('auth_token');
         return new HttpHeaders({
-            'Content-Type': 'application/json',
             'Authorization': authToken ? authToken : ''
         });
     }
@@ -35,14 +35,14 @@ export class AppService {
         };
 
         let requestObservable: Observable<any>;
-        let moduleString: string = "/app/"
+        let moduleString: string = "/"
 
         switch (method) {
             case RestMethods.POST:
-                requestObservable = this.http.post(`${this.apiUrl}${moduleString}${endpoint}`, body, httpOptionsWithAuthToken);
+                requestObservable = this.http.post(`${this.apiTokenUrl}${moduleString}${endpoint}`, body, httpOptionsWithAuthToken);
                 break;
             case RestMethods.GET:
-                requestObservable = this.http.get(`${this.apiUrl}${moduleString}${endpoint}`, httpOptionsWithAuthToken);
+                requestObservable = this.http.get(`${this.apiTokenUrl}${moduleString}${endpoint}`, httpOptionsWithAuthToken);
                 break;
             default:
                 throw new Error(`Unsupported HTTP method: ${method}`);
@@ -54,7 +54,12 @@ export class AppService {
     }
 
     public createERC20(network: string, form: any, imageFile?: File): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._createERC20, { network, form });
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        formData.append('network', network);
+        formData.append('form', JSON.stringify(form));
+
+        return this.performRequest(RestMethods.POST, this._createERC20, formData);
     }
 
     public createERC721(network: string, form: any, imageFile?: File): Observable<Object | null>{

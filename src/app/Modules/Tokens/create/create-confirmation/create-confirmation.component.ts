@@ -13,7 +13,9 @@ export class CreateConfirmationComponent implements OnInit {
 
   tokenType: any;
   formStructure: any;
+  networkType: any;
 
+  imageData: File;
   imageSrc;
   tokenName: string = "Nome do Token"
   tokenSymbol: string = "NT"
@@ -23,9 +25,21 @@ export class CreateConfirmationComponent implements OnInit {
     subtitle: "Confirme todos os dados do seu token antes de lançá-lo"
   }
 
-  constructor(private sharedDataService: SharedDataService, private router: Router) { }
+  constructor(
+    private sharedDataService: SharedDataService, 
+    private appService: AppService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.sharedDataService.tokenType.subscribe(data => {
+      if(!data){
+        return
+      }
+
+      this.tokenType = data;
+      this.formStructure = this.tokenType.form;
+    })
+
     this.sharedDataService.formStructure.subscribe(data => {
       this.formStructure = data;
 
@@ -46,6 +60,7 @@ export class CreateConfirmationComponent implements OnInit {
 
     this.sharedDataService.tokenImage.subscribe(data => {
       if(data){
+        this.imageData = data;
         this.previewImage(data);
       }
     })
@@ -60,11 +75,23 @@ export class CreateConfirmationComponent implements OnInit {
   }
 
   createToken(){
+    console.log("entrou")
     if(!this.tokenType){
       return
     }
 
-    this.router.navigate(['/success']);
+    console.log("passou")
+
+    this.appService.createERC20('MUMBAI', this.formStructure, this.imageData).subscribe(data => {
+      const response: any = data;
+      console.log({response});
+    },
+    error => {
+      console.log(error)
+    })
+
+
+    //this.router.navigate(['/success']);
   }
 
 }
