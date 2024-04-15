@@ -107,7 +107,6 @@ export class CreateConfirmationComponent implements OnInit {
       this.sharedDataService.setTokenType(this.tokenType);
       
       const response: {
-        contractAddress?: string
         name?: string
         symbol?: string
         description?: string
@@ -118,7 +117,7 @@ export class CreateConfirmationComponent implements OnInit {
         available?: boolean 
       } = data;
 
-      console.log({response});
+      this.sharedDataService.setCreateResponse(response);
       this.router.navigate(['/success']);
     },
     error => {

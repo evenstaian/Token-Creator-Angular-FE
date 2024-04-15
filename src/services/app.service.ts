@@ -15,6 +15,7 @@ export class AppService {
     apiTokenUrl = Constants.API_TOKEN_URL
 
     //Endpoints
+    _getUserData = 'getUserData';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
 
@@ -29,7 +30,7 @@ export class AppService {
         });
     }
 
-    private performRequest(method: RestMethods, endpoint: string, body: any): Observable<any> {
+    private performRequest(method: RestMethods, endpoint: string, body?: any): Observable<any> {
         const httpOptionsWithAuthToken = {
             headers: this.getAuthTokenHeader()
         };
@@ -53,6 +54,10 @@ export class AppService {
         );
     }
 
+    public getUserData(): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._getUserData);
+    }
+
     public createERC20(network: string, form: any, imageFile?: File): Observable<Object | null>{
         const formData = new FormData();
         formData.append('file', imageFile);
@@ -63,7 +68,12 @@ export class AppService {
     }
 
     public createERC721(network: string, form: any, imageFile?: File): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._createERC721, { network, form });
+    const formData = new FormData();
+        formData.append('file', imageFile);
+        formData.append('network', network);
+        formData.append('form', JSON.stringify(form));
+
+        return this.performRequest(RestMethods.POST, this._createERC721, formData);
     }
 
 }
