@@ -20,16 +20,16 @@
                     <button class="btn mx-2" style="color: #fff; width: 100px;" [ngStyle]="{ 'background-color': ButtonsTypes[action].color }">{{action}}</button>
                 </div>
             </div>
-        
-            <div class="d-flex px-2 align-items-center">
-                <p class="detailsBtn">Ver Detalhes</p>
-            </div>
 
             <div *ngIf="myToken.status == 'PENDING'">
                 <div class="d-flex px-2 align-items-center">
                     <app-loader loaderJson="processing.json" class="processing-loader"></app-loader>
                     <p class="processing">processando...</p>
                 </div>
+            </div>
+
+            <div class="d-flex px-2 align-items-center">
+                <p class="detailsBtn">Ver Detalhes</p>
             </div>
         </div>   
     </div>
