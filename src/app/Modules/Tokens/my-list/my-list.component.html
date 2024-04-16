@@ -15,7 +15,7 @@
             
             
         <div class="d-flex">
-            <div *ngIf="myToken.status == 'CONFIRMED'">
+            <div *ngIf="myToken.status == 'CONFIRMED'" class="d-flex">
                 <div *ngFor="let action of myToken.actions">
                     <button class="btn mx-2" style="color: #fff; width: 100px;" [ngStyle]="{ 'background-color': ButtonsTypes[action].color }">{{action}}</button>
                 </div>

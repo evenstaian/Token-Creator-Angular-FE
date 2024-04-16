@@ -55,8 +55,37 @@ export class AppService {
         );
     }
 
+    private performEvents(endpoint: string): any {
+        return new Observable(subscriber => {
+            const url = `${this.apiTokenUrl}/${endpoint}`;
+            const eventSource = new EventSource(url);
+        
+            eventSource.onmessage = event => {
+                console.log(event)
+              const data = JSON.parse(event.data);
+              console.log('Evento recebido:', data);
+              if (data.status == "CONFIRMED") {
+                subscriber.next(data);
+                eventSource.close();
+                subscriber.complete();
+              }
+            };
+        
+            eventSource.onerror = error => {
+              console.error('Erro na conexão do Server-Sent Events:', error);
+              eventSource.close();
+              subscriber.error(error);
+            };
+        
+            // Função de teardown: será chamada quando o Observable for desinscrito
+            return () => {
+              eventSource.close();
+            };
+          });
+    }
+
     public tokenSubscribe(hashId: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.GET, `${this._tokenSubscribe}/${hashId}`);
+        return this.performEvents(`${this._tokenSubscribe}/${hashId}`);
     }
 
     public getUserData(): Observable<Object | null>{
