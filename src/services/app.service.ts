@@ -15,6 +15,7 @@ export class AppService {
     apiTokenUrl = Constants.API_TOKEN_URL
 
     //Endpoints
+    _tokenSubscribe = 'tokenSubscribe';
     _getUserData = 'getUserData';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
@@ -52,6 +53,10 @@ export class AppService {
         return requestObservable.pipe(
             catchError((error: HttpErrorResponse) => this.errorHandler.handleError(error))
         );
+    }
+
+    public tokenSubscribe(hashId: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.GET, `${this._tokenSubscribe}?hashId=${hashId}`);
     }
 
     public getUserData(): Observable<Object | null>{
