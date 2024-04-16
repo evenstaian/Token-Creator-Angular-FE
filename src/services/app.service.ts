@@ -56,7 +56,7 @@ export class AppService {
     }
 
     public tokenSubscribe(hashId: string): Observable<Object | null>{
-        return this.performRequest(RestMethods.GET, `${this._tokenSubscribe}?hashId=${hashId}`);
+        return this.performRequest(RestMethods.GET, `${this._tokenSubscribe}/${hashId}`);
     }
 
     public getUserData(): Observable<Object | null>{
