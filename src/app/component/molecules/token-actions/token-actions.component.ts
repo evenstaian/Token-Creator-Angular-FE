@@ -101,7 +101,6 @@ export class TokenActionsComponent implements OnChanges {
     }
 
     this.formStructure[action].forEach(field => {
-      console.log({ field })
       const validators: ValidatorFn[] = [];
       if (field.required) {
         validators.push(Validators.required);

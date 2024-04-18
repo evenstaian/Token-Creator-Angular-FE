@@ -60,7 +60,6 @@ export class MyListComponent implements OnInit {
   }
 
   showAction(token: any, action: string){
-    console.log({ token, action })
     for (let item of this.myTokensList){
       if (item.hashId == token.hashId) {
         item.actionOpened = item.actionOpened == action ? undefined : action;
