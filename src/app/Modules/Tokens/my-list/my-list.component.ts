@@ -33,7 +33,8 @@ export class MyListComponent implements OnInit {
   }
 
   loader: boolean = false;
-
+  fullLoader: boolean = false;
+  
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
@@ -59,6 +60,10 @@ export class MyListComponent implements OnInit {
     this.loader = status
   }
 
+  showFullscreenLoader(status: boolean) {
+    this.fullLoader = status
+  }
+
   showAction(token: any, action: string){
     for (let item of this.myTokensList){
       if (item.hashId == token.hashId) {
@@ -69,6 +74,12 @@ export class MyListComponent implements OnInit {
 
   processAction(form: any){
     console.log({ form })
+
+    this.showFullscreenLoader(true);
+
+    setTimeout(() => {
+      this.showFullscreenLoader(false);
+    }, 2000);
   }
 
 }

@@ -64,6 +64,7 @@ import { CreateResponseComponent } from './Modules/Tokens/create/create-response
 import { LoaderComponent } from './component/loader/loader.component';
 import { TokenActionsComponent } from './component/molecules/token-actions/token-actions.component';
 import { SoundService } from '../services/sound/sound.service';
+import { FullLoaderComponent } from './component/organisms/full-loader/full-loader.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -100,6 +101,7 @@ export function playerFactory() {
     CreateResponseComponent,
     LoaderComponent,
     TokenActionsComponent,
+    FullLoaderComponent,
   ],
   imports: [
     CommonModule,
