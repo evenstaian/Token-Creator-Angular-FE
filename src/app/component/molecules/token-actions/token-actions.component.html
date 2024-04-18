@@ -1,0 +1,51 @@
+<div class="wrapper">
+    
+    <div class="p-5">
+        <div *ngIf="this.action =='DETAILS'">
+            <div class="form-content">
+                <div *ngFor="let detail of tokenDetails">
+                    <p class="form-item-title">{{detail.label}}<br>
+                    <label class="form-item-subtitle">{{detail.value}}</label></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-secondary px-4" (click)="goToScan()">VER NA SCAN</button>
+            </div>
+        </div>
+
+        <div>
+            <div *ngIf="!isEditMode">
+                <div class="form-content">
+                    <div *ngFor="let form of formStructure[this.action]">
+                        <p class="form-item-title">{{form.placeholder}}<br>
+                        <label class="form-item-subtitle">{{form.defaultValue}}</label></p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-secondary px-4" (click)="confirm()">CONFIRMAR</button>
+                </div>
+            </div>
+
+            <form *ngIf="formStructure[this.action] && isEditMode" [formGroup]="form">
+                <div *ngFor="let field of formStructure[this.action]" class="form-group">
+                    <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
+                        <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required">
+                        <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
+                            Este campo é obrigatório.
+                        </div>
+                    </ng-container>
+                    <ng-template #textareaField>
+                        <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required"></textarea>
+                        <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
+                            Este campo é obrigatório.
+                        </div>
+                    </ng-template>
+                </div>
+            
+                <div class="d-flex justify-content-end">
+                    <button (click)="changeMode()" class="btn btn-secondary px-4">{{ButtonsTypes[this.action].label}}</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>

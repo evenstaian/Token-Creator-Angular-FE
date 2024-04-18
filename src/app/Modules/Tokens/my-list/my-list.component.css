@@ -1,10 +1,12 @@
 .list{
+    margin-bottom: 1rem;
+}
+.item {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 5rem;
     background-color: #545353;
-    margin-bottom: 1rem;
     padding-inline: 2rem;
 }
 

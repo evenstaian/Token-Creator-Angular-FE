@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: #434242; 
+    width: 100%
+}
+
+.form-control {
+    border: 1px solid #FFFFFF;
+    background-color: #545353;
+    border-radius: 0;
+    color: #FFFFFF;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    height: 3.5rem;
+}
+
+.form-control::placeholder {
+    color: #fff;
+}
+
+.form-control:focus {
+    border-color: #A511FF;
+}

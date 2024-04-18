@@ -9,28 +9,36 @@
     </div>
 
     <div class="list" *ngFor="let myToken of myTokensList">
-        <div class="token">
-            <app-circular-thumb-image imageUrl="{{ myToken.imgUrl || imagePlaceholder }}" [hasMessage]="false"></app-circular-thumb-image>
-            <p>{{myToken.name}} <br>{{myToken.ticker}}</p></div>
-            
-            
-        <div class="d-flex">
-            <div *ngIf="myToken.status == 'CONFIRMED'" class="d-flex">
-                <div *ngFor="let action of myToken.actions">
-                    <button class="btn mx-2" style="color: #fff; width: 100px;" [ngStyle]="{ 'background-color': ButtonsTypes[action].color }">{{action}}</button>
+        <div class="item">
+            <div class="token">
+                <app-circular-thumb-image imageUrl="{{ myToken.imgUrl || imagePlaceholder }}" [hasMessage]="false"></app-circular-thumb-image>
+                <p>{{myToken.name}} <br>{{myToken.ticker}}</p></div>
+                
+                
+            <div class="d-flex">
+                <div *ngIf="myToken.status == 'CONFIRMED'" class="d-flex">
+                    <div *ngFor="let action of myToken.actions">
+                        <button class="btn mx-2" style="color: #fff; width: 100px;" 
+                        [ngStyle]="{ 'background-color': ButtonsTypes[action].color }"
+                        (click)="showAction(myToken, action)">{{action}}</button>
+                    </div>
                 </div>
-            </div>
-
-            <div *ngIf="myToken.status == 'PENDING'">
+    
+                <div *ngIf="myToken.status == 'PENDING'">
+                    <div class="d-flex px-2 align-items-center">
+                        <app-loader loaderJson="processing.json" class="processing-loader"></app-loader>
+                        <p class="processing">processando...</p>
+                    </div>
+                </div>
+    
                 <div class="d-flex px-2 align-items-center">
-                    <app-loader loaderJson="processing.json" class="processing-loader"></app-loader>
-                    <p class="processing">processando...</p>
+                    <p class="detailsBtn" (click)="showAction(myToken, 'DETAILS')">Ver Detalhes</p>
                 </div>
-            </div>
-
-            <div class="d-flex px-2 align-items-center">
-                <p class="detailsBtn">Ver Detalhes</p>
-            </div>
-        </div>   
+            </div>   
+            
+        </div>
+        <div *ngIf="myToken.actionOpened">
+            <app-token-actions [token]="myToken" [action]="myToken.actionOpened" (actionForm)="processAction($event)"></app-token-actions>
+        </div>
     </div>
 </div>
