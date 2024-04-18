@@ -50,7 +50,7 @@ export class MyListComponent implements OnInit {
       if(response.tokensQueued){
         this.myTokensList = response.tokensQueued;
       }
-    }, 
+    },
     error => {
       this.showLoader(false);
     }) 

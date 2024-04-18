@@ -142,9 +142,9 @@ export class TokenActionsComponent implements OnChanges {
     this.isEditMode = !this.isEditMode
   }
 
-  confirm(form: any){
+  confirm(formStructure: any){
     if (this.form.valid) {
-      this.actionForm.emit(form);
+      this.actionForm.emit({tokenHashId: this.token.hashId, form: formStructure});
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {
         if (this.form.get(fieldName).errors && this.form.get(fieldName).errors.required) {
