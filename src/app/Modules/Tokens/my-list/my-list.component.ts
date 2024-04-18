@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
+import { TOKEN_ACTIONS_TYPES } from 'criptolab-types';
 
 @Component({
   selector: 'app-my-list',
@@ -10,6 +12,8 @@ import { AppService } from 'src/services/app.service';
   ]
 })
 export class MyListComponent implements OnInit {
+
+  @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
   imagePlaceholder="assets/images/icons/ic_token_image.svg";
 
@@ -34,6 +38,10 @@ export class MyListComponent implements OnInit {
 
   loader: boolean = false;
   fullLoader: boolean = false;
+
+  alertIcon="warning"
+  alertTitle;
+  alertMessage;
   
   constructor(private appService: AppService) { }
 
@@ -72,14 +80,63 @@ export class MyListComponent implements OnInit {
     }
   }
 
-  processAction(form: any){
-    console.log({ form })
-
+  processAction(actionData: any){
     this.showFullscreenLoader(true);
 
-    setTimeout(() => {
+    console.log(actionData);
+
+    switch (actionData.action) {
+      case TOKEN_ACTIONS_TYPES.MINT:
+        this.mintERC20(actionData.tokenHashId, actionData.form);
+        break;
+      case TOKEN_ACTIONS_TYPES.TRANSFER:
+        this.transferERC20(actionData.tokenHashId, actionData.form);
+        break;
+      default:
+        this.showFullscreenLoader(false);
+        this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento")
+        break;
+    }
+  }
+
+  mintERC20(tokenHashId: string, form: any){
+    this.appService.mintERC20(tokenHashId, form).subscribe(data => {
       this.showFullscreenLoader(false);
+      this.createTokenActionStatusResponse(tokenHashId, TOKEN_ACTIONS_TYPES.MINT, 'PENDING');
+    },
+    error => {
+      this.showFullscreenLoader(false);
+      this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento")
+    }) 
+  }
+
+  transferERC20(tokenHashId: string, form: any){
+    console.log("entrou aqui")
+    setTimeout(async () => {
+      this.showFullscreenLoader(false);
+      this.createTokenActionStatusResponse(tokenHashId, TOKEN_ACTIONS_TYPES.TRANSFER, 'PENDING');
     }, 2000);
+  }
+
+  async createTokenActionStatusResponse(tokenHashId: string, action: string, status: string): Promise<any>{
+    for(let item of this.myTokensList){
+      item.actionsStatus = {};
+      if(item.hashId == tokenHashId){
+        item.actionsStatus[action] = status
+        return item
+      }
+    }
+  }
+
+  showAlert(success: boolean, title: string, message: string){
+    this.showLoader(false);
+    this.alertIcon = success ? "success" : "warning";
+    this.alertTitle = title;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertSwal.fire();
+    }, 200);
   }
 
 }

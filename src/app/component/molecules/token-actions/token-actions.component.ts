@@ -10,11 +10,17 @@ export class TokenActionsComponent implements OnChanges {
 
   @Input() action: string;
   @Input() token: any;
+  @Input() statusResponse: any = {
+    MINT: "PENDING",
+    TRANSFER: "PENDING",
+    BURN: "PENDING",
+  };
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
 
   isEditMode: boolean = true;
+  isNewAction: boolean = true; 
 
   QUANTITY_FORM_ITEM = {
     label: "quantity",
@@ -85,11 +91,18 @@ export class TokenActionsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.action) {
       this.isEditMode = true;
+      this.isNewAction = true;
       this.buildActionForm(this.action);
     }
 
     if (changes.token) {
       this.buildDetails(this.token);
+    }
+
+    if(changes.statusResponse){
+      if(changes.statusResponse.currentValue){
+        this.isNewAction = false;
+      }
     }
   }
 
@@ -144,7 +157,7 @@ export class TokenActionsComponent implements OnChanges {
 
   confirm(formStructure: any){
     if (this.form.valid) {
-      this.actionForm.emit({tokenHashId: this.token.hashId, form: formStructure});
+      this.actionForm.emit({tokenHashId: this.token.hashId, action: this.action, form: formStructure});
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {
         if (this.form.get(fieldName).errors && this.form.get(fieldName).errors.required) {

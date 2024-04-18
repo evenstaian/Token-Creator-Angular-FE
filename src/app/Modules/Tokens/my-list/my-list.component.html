@@ -1,3 +1,6 @@
+<swal #swalWarningDefault title={{alertTitle}} text={{alertMessage}} icon={{alertIcon}}>
+</swal>
+
 <div class="w-100 px-5" style="color: #fff">
     <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
 
@@ -38,7 +41,7 @@
             
         </div>
         <div *ngIf="myToken.actionOpened">
-            <app-token-actions [token]="myToken" [action]="myToken.actionOpened" (actionForm)="processAction($event)"></app-token-actions>
+            <app-token-actions [token]="myToken" [action]="myToken.actionOpened" [statusResponse]="myToken.actionsStatus" (actionForm)="processAction($event)"></app-token-actions>
         </div>
     </div>
 </div>

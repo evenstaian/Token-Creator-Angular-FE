@@ -19,6 +19,7 @@ export class AppService {
     _getUserData = 'getUserData';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
+    _mintERC20 = 'mintERC20Tokens';
 
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler ){
@@ -108,6 +109,10 @@ export class AppService {
         formData.append('form', JSON.stringify(form));
 
         return this.performRequest(RestMethods.POST, this._createERC721, formData);
+    }
+
+    public mintERC20(tokenHashId: string, form: any): Observable<Object | null> {
+        return this.performRequest(RestMethods.POST, `${this._mintERC20}/${tokenHashId}`, { form });
     }
 
 }

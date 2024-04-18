@@ -65,6 +65,7 @@ import { LoaderComponent } from './component/loader/loader.component';
 import { TokenActionsComponent } from './component/molecules/token-actions/token-actions.component';
 import { SoundService } from '../services/sound/sound.service';
 import { FullLoaderComponent } from './component/organisms/full-loader/full-loader.component';
+import { ProcessStatusTagComponent } from './component/molecules/process-status-tag/process-status-tag.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -102,6 +103,7 @@ export function playerFactory() {
     LoaderComponent,
     TokenActionsComponent,
     FullLoaderComponent,
+    ProcessStatusTagComponent,
   ],
   imports: [
     CommonModule,
