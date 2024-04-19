@@ -96,7 +96,7 @@ export class MyListComponent implements OnInit {
     this.appService.interactERC20(tokenHashId, type, form).subscribe(data => {
       const response: any = data;
       if (response.hashId){
-        //TODO: observe event;
+        this.setTokenSubscribe(tokenHashId, response.hashId, type);
         this.createTokenActionStatusResponse(tokenHashId, response.hashId, type, 'PENDING');
       }
 
@@ -106,6 +106,17 @@ export class MyListComponent implements OnInit {
       this.showFullscreenLoader(false);
       this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento")
     }) 
+  }
+
+  setTokenSubscribe(tokenHashId: string, actionHashId?: string, actionType?: string) {
+    this.appService.tokenSubscribe(actionHashId || tokenHashId).subscribe(
+      data => { 
+        const response: any = data;
+        if(response.status && actionHashId) {
+          this.createTokenActionStatusResponse(tokenHashId, actionHashId, actionType, response.status);
+        }
+      }, 
+      error => {})
   }
 
   refreshActionStatus(tokenHashId: string, action: string, hashId: string){
@@ -123,6 +134,7 @@ export class MyListComponent implements OnInit {
     for(let item of this.myTokensList){
       item.actionsStatus = {};
       if(item.hashId == tokenHashId){
+        console.log({hashId, status})
         item.actionsStatus[action] = { hashId, status }
         return item
       }

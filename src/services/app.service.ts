@@ -13,6 +13,7 @@ export class AppService {
 
     apiUrl = Constants.API_URL
     apiTokenUrl = Constants.API_TOKEN_URL
+    apiEventsUrl = Constants.API_EVENTS_URL
 
     //Endpoints
     _tokenSubscribe = 'tokenSubscribe';
@@ -61,7 +62,7 @@ export class AppService {
 
     private performEvents(endpoint: string): any {
         return new Observable(subscriber => {
-            const url = `${this.apiTokenUrl}/${endpoint}`;
+            const url = `${this.apiEventsUrl}/${endpoint}`;
             const eventSource = new EventSource(url);
         
             eventSource.onmessage = event => {
