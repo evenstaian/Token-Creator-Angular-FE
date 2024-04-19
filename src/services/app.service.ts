@@ -17,9 +17,12 @@ export class AppService {
     //Endpoints
     _tokenSubscribe = 'tokenSubscribe';
     _getUserData = 'getUserData';
+    _getActionProcess = 'getActionProcess';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
     _mintERC20 = 'mintERC20Tokens';
+    _transferERC20 = 'transferERC20Tokens';
+    _burnERC20 = 'burnERC20Tokens';
 
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler ){
@@ -93,6 +96,10 @@ export class AppService {
         return this.performRequest(RestMethods.POST, this._getUserData);
     }
 
+    public getActionProcess(hashId: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.GET, `${this._getActionProcess}/${hashId}`);
+    }
+
     public createERC20(network: string, form: any, imageFile?: File): Observable<Object | null>{
         const formData = new FormData();
         formData.append('file', imageFile);
@@ -111,8 +118,20 @@ export class AppService {
         return this.performRequest(RestMethods.POST, this._createERC721, formData);
     }
 
-    public mintERC20(tokenHashId: string, form: any): Observable<Object | null> {
-        return this.performRequest(RestMethods.POST, `${this._mintERC20}/${tokenHashId}`, { form });
+    public interactERC20(tokenHashId: string, actionType: string, form: any): Observable<Object | null> {
+        const opEndpoint = () => {
+            switch (actionType) {
+                case "MINT":
+                    return this._mintERC20;
+                case "TRANSFER":
+                    return this._transferERC20;
+                case "BURN":
+                    return this._burnERC20;
+                default:
+                    break;
+            }
+        }
+        return this.performRequest(RestMethods.POST, `${opEndpoint()}/${tokenHashId}`, { form });
     }
 
 }

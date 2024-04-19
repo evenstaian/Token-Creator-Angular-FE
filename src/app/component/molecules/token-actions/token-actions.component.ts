@@ -16,6 +16,7 @@ export class TokenActionsComponent implements OnChanges {
     BURN: "PENDING",
   };
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
+  @Output() refreshStatus: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -35,7 +36,19 @@ export class TokenActionsComponent implements OnChanges {
     placeholder: "para qual endereço? (deixe vazio se não houver um destino ainda)",
     type: "text",
     defaultValue: "",
-    required: true,
+    required: false,
+  }
+
+  SCAN_URL_FORM_ITEM = {
+    label: "scan_url",
+    placeholder: "Veja na scan",
+    defaultValue: "",
+  }
+
+  TXHASH_URL_FORM_ITEM = {
+    label: "scan_url",
+    placeholder: "Veja na scan",
+    defaultValue: "",
   }
 
   MINT_FORM = [
@@ -101,7 +114,18 @@ export class TokenActionsComponent implements OnChanges {
 
     if(changes.statusResponse){
       if(changes.statusResponse.currentValue){
+        console.log("status changes", changes.statusResponse.currentValue)
         this.isNewAction = false;
+
+        if(this.statusResponse.scanUrl){
+          this.SCAN_URL_FORM_ITEM.defaultValue = this.statusResponse.scanUrl
+          this.formStructure[this.action].append(this.SCAN_URL_FORM_ITEM)
+        }
+
+        if(this.statusResponse.txHash){
+          this.SCAN_URL_FORM_ITEM.defaultValue = this.statusResponse.txHash
+          this.formStructure[this.action].append(this.TXHASH_URL_FORM_ITEM)
+        }
       }
     }
   }
@@ -152,7 +176,15 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   changeMode(){
-    this.isEditMode = !this.isEditMode
+    if (this.form.valid) {
+      this.isEditMode = !this.isEditMode
+    } else {
+      Object.keys(this.form.controls).forEach(fieldName => {
+        if (this.form.get(fieldName).errors && this.form.get(fieldName).errors.required) {
+          this.makeFieldInvalid(fieldName);
+        }
+      });
+    }
   }
 
   confirm(formStructure: any){
@@ -167,8 +199,12 @@ export class TokenActionsComponent implements OnChanges {
     }
   }
 
+  refresh(hashId: string){
+    this.refreshStatus.emit(hashId)
+  }
+
   goToScan(){
-    const url = `/address/${this.token.address}`;
+    const url = this.token.scanUrl;
     window.open(url, '_blank');
   }
 

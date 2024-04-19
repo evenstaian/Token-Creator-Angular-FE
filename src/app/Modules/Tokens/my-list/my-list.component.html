@@ -28,10 +28,7 @@
                 </div>
     
                 <div *ngIf="myToken.status == 'PENDING'">
-                    <div class="d-flex px-2 align-items-center">
-                        <app-loader loaderJson="processing.json" class="processing-loader"></app-loader>
-                        <p class="processing">processando...</p>
-                    </div>
+                    <app-process-status-tag [processStatus]=myToken.status></app-process-status-tag>
                 </div>
     
                 <div class="d-flex px-2 align-items-center">
@@ -41,7 +38,7 @@
             
         </div>
         <div *ngIf="myToken.actionOpened">
-            <app-token-actions [token]="myToken" [action]="myToken.actionOpened" [statusResponse]="myToken.actionsStatus" (actionForm)="processAction($event)"></app-token-actions>
+            <app-token-actions [token]="myToken" [action]="myToken.actionOpened" [statusResponse]="myToken.actionsStatus" (actionForm)="processAction($event)" (refreshStatus)="refreshActionStatus(myToken.hashId, myToken.actionOpened, $event)"></app-token-actions>
         </div>
     </div>
 </div>

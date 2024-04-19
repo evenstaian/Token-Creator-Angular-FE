@@ -17,6 +17,14 @@
     height: 50px;
 }
 
+.refresh-icon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    accent-color: yellow;
+    margin-left: 15px;
+}
+
 p {
     margin-bottom: 0;
 }

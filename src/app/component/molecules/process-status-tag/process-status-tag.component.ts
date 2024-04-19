@@ -5,17 +5,19 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   templateUrl: './process-status-tag.component.html',
   styleUrls: ['./process-status-tag.component.css']
 })
-export class ProcessStatusTagComponent implements OnChanges {
+export class ProcessStatusTagComponent implements OnInit {
 
   @Input() processStatus: string;
 
+  showRefreshIcon: boolean = false;
+  waitToRefreshIntervalMs = 15000;
+
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-    if(changes.processStatus){
-      console.log({processStatus: this.processStatus})
-    }
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.showRefreshIcon = true
+    }, this.waitToRefreshIntervalMs);
   }
 
 }

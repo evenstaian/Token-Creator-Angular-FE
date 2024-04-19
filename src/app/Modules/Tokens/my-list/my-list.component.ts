@@ -83,26 +83,24 @@ export class MyListComponent implements OnInit {
   processAction(actionData: any){
     this.showFullscreenLoader(true);
 
-    console.log(actionData);
-
-    switch (actionData.action) {
-      case TOKEN_ACTIONS_TYPES.MINT:
-        this.mintERC20(actionData.tokenHashId, actionData.form);
-        break;
-      case TOKEN_ACTIONS_TYPES.TRANSFER:
-        this.transferERC20(actionData.tokenHashId, actionData.form);
-        break;
-      default:
-        this.showFullscreenLoader(false);
-        this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento")
-        break;
+    if(!TOKEN_ACTIONS_TYPES[actionData.action]){
+      this.showFullscreenLoader(false);
+      this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento");
+      return
     }
+
+    this.interactERC20(actionData.tokenHashId, actionData.action, actionData.form);
   }
 
-  mintERC20(tokenHashId: string, form: any){
-    this.appService.mintERC20(tokenHashId, form).subscribe(data => {
+  interactERC20(tokenHashId: string, type: string, form: any){
+    this.appService.interactERC20(tokenHashId, type, form).subscribe(data => {
+      const response: any = data;
+      if (response.hashId){
+        //TODO: observe event;
+        this.createTokenActionStatusResponse(tokenHashId, response.hashId, type, 'PENDING');
+      }
+
       this.showFullscreenLoader(false);
-      this.createTokenActionStatusResponse(tokenHashId, TOKEN_ACTIONS_TYPES.MINT, 'PENDING');
     },
     error => {
       this.showFullscreenLoader(false);
@@ -110,19 +108,22 @@ export class MyListComponent implements OnInit {
     }) 
   }
 
-  transferERC20(tokenHashId: string, form: any){
-    console.log("entrou aqui")
-    setTimeout(async () => {
-      this.showFullscreenLoader(false);
-      this.createTokenActionStatusResponse(tokenHashId, TOKEN_ACTIONS_TYPES.TRANSFER, 'PENDING');
-    }, 2000);
+  refreshActionStatus(tokenHashId: string, action: string, hashId: string){
+    console.log({tokenHashId, action, hashId})
+    this.appService.getActionProcess(hashId).subscribe(data => {
+      const response: any = data;
+      //TODO: observe event;
+      this.createTokenActionStatusResponse(tokenHashId, hashId, action, response.status);
+    },
+    error => {
+    }) 
   }
 
-  async createTokenActionStatusResponse(tokenHashId: string, action: string, status: string): Promise<any>{
+  async createTokenActionStatusResponse(tokenHashId: string, hashId: string, action: string, status: string): Promise<any>{
     for(let item of this.myTokensList){
       item.actionsStatus = {};
       if(item.hashId == tokenHashId){
-        item.actionsStatus[action] = status
+        item.actionsStatus[action] = { hashId, status }
         return item
       }
     }

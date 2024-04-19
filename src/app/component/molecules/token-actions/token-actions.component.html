@@ -17,15 +17,17 @@
             <div *ngIf="!isEditMode">
                 <div class="form-content">
                     <div *ngFor="let form of formStructure[this.action]">
-                        <p class="form-item-title">{{form.placeholder}}<br>
-                        <label class="form-item-subtitle">{{form.defaultValue}}</label></p>
+                        <div *ngIf="form.defaultValue">
+                            <p class="form-item-title">{{form.placeholder}}<br>
+                            <label class="form-item-subtitle">{{form.defaultValue}}</label></p>
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end" *ngIf="isNewAction">
                     <button type="submit" class="btn btn-secondary px-4" (click)="confirm(formStructure[this.action])">CONFIRMAR</button>
                 </div>
                 <div class="d-flex justify-content-end" *ngIf="!isNewAction">
-                    <app-process-status-tag [processStatus]=statusResponse[this.action]></app-process-status-tag>
+                    <app-process-status-tag [processStatus]=statusResponse[this.action].status (click)="refresh(statusResponse[this.action].hashId)"></app-process-status-tag>
                 </div>
             </div>
 
