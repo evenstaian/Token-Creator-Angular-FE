@@ -1,6 +1,8 @@
 <div class="wrapper">
    <div class="box">
-    <app-account-menu style="height: 100%;" [menu]="menu"></app-account-menu>
-    <app-wallets style="height: 100%"></app-wallets>
+    <app-account-menu style="height: 100%;" [menu]="menu" (selected)="openMenuItem($event)"></app-account-menu>
+    <div style="height: 100%;">
+        <router-outlet></router-outlet>
+    </div>
    </div>
 </div>

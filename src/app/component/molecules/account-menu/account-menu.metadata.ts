@@ -3,6 +3,7 @@ export interface MenuItem {
     title: string,
     icon: string,
     class: string,
+    router?: string,
     clickable: boolean,
     isSelected: boolean,
     show: boolean,

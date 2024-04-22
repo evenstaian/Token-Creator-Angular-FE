@@ -14,6 +14,7 @@ import { NetworksComponent } from './Modules/Tokens/create/networks/networks.com
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
 import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
+import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 
 export const Approutes: Routes = [
   {
@@ -67,7 +68,13 @@ export const Approutes: Routes = [
     children: [
       {
         path: '',
-        component: MyAccountComponent
+        component: MyAccountComponent,
+        children: [
+          {
+            path: 'wallets',
+            component: WalletsComponent
+          },
+        ],
       },
     ],
     canActivate: [AuthGuard]

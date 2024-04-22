@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../../component/molecules/account-menu/account-menu.metadata';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
@@ -24,6 +25,7 @@ export class MyAccountComponent implements OnInit {
       title: 'Carteiras',
       icon: 'assets/images/icons/ic_wallets.svg',
       class: '',
+      router: '/my-account/wallets',
       clickable: false,
       isSelected: false,
       show: true,
@@ -51,7 +53,7 @@ export class MyAccountComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -74,6 +76,15 @@ export class MyAccountComponent implements OnInit {
         this.toggleMenuItemSelection(item.submenu, title);
       }
     }
+  }
+
+  openMenuItem(menuItem: MenuItem){
+    if(menuItem?.router){
+      this.router.navigate([menuItem.router])
+      return
+    }
+
+    this.router.navigate(["/my-account"])
   }
 
 }
