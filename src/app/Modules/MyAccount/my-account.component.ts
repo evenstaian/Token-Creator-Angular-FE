@@ -12,7 +12,7 @@ export class MyAccountComponent implements OnInit {
     {
       type: 'PROFILE',
       title: 'Meus Dados',
-      icon: 'mdi mdi-gauge',
+      icon: 'assets/images/icons/ic_myaccount.svg',
       class: '',
       clickable: false,
       isSelected: false,
@@ -22,7 +22,7 @@ export class MyAccountComponent implements OnInit {
     {
       type: 'WALLET',
       title: 'Carteiras',
-      icon: 'mdi mdi-gauge',
+      icon: 'assets/images/icons/ic_wallets.svg',
       class: '',
       clickable: false,
       isSelected: false,
@@ -32,7 +32,7 @@ export class MyAccountComponent implements OnInit {
     {
       type: 'SUBSCRIPTION',
       title: 'Assinatura',
-      icon: 'mdi mdi-gauge',
+      icon: 'assets/images/icons/ic_subscription.svg',
       class: '',
       clickable: false,
       isSelected: false,
@@ -42,33 +42,12 @@ export class MyAccountComponent implements OnInit {
     {
       type: 'ABOUT',
       title: 'Sobre',
-      icon: 'mdi mdi-gauge',
+      icon: 'assets/images/icons/ic_about.svg',
       class: '',
       clickable: false,
       isSelected: false,
       show: true,
       submenu: []
-    },
-    {
-      type: 'PROFILE',
-      title: 'Meus Dados',
-      icon: 'mdi mdi-gauge',
-      class: '',
-      clickable: false,
-      isSelected: false,
-      show: false,
-      submenu: [
-        {
-          type: 'PROFILE',
-          title: 'Meus Dados',
-          icon: 'mdi mdi-gauge',
-          class: '',
-          clickable: false,
-          isSelected: false,
-          show: true,
-          submenu: []
-        },
-      ]
     },
   ]
 
