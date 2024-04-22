@@ -56,9 +56,15 @@ export class TokenActionsComponent implements OnChanges {
     this.ADDRESS_TO_FORM_ITEM,
   ]
 
+  TRANSFER_ADDRESS_TO_FORM_ITEM = () => {
+    let FORM = this.ADDRESS_TO_FORM_ITEM;
+    FORM.placeholder = "para qual endereço?"
+    return FORM
+  }
+
   TRANSFER_FORM = [
     this.QUANTITY_FORM_ITEM,
-    this.ADDRESS_TO_FORM_ITEM,
+    this.TRANSFER_ADDRESS_TO_FORM_ITEM(),
   ]
 
   BURN_FORM = [

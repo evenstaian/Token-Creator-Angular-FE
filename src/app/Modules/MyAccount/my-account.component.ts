@@ -1,0 +1,100 @@
+import { Component, OnInit } from '@angular/core';
+import { MenuItem } from '../../component/molecules/account-menu/account-menu.metadata';
+
+@Component({
+  selector: 'app-my-account',
+  templateUrl: './my-account.component.html',
+  styleUrls: ['./my-account.component.css']
+})
+export class MyAccountComponent implements OnInit {
+
+  menu: MenuItem[] = [
+    {
+      type: 'PROFILE',
+      title: 'Meus Dados',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      clickable: false,
+      isSelected: false,
+      show: true,
+      submenu: []
+    },
+    {
+      type: 'WALLET',
+      title: 'Carteiras',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      clickable: false,
+      isSelected: false,
+      show: true,
+      submenu: []
+    },
+    {
+      type: 'SUBSCRIPTION',
+      title: 'Assinatura',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      clickable: false,
+      isSelected: false,
+      show: true,
+      submenu: []
+    },
+    {
+      type: 'ABOUT',
+      title: 'Sobre',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      clickable: false,
+      isSelected: false,
+      show: true,
+      submenu: []
+    },
+    {
+      type: 'PROFILE',
+      title: 'Meus Dados',
+      icon: 'mdi mdi-gauge',
+      class: '',
+      clickable: false,
+      isSelected: false,
+      show: false,
+      submenu: [
+        {
+          type: 'PROFILE',
+          title: 'Meus Dados',
+          icon: 'mdi mdi-gauge',
+          class: '',
+          clickable: false,
+          isSelected: false,
+          show: true,
+          submenu: []
+        },
+      ]
+    },
+  ]
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  toggleSelection(title: string): void {
+    this.toggleMenuItemSelection(this.menu, title);
+  }
+
+  private toggleMenuItemSelection(items: MenuItem[], title: string): void {
+    for (let item of items) {
+      if (item.title === title) {
+        item.isSelected = !item.isSelected;
+      }
+
+      if (item.title != title) {
+        item.isSelected = false;
+      }
+
+      if (item.submenu.length > 0) {
+        this.toggleMenuItemSelection(item.submenu, title);
+      }
+    }
+  }
+
+}

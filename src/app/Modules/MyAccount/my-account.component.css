@@ -1,0 +1,15 @@
+.wrapper {
+    margin-top: 150px;
+    width: 100%;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 5rem;
+    background-color: #434242;
+    height: 500px;
+    margin-inline: 50px;
+    padding: 0 !important;
+}

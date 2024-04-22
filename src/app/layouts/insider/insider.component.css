@@ -3,7 +3,6 @@
     overflow: hidden; /* oculta o conteúdo que ultrapassa os limites */
     display: flex; 
     justify-content: center; 
-    overflow: hidden;
 }
 
 .child {

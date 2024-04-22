@@ -17,7 +17,7 @@ export class AppService {
 
     //Endpoints
     _tokenSubscribe = 'tokenSubscribe';
-    _getUserData = 'getUserData';
+    _getMyTokens = 'getMyTokens';
     _getActionProcess = 'getActionProcess';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
@@ -93,8 +93,8 @@ export class AppService {
         return this.performEvents(`${this._tokenSubscribe}/${hashId}`);
     }
 
-    public getUserData(): Observable<Object | null>{
-        return this.performRequest(RestMethods.POST, this._getUserData);
+    public getMyTokens(): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._getMyTokens);
     }
 
     public getActionProcess(hashId: string): Observable<Object | null>{

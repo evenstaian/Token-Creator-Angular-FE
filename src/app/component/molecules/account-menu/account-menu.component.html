@@ -1,0 +1,27 @@
+<div class="menu">
+    <div class="menu-content">
+        <div *ngFor="let item of menu">
+            <div *ngIf="item.submenu.length && item.show">
+                <div class="subtitle">
+                    {{item.title}}
+                </div>
+
+                <div *ngFor="let subitem of item.submenu">
+                    <div class="item-menu" [class.selected]="subitem.isSelected" (click)="toggleSelection(subitem.title)">
+                        <div class="token">
+                            <img class="image" src="{{subitem.icon}}">
+                            <p>{{subitem.title}}</p></div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!item.submenu.length && item.show">
+                <div class="item-menu" [class.selected]="item.isSelected" (click)="toggleSelection(item.title)">
+                    <div class="token">
+                        <img class="image" src="{{item.icon}}">
+                        <p>{{item.title}}</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divisor"></div>
+</div>

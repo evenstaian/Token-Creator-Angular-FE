@@ -66,6 +66,9 @@ import { TokenActionsComponent } from './component/molecules/token-actions/token
 import { SoundService } from '../services/sound/sound.service';
 import { FullLoaderComponent } from './component/organisms/full-loader/full-loader.component';
 import { ProcessStatusTagComponent } from './component/molecules/process-status-tag/process-status-tag.component';
+import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
+import { AccountMenuComponent } from './component/molecules/account-menu/account-menu.component';
+import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -104,6 +107,9 @@ export function playerFactory() {
     TokenActionsComponent,
     FullLoaderComponent,
     ProcessStatusTagComponent,
+    MyAccountComponent,
+    AccountMenuComponent,
+    WalletsComponent
   ],
   imports: [
     CommonModule,

@@ -52,11 +52,11 @@ export class MyListComponent implements OnInit {
   getMyTokensList(){
     this.showLoader(true);
 
-    this.appService.getUserData().subscribe(data => {
+    this.appService.getMyTokens().subscribe(data => {
       this.showLoader(false);
       const response: any = data;
-      if(response.tokensQueued){
-        this.myTokensList = response.tokensQueued;
+      if(response){
+        this.myTokensList = response;
       }
     },
     error => {

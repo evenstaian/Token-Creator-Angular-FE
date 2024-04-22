@@ -13,6 +13,7 @@ import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-toke
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 import { CreateConfirmationComponent } from './Modules/Tokens/create/create-confirmation/create-confirmation.component';
 import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
+import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 
 export const Approutes: Routes = [
   {
@@ -55,6 +56,18 @@ export const Approutes: Routes = [
       {
         path: 'success',
         component: CreateResponseComponent
+      },
+    ],
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'my-account',
+    component: InsiderComponent,
+    children: [
+      {
+        path: '',
+        component: MyAccountComponent
       },
     ],
     canActivate: [AuthGuard]
