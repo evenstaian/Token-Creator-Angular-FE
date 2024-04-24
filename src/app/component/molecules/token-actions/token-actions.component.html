@@ -4,8 +4,10 @@
         <div *ngIf="this.action =='DETAILS'">
             <div class="form-content">
                 <div *ngFor="let detail of tokenDetails">
-                    <p class="form-item-title">{{detail.label}}<br>
-                    <label class="form-item-subtitle">{{detail.value}}</label></p>
+                    <div *ngIf="detail.value">
+                        <p class="form-item-title">{{detail.label}}<br>
+                        <label class="form-item-subtitle">{{detail.value}}</label></p>
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end">
@@ -28,6 +30,7 @@
                 </div>
                 <div class="d-flex justify-content-end" *ngIf="!isNewAction">
                     <app-process-status-tag [processStatus]=statusResponse[this.action].status (click)="refresh(statusResponse[this.action].hashId)"></app-process-status-tag>
+                    <button *ngIf="this.statusResponse[this.action].scanUrl" class="btn btn-secondary px-4" style="margin-right: 20px;" (click)="goToScan(this.statusResponse[this.action].scanUrl)">VER NA SCAN</button>
                 </div>
             </div>
 

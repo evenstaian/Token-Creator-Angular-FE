@@ -4,17 +4,17 @@
 
         <div class="w-100 h-100" style="padding: 20px;">
 
-            <div *ngIf="!(loaderService.loaderState | async)">
+            <div *ngIf="!(loaderService.loaderState | async) && response">
                 <p class="label">Saldo<br> 
-                    <label class="balance">2.30 ETH</label>
+                    <label class="balance">{{response.balance}} {{response.network}}</label>
                 </p>
         
                 <p class="label">Chave Pública<br> 
-                    <label class="value">0xc4471c29F4b27F4cBD7e7AC8B7AFa6374EE6ED5B</label>
+                    <label class="value">{{response.walletAddress}} </label>
                 </p>
         
                 <p class="label">Ultimas Transações<br> 
-                    <label class="value">Não há transações</label>
+                    <label *ngIf="!response.transactions" class="value">Não há transações</label>
                 </p>
             </div>
 
@@ -22,6 +22,12 @@
                 <div class="w-100" style="width: 100px; height: 100px;">
                     <app-loader loaderJson="crypto_loader.json"></app-loader>
                     <p style="color: rgb(123, 121, 118)" class="text-center">Buscando sua carteira...</p>
+                </div>
+            </div>
+
+            <div *ngIf="!(loaderService.loaderState | async) && ! response" class="d-flex align-items-center w-100 h-100">
+                <div class="w-100" style="width: 100px; height: 100px;">
+                    <p style="color: rgb(123, 121, 118)" class="text-center">Você não tem uma carteira nesta rede. Para isso você precisa criar um Token usando esta rede.</p>
                 </div>
             </div>
         </div>

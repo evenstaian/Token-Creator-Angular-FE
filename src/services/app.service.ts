@@ -94,7 +94,7 @@ export class AppService {
         return this.performEvents(`${this._tokenSubscribe}/${hashId}`);
     }
 
-    public getWalletData(network: string): Observable<Object | null>{
+    public getWalletData(network: string): Observable<any | null>{
         return this.performRequest(RestMethods.POST, `${this._getWalletData}/${network}`);
     }
 

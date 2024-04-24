@@ -4,6 +4,11 @@ import { NETWORK_TYPES } from 'criptolab-types';
 import { AppService } from 'src/services/app.service';
 import { LoaderService } from 'src/app/shared/loader.service';
 
+interface WalletModelResponse {
+  balance: number,
+  walletAddress: string,
+}
+
 @Component({
   selector: 'app-wallets',
   templateUrl: './wallets.component.html',
@@ -15,6 +20,8 @@ import { LoaderService } from 'src/app/shared/loader.service';
 export class WalletsComponent implements OnInit {
 
   networkMenu: MenuItem[] = [];
+
+  response: WalletModelResponse;
 
   constructor(private appService: AppService, private loaderService: LoaderService) { }
 
@@ -86,11 +93,15 @@ export class WalletsComponent implements OnInit {
   };
 
   private initWallet(){
-    const networks: any[] = this.toIterable(NETWORK_TYPES);
-    this.getWalletData(networks[0].name);
+    this.networkMenu.forEach(menu => {
+      if(menu.type == "menu-2"){
+        this.getWalletData(menu.submenu[0].title);
+      }
+    })
   }
 
   openMenuItem(networkMenuItem: MenuItem){
+    this.response = null;
     if(networkMenuItem.type){
       this.getWalletData(networkMenuItem.type)
     }
@@ -100,12 +111,24 @@ export class WalletsComponent implements OnInit {
     this.loaderService.showLoader(true)
     this.appService.getWalletData(network).subscribe(
       data => {
-        this.loaderService.showLoader(false)
-        console.log(data)
+        this.response = data.userWallet as WalletModelResponse;
+        this.loaderService.showLoader(false);
+        this.makeNetworkSelected(network);
       }, 
       error => {
         this.loaderService.showLoader(false)
+        this.response = null;
       })
+  }
+
+  private makeNetworkSelected(network: string){
+    this.networkMenu.forEach(menu => {
+      menu.submenu.forEach(submenu => {
+        if(submenu.title == network){
+          submenu.isSelected = true;
+        }
+      })
+    })
   }
 
 }

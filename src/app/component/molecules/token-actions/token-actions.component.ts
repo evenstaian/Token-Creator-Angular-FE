@@ -46,8 +46,8 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   TXHASH_URL_FORM_ITEM = {
-    label: "scan_url",
-    placeholder: "Veja na scan",
+    label: "tx_hash",
+    placeholder: "Endereço na blockchain",
     defaultValue: "",
   }
 
@@ -57,8 +57,9 @@ export class TokenActionsComponent implements OnChanges {
   ]
 
   TRANSFER_ADDRESS_TO_FORM_ITEM = () => {
-    let FORM = this.ADDRESS_TO_FORM_ITEM;
+    let FORM = { ...this.ADDRESS_TO_FORM_ITEM };
     FORM.placeholder = "para qual endereço?"
+    FORM.required = true
     return FORM
   }
 
@@ -102,7 +103,7 @@ export class TokenActionsComponent implements OnChanges {
       name: "type",
       label: "Tipo do Token",
       value: ""
-    }
+    },
   ]
 
   constructor(private fb: FormBuilder) { }
@@ -112,6 +113,7 @@ export class TokenActionsComponent implements OnChanges {
       this.isEditMode = true;
       this.isNewAction = true;
       this.buildActionForm(this.action);
+      this.form.reset();
     }
 
     if (changes.token) {
@@ -120,17 +122,11 @@ export class TokenActionsComponent implements OnChanges {
 
     if(changes.statusResponse){
       if(changes.statusResponse.currentValue){
-        console.log("status changes", changes.statusResponse.currentValue)
         this.isNewAction = false;
 
-        if(this.statusResponse.scanUrl){
-          this.SCAN_URL_FORM_ITEM.defaultValue = this.statusResponse.scanUrl
-          this.formStructure[this.action].append(this.SCAN_URL_FORM_ITEM)
-        }
-
-        if(this.statusResponse.txHash){
-          this.SCAN_URL_FORM_ITEM.defaultValue = this.statusResponse.txHash
-          this.formStructure[this.action].append(this.TXHASH_URL_FORM_ITEM)
+        if(this.statusResponse[this.action].txHash){
+          this.TXHASH_URL_FORM_ITEM.defaultValue = this.statusResponse[this.action].txHash
+          this.formStructure[this.action].push(this.TXHASH_URL_FORM_ITEM)
         }
       }
     }
@@ -209,8 +205,8 @@ export class TokenActionsComponent implements OnChanges {
     this.refreshStatus.emit(hashId)
   }
 
-  goToScan(){
-    const url = this.token.scanUrl;
+  goToScan(scanUrl?: string){
+    const url = scanUrl || this.token.scanUrl;
     window.open(url, '_blank');
   }
 

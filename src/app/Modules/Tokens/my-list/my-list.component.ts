@@ -113,7 +113,9 @@ export class MyListComponent implements OnInit {
       data => { 
         const response: any = data;
         if(response.status && actionHashId) {
-          this.createTokenActionStatusResponse(tokenHashId, actionHashId, actionType, response.status);
+          this.refreshActionStatus(tokenHashId, actionType, actionHashId)
+          return
+          //this.createTokenActionStatusResponse(tokenHashId, actionHashId, actionType, response.status);
         }
       }, 
       error => {})
@@ -124,18 +126,24 @@ export class MyListComponent implements OnInit {
     this.appService.getActionProcess(hashId).subscribe(data => {
       const response: any = data;
       //TODO: observe event;
-      this.createTokenActionStatusResponse(tokenHashId, hashId, action, response.status);
+      this.createTokenActionStatusResponse(tokenHashId, hashId, action, response.status, response.txHash, response.scanUrl);
     },
     error => {
     }) 
   }
 
-  async createTokenActionStatusResponse(tokenHashId: string, hashId: string, action: string, status: string): Promise<any>{
+  async createTokenActionStatusResponse(
+    tokenHashId: string, 
+    hashId: string, 
+    action: string, 
+    status: string, 
+    txHash?: string,
+    scanUrl?: string,): Promise<any>{
     for(let item of this.myTokensList){
       item.actionsStatus = {};
       if(item.hashId == tokenHashId){
-        console.log({hashId, status})
-        item.actionsStatus[action] = { hashId, status }
+        console.log({hashId, status, txHash, scanUrl})
+        item.actionsStatus[action] = { hashId, status, txHash, scanUrl }
         return item
       }
     }
