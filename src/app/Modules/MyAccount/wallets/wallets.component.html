@@ -1,20 +1,29 @@
 <div class="wrapper">
     <div class="content">
-        <app-account-menu style="overflow: scroll; width: 100%; height: 100%;" [menu]="networkMenu"></app-account-menu>
+        <app-account-menu style="overflow: scroll; width: 250px; height: 100%;" [menu]="networkMenu" (selected)="openMenuItem($event)"></app-account-menu>
 
-        <div style="margin: 20px; height: 100%; width: 100%;">
+        <div class="w-100 h-100" style="padding: 20px;">
 
-            <p class="label">Saldo<br> 
-                <label class="balance">2.30 ETH</label>
-            </p>
-    
-            <p class="label">Chave Pública<br> 
-                <label class="value">0xc4471c29F4b27F4cBD7e7AC8B7AFa6374EE6ED5B</label>
-            </p>
-    
-            <p class="label">Ultimas Transações<br> 
-                <label class="value">Não há transações</label>
-            </p>
+            <div *ngIf="!(loaderService.loaderState | async)">
+                <p class="label">Saldo<br> 
+                    <label class="balance">2.30 ETH</label>
+                </p>
+        
+                <p class="label">Chave Pública<br> 
+                    <label class="value">0xc4471c29F4b27F4cBD7e7AC8B7AFa6374EE6ED5B</label>
+                </p>
+        
+                <p class="label">Ultimas Transações<br> 
+                    <label class="value">Não há transações</label>
+                </p>
+            </div>
+
+            <div *ngIf="loaderService.loaderState | async" class="d-flex align-items-center w-100 h-100">
+                <div class="w-100" style="width: 100px; height: 100px;">
+                    <app-loader loaderJson="crypto_loader.json"></app-loader>
+                    <p style="color: rgb(123, 121, 118)" class="text-center">Buscando sua carteira...</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -19,6 +19,7 @@ export class AppService {
     _tokenSubscribe = 'tokenSubscribe';
     _getMyTokens = 'getMyTokens';
     _getActionProcess = 'getActionProcess';
+    _getWalletData = 'getWalletData';;
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
     _mintERC20 = 'mintERC20Tokens';
@@ -91,6 +92,10 @@ export class AppService {
 
     public tokenSubscribe(hashId: string): Observable<Object | null>{
         return this.performEvents(`${this._tokenSubscribe}/${hashId}`);
+    }
+
+    public getWalletData(network: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, `${this._getWalletData}/${network}`);
     }
 
     public getMyTokens(): Observable<Object | null>{

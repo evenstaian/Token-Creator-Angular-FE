@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../../../component/molecules/account-menu/account-menu.metadata';
 import { NETWORK_TYPES } from 'criptolab-types';
+import { AppService } from 'src/services/app.service';
+import { LoaderService } from 'src/app/shared/loader.service';
 
 @Component({
   selector: 'app-wallets',
   templateUrl: './wallets.component.html',
-  styleUrls: ['./wallets.component.css']
+  styleUrls: ['./wallets.component.css'],
+  providers: [
+    AppService
+  ]
 })
 export class WalletsComponent implements OnInit {
 
   networkMenu: MenuItem[] = [];
 
-  constructor() { }
+  constructor(private appService: AppService, private loaderService: LoaderService) { }
 
   ngOnInit(): void {
+    this.loaderService.showLoader(true)
     this.buildNetworkMenu()
+    this.initWallet()
   }
 
   private buildNetworkMenu(){
@@ -77,5 +84,28 @@ export class WalletsComponent implements OnInit {
       return networkTypes[key];
     }).filter(obj => obj !== null);
   };
+
+  private initWallet(){
+    const networks: any[] = this.toIterable(NETWORK_TYPES);
+    this.getWalletData(networks[0].name);
+  }
+
+  openMenuItem(networkMenuItem: MenuItem){
+    if(networkMenuItem.type){
+      this.getWalletData(networkMenuItem.type)
+    }
+  }
+
+  private getWalletData(network: string){
+    this.loaderService.showLoader(true)
+    this.appService.getWalletData(network).subscribe(
+      data => {
+        this.loaderService.showLoader(false)
+        console.log(data)
+      }, 
+      error => {
+        this.loaderService.showLoader(false)
+      })
+  }
 
 }

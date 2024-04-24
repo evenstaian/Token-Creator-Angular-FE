@@ -56,6 +56,7 @@ import { CircularThumbImageComponent } from './component/circular-thumb-image/ci
 import { MyListComponent } from './Modules/Tokens/my-list/my-list.component';
 import { PageTitlesComponent } from './component/molecules/page-titles/page-titles.component';
 import { SharedDataService } from './shared/shared-data.service';
+import { LoaderService } from './shared/loader.service';
 import { CreateTokenDetailsComponent } from './Modules/Tokens/create/create-token-details/create-token-details.component';
 import { NetworksComponent } from './Modules/Tokens/create/networks/networks.component';
 import { ImageSenderComponent } from './component/molecules/image-sender/image-sender.component';
@@ -137,6 +138,7 @@ export function playerFactory() {
     MessageService, 
     Clean, 
     SharedDataService,
+    LoaderService,
     SoundService,
     {
       provide: LocationStrategy,

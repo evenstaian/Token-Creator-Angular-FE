@@ -1,7 +1,6 @@
 .menu {
     display: flex;
     justify-content: flex-end;
-    width: 200px;
     height: 100%;
 }
 
