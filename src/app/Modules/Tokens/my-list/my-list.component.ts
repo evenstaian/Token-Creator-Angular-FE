@@ -73,18 +73,9 @@ export class MyListComponent implements OnInit {
   }
 
   showAction(token: any, action: string){
-    let selectedAction = () => {
-      if(action != TOKEN_ACTIONS_TYPES.MINT){
-        return action
-      }
-      return token.type != TOKEN_STANDARD_TYPES.ERC20 
-      ? `${action}_${token.type}` 
-      : action;  
-    }
-
     for (let item of this.myTokensList){
       if (item.hashId == token.hashId) {
-        item.actionOpened = item.actionOpened == selectedAction() ? undefined : selectedAction();
+        item.actionOpened = item.actionOpened == action ? undefined : action;
       }
     }
   }
@@ -98,11 +89,11 @@ export class MyListComponent implements OnInit {
       return
     }
 
-    this.interactERC20(actionData.tokenHashId, actionData.action, actionData.form);
+    this.interactERC20(actionData.tokenHashId, actionData.standard, actionData.action, actionData.form, actionData.file);
   }
 
-  interactERC20(tokenHashId: string, type: string, form: any){
-    this.appService.interactERC20(tokenHashId, type, form).subscribe(data => {
+  interactERC20(tokenHashId: string, standard: string, type: string, form: any, file: File){
+    this.appService.interactERC20(tokenHashId, type, standard, form, file).subscribe(data => {
       const response: any = data;
       if (response.hashId){
         this.setTokenSubscribe(tokenHashId, response.hashId, type);

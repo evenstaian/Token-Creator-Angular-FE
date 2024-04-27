@@ -26,6 +26,9 @@ export class AppService {
     _mintERC20 = 'mintERC20Tokens';
     _transferERC20 = 'transferERC20Tokens';
     _burnERC20 = 'burnERC20Tokens';
+    _mintERC721 = 'mintERC721Token';
+    _transferERC721= 'transferERC721Token';
+    _burnERC721 = 'burnERC721Token';
 
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler ){
@@ -112,13 +115,13 @@ export class AppService {
         formData.append('file', imageFile);
         formData.append('network', network);
         formData.append('form', JSON.stringify(form));
-        
+
         const endpoint = standard == TOKEN_STANDARD_TYPES.ERC20 ? this._createERC20 : this._createERC721;
         return this.performRequest(RestMethods.POST, endpoint, formData);
     }
 
     public createERC721(network: string, form: any, imageFile?: File): Observable<Object | null>{
-    const formData = new FormData();
+        const formData = new FormData();
         formData.append('file', imageFile);
         formData.append('network', network);
         formData.append('form', JSON.stringify(form));
@@ -126,20 +129,29 @@ export class AppService {
         return this.performRequest(RestMethods.POST, this._createERC721, formData);
     }
 
-    public interactERC20(tokenHashId: string, actionType: string, form: any): Observable<Object | null> {
+    public interactERC20(tokenHashId: string, actionType: string, standard: string, form: any, file?: File): Observable<Object | null> {
         const opEndpoint = () => {
             switch (actionType) {
                 case "MINT":
-                    return this._mintERC20;
+                    return standard == TOKEN_STANDARD_TYPES.ERC20 ? this._mintERC20 : this._mintERC721;
                 case "TRANSFER":
-                    return this._transferERC20;
+                    return standard == TOKEN_STANDARD_TYPES.ERC20 ? this._transferERC20 : this._transferERC721;
                 case "BURN":
-                    return this._burnERC20;
+                    return standard == TOKEN_STANDARD_TYPES.ERC20 ? this._burnERC20 : this._burnERC721;
                 default:
                     break;
             }
         }
-        return this.performRequest(RestMethods.POST, `${opEndpoint()}/${tokenHashId}`, { form });
+
+        if(standard == TOKEN_STANDARD_TYPES.ERC721){
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('form', JSON.stringify(form));
+    
+            return this.performRequest(RestMethods.POST, `${opEndpoint()}/${tokenHashId}`, formData);
+        } else {
+            return this.performRequest(RestMethods.POST, `${opEndpoint()}/${tokenHashId}`, { form });
+        }
     }
 
 }

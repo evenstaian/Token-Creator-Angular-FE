@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { TOKEN_STANDARD_TYPES } from 'criptolab-types';
 
 @Component({
   selector: 'app-token-actions',
@@ -23,6 +24,8 @@ export class TokenActionsComponent implements OnChanges {
     subtitle: "(tamanho máximo: 1080px)"
   }
 
+  imageFile: File;
+
   form: FormGroup;
 
   isEditMode: boolean = true;
@@ -34,6 +37,7 @@ export class TokenActionsComponent implements OnChanges {
     type: "number",
     defaultValue: "",
     required: true,
+    hide: false,
   }
 
   ADDRESS_TO_FORM_ITEM = {
@@ -50,6 +54,7 @@ export class TokenActionsComponent implements OnChanges {
     type: "file",
     defaultValue: "",
     required: false,
+    hide: false,
   }
 
   SCAN_URL_FORM_ITEM = {
@@ -65,11 +70,6 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   MINT_FORM = [
-    this.QUANTITY_FORM_ITEM,
-    this.ADDRESS_TO_FORM_ITEM,
-  ]
-
-  MINT_ERC721_FORM = [
     this.IMAGE_FORM_ITEM,
     this.QUANTITY_FORM_ITEM,
     this.ADDRESS_TO_FORM_ITEM,
@@ -93,7 +93,6 @@ export class TokenActionsComponent implements OnChanges {
 
   formStructure: any = {
     MINT: this.MINT_FORM,
-    MINT_ERC721: this.MINT_ERC721_FORM,
     TRANSFER: this.TRANSFER_FORM,
     BURN: this.BURN_FORM,
   }
@@ -138,6 +137,13 @@ export class TokenActionsComponent implements OnChanges {
 
     if (changes.token) {
       this.buildDetails(this.token);
+      if(this.token.type == TOKEN_STANDARD_TYPES.ERC20){
+        this.IMAGE_FORM_ITEM.hide = true
+      }
+      if(this.token.type == TOKEN_STANDARD_TYPES.ERC721){
+        this.QUANTITY_FORM_ITEM.hide = true
+      }
+      this.buildActionForm(this.action);
     }
 
     if(changes.statusResponse){
@@ -160,9 +166,9 @@ export class TokenActionsComponent implements OnChanges {
     }
 
     this.formStructure[action].forEach(field => {
-      console.log(this.formStructure[action])
+      console.log(field.required, field.hide)
       const validators: ValidatorFn[] = [];
-      if (field.required) {
+      if (field.required && !field.hide) {
         validators.push(Validators.required);
       }
       this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
@@ -212,7 +218,7 @@ export class TokenActionsComponent implements OnChanges {
 
   confirm(formStructure: any){
     if (this.form.valid) {
-      this.actionForm.emit({tokenHashId: this.token.hashId, action: this.action, form: formStructure});
+      this.actionForm.emit({tokenHashId: this.token.hashId, standard: this.token.type, action: this.action, form: formStructure, file: this.imageFile});
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {
         if (this.form.get(fieldName).errors && this.form.get(fieldName).errors.required) {
@@ -224,6 +230,10 @@ export class TokenActionsComponent implements OnChanges {
 
   refresh(hashId: string){
     this.refreshStatus.emit(hashId)
+  }
+
+  setImageFile(file: File){
+    this.imageFile = file;
   }
 
   goToScan(scanUrl?: string){
