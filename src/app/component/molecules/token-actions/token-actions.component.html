@@ -37,18 +37,21 @@
             <div *ngIf="formStructure[this.action] && isEditMode">
                 <form [formGroup]="form">
                     <div *ngFor="let field of formStructure[this.action]" class="form-group">
-                        <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
+                        <ng-container *ngIf="field.type !== 'textarea' && field.type !== 'file'">
                             <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required">
                             <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
                                 Este campo é obrigatório.
                             </div>
                         </ng-container>
-                        <ng-template #textareaField>
+                        <ng-container *ngIf="field.type == 'textarea'">
                             <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required"></textarea>
                             <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
                                 Este campo é obrigatório.
                             </div>
-                        </ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="field.type == 'file'">
+                            <app-image-sender></app-image-sender>
+                        </ng-container>
                     </div>
                   </form>
                   <div class="d-flex justify-content-end">

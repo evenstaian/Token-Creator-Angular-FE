@@ -23,7 +23,7 @@ export class WalletsComponent implements OnInit {
 
   response: WalletModelResponse;
 
-  constructor(private appService: AppService, private loaderService: LoaderService) { }
+  constructor(private appService: AppService, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.loaderService.showLoader(true)

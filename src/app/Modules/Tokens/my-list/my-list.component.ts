@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
-import { TOKEN_ACTIONS_TYPES } from 'criptolab-types';
+import { TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 
 @Component({
   selector: 'app-my-list',
@@ -73,9 +73,18 @@ export class MyListComponent implements OnInit {
   }
 
   showAction(token: any, action: string){
+    let selectedAction = () => {
+      if(action != TOKEN_ACTIONS_TYPES.MINT){
+        return action
+      }
+      return token.type != TOKEN_STANDARD_TYPES.ERC20 
+      ? `${action}_${token.type}` 
+      : action;  
+    }
+
     for (let item of this.myTokensList){
       if (item.hashId == token.hashId) {
-        item.actionOpened = item.actionOpened == action ? undefined : action;
+        item.actionOpened = item.actionOpened == selectedAction() ? undefined : selectedAction();
       }
     }
   }

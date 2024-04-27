@@ -39,6 +39,14 @@ export class TokenActionsComponent implements OnChanges {
     required: false,
   }
 
+  IMAGE_FORM_ITEM = {
+    label: "image",
+    placeholder: "Qual imagem você gostaria de mintar?",
+    type: "file",
+    defaultValue: "",
+    required: false,
+  }
+
   SCAN_URL_FORM_ITEM = {
     label: "scan_url",
     placeholder: "Veja na scan",
@@ -52,6 +60,12 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   MINT_FORM = [
+    this.QUANTITY_FORM_ITEM,
+    this.ADDRESS_TO_FORM_ITEM,
+  ]
+
+  MINT_ERC721_FORM = [
+    this.IMAGE_FORM_ITEM,
     this.QUANTITY_FORM_ITEM,
     this.ADDRESS_TO_FORM_ITEM,
   ]
@@ -74,6 +88,7 @@ export class TokenActionsComponent implements OnChanges {
 
   formStructure: any = {
     MINT: this.MINT_FORM,
+    MINT_ERC721: this.MINT_ERC721_FORM,
     TRANSFER: this.TRANSFER_FORM,
     BURN: this.BURN_FORM,
   }
@@ -140,6 +155,7 @@ export class TokenActionsComponent implements OnChanges {
     }
 
     this.formStructure[action].forEach(field => {
+      console.log(this.formStructure[action])
       const validators: ValidatorFn[] = [];
       if (field.required) {
         validators.push(Validators.required);
