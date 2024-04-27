@@ -18,6 +18,11 @@ export class TokenActionsComponent implements OnChanges {
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
   @Output() refreshStatus: EventEmitter<any> = new EventEmitter<any>();
 
+  imageLabels = { 
+    title: "Arraste e solte uma imagem aqui ou clique aqui para selecionar uma imagem. ", 
+    subtitle: "(tamanho máximo: 1080px)"
+  }
+
   form: FormGroup;
 
   isEditMode: boolean = true;

@@ -56,6 +56,37 @@ export class CreateComponent implements OnInit {
     },
   ]
 
+  ERC721_FORM = [
+    {
+      label: "name",
+      placeholder: "nome do seu token",
+      type: "text",
+      defaultValue: "",
+      required: true,
+    },
+    {
+      label: "symbol",
+      placeholder: "qual o símbolo? ex: BTC",
+      type: "text",
+      defaultValue: "",
+      required: true,
+    },
+    {
+      label: "description",
+      placeholder: "qual a descrição?",
+      type: "textarea",
+      defaultValue: "",
+      required: true,
+    },
+    {
+      label: "company",
+      placeholder: "qual é o nome da sua empresa?",
+      type: "text",
+      defaultValue: "",
+      required: true,
+    },
+  ]
+
   TokenTypes = [
     {
       label: "Fan/Sport Token",
@@ -94,8 +125,8 @@ export class CreateComponent implements OnInit {
       identifier: "NFTC",
       bannerImageUrl: "",
       type: TOKEN_STANDARD_TYPES.ERC20,
-      form: this.ERC20_FORM,
-      status: STATUS.soon,
+      form: this.ERC721_FORM,
+      status: STATUS.enabled,
     },
     {
       label: "Rewards/Cashback Token",

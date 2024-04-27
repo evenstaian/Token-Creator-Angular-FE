@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
@@ -9,6 +9,14 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 export class ImageSenderComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent;
+
+  @Input() labels = { 
+    title: "Arraste e solte uma imagem aqui ou clique aqui para selecionar uma imagem. ", 
+    subtitle: "Tamanho recomendando: 350 x 350 (tamanho máximo: 800px)"
+  }
+  @Input() isImageSquad: boolean = true;
+  @Input() minimumSize: number;
+  @Input() maximumSize: number;
   
   @Output() file: EventEmitter<File> = new EventEmitter<File>();
 
@@ -94,18 +102,18 @@ export class ImageSenderComponent implements OnInit {
           const width = img.width;
           const height = img.height;
   
-          if (width !== height) {
+          if (this.isImageSquad && width !== height) {
             resolve({status: false, error: "A imagem enviada deve ser um quadrado"});
             return;
           }
   
-          if (width < 350) {
-            resolve({status: false, error: "A imagem deve ser maior que 350px"});
+          if (width < (this.minimumSize || 350)) {
+            resolve({status: false, error: `A imagem deve ser maior que ${(this.minimumSize || 350)}px`});
             return;
           }
 
-          if (width > 800) {
-            resolve({status: false, error: "A imagem deve ser menor que 800px"});
+          if (width > (this.maximumSize || 800)) {
+            resolve({status: false, error: `A imagem deve ser menor que ${(this.maximumSize || 800)}px`});
             return;
           }
   

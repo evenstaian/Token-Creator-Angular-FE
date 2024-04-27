@@ -50,7 +50,7 @@
                             </div>
                         </ng-container>
                         <ng-container *ngIf="field.type == 'file'">
-                            <app-image-sender></app-image-sender>
+                            <app-image-sender [labels]="imageLabels" [isImageSquad]="false" [minimumSize]="500" [maximumSize]="4000"></app-image-sender>
                         </ng-container>
                     </div>
                   </form>

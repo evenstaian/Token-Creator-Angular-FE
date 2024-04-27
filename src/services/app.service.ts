@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Constants } from "../utils/Constantes";
 import { RestMethods } from "./types/enum/RestMethods";
 import { HttpErrorHandler } from "./http-handle-error.service";
+import { TOKEN_STANDARD_TYPES } from "criptolab-types";
 
 @Injectable()
 export class AppService {
@@ -106,13 +107,14 @@ export class AppService {
         return this.performRequest(RestMethods.GET, `${this._getActionProcess}/${hashId}`);
     }
 
-    public createERC20(network: string, form: any, imageFile?: File): Observable<Object | null>{
+    public createToken(standard: string, network: string, form: any, imageFile?: File): Observable<Object | null>{
         const formData = new FormData();
         formData.append('file', imageFile);
         formData.append('network', network);
         formData.append('form', JSON.stringify(form));
-
-        return this.performRequest(RestMethods.POST, this._createERC20, formData);
+        
+        const endpoint = standard == TOKEN_STANDARD_TYPES.ERC20 ? this._createERC20 : this._createERC721;
+        return this.performRequest(RestMethods.POST, endpoint, formData);
     }
 
     public createERC721(network: string, form: any, imageFile?: File): Observable<Object | null>{

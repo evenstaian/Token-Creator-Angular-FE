@@ -103,7 +103,7 @@ export class CreateConfirmationComponent implements OnInit {
 
     this.showLoader(true);
 
-    this.appService.createERC20(this.networkType.name, this.formStructure, this.imageData).subscribe(data => {
+    this.appService.createToken(this.tokenType, this.networkType.name, this.formStructure, this.imageData).subscribe(data => {
       this.showLoader(false);
       this.sharedDataService.setTokenType(this.tokenType);
       
