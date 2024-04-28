@@ -5,7 +5,7 @@ export class SoundService {
 
   private audio: HTMLAudioElement;
   public SoundTypes = {
-    SELECTION: 'assets/sounds/beep-boop.aac',
+    SELECTION: 'assets/sounds/gta-menu.wav',
     ERROR: 'assets/sounds/error.aac'
   }
 
