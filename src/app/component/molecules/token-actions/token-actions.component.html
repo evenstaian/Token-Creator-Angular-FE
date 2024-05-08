@@ -17,6 +17,10 @@
 
         <div>
             <div *ngIf="!isEditMode">
+                <div *ngIf="token.type == 'ERC721' && action != 'MINT'">
+                    <app-collection-items [collectionItems]="selectedItem"></app-collection-items>
+                </div>
+
                 <div class="form-content">
                     <div *ngFor="let form of formStructure[this.action]">
                         <div *ngIf="form.defaultValue">
@@ -35,6 +39,11 @@
             </div>
 
             <div *ngIf="formStructure[this.action] && isEditMode">
+
+                <div *ngIf="token.type == 'ERC721' && action != 'MINT'">
+                    <app-collection-items (selected)="setSelectedCollectionItem($event)"></app-collection-items>
+                </div>
+
                 <form [formGroup]="form">
                     <div *ngFor="let field of formStructure[this.action]" class="form-group">
                         <ng-container *ngIf="field.type !== 'textarea' && field.type !== 'file' && !field.hide">

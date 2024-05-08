@@ -1,0 +1,17 @@
+.wrapper {
+    width: 100%; 
+    display: flex; 
+    overflow: scroll;
+}
+
+.item {
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;
+    padding-top: 20px;
+}
+
+.selected {
+    background-color: #545353;
+    color: #fff;
+}

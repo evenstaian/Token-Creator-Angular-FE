@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <div *ngFor="let item of collectionItems" [class.selected]="item.isSelected" class="item" (click)="toggleSelection(item)">
+        <app-circular-thumb-image imageUrl="{{ item.imageUrl || imagePlaceholder }}" [imgSize]=100
+            [hasMessage]="false"></app-circular-thumb-image>
+        <p style="width: 100%; text-align: center; line-height: 25px;">#{{item.itemId}}</p>
+    </div>
+</div>

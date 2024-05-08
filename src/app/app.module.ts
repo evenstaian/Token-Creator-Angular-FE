@@ -70,6 +70,7 @@ import { ProcessStatusTagComponent } from './component/molecules/process-status-
 import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 import { AccountMenuComponent } from './component/molecules/account-menu/account-menu.component';
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
+import { CollectionItemsComponent } from './component/organisms/collection-items/collection-items.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -110,7 +111,8 @@ export function playerFactory() {
     ProcessStatusTagComponent,
     MyAccountComponent,
     AccountMenuComponent,
-    WalletsComponent
+    WalletsComponent,
+    CollectionItemsComponent,
   ],
   imports: [
     CommonModule,

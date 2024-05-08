@@ -1,14 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-circular-thumb-image',
   templateUrl: './circular-thumb-image.component.html',
   styleUrls: ['./circular-thumb-image.component.css']
 })
-export class CircularThumbImageComponent implements OnInit {
+export class CircularThumbImageComponent implements OnChanges {
 
   @Input() imageUrl: string = "assets/images/vectors/ic_user_placeholder.svg";
   @Input() hasMessage: boolean = true;
+  @Input() imgSize: number;
+
+  customSize: any;
 
   userName: string;
 
@@ -17,6 +20,15 @@ export class CircularThumbImageComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.hasMessage)
     this.getUserData()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.imgSize){
+      this.customSize = {
+        width: `${this.imgSize}px`,
+        height: `${this.imgSize}px`
+      }
+    }
   }
 
   getUserData(){

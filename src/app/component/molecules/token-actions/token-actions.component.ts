@@ -125,6 +125,8 @@ export class TokenActionsComponent implements OnChanges {
     },
   ]
 
+  selectedItem: any = [];
+
   constructor(private fb: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -133,6 +135,7 @@ export class TokenActionsComponent implements OnChanges {
       this.isNewAction = true;
       this.buildActionForm(this.action);
       this.form.reset();
+      this.selectedItem = []
     }
 
     if (changes.token) {
@@ -214,6 +217,11 @@ export class TokenActionsComponent implements OnChanges {
         }
       });
     }
+  }
+
+  setSelectedCollectionItem(item: any){
+    this.selectedItem = []
+    this.selectedItem.push(item)
   }
 
   confirm(formStructure: any){
