@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { AppService } from 'src/services/app.service';
 
 @Component({
   selector: 'app-token-actions',
@@ -18,6 +19,8 @@ export class TokenActionsComponent implements OnChanges {
   };
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
   @Output() refreshStatus: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChild('formDirective') formDirective: NgForm;
 
   imageLabels = { 
     title: "Arraste e solte uma imagem aqui ou clique aqui para selecionar uma imagem. ", 
@@ -125,17 +128,23 @@ export class TokenActionsComponent implements OnChanges {
     },
   ]
 
+  items: any = [];
   selectedItem: any = [];
 
-  constructor(private fb: FormBuilder) { }
+  itemsErrorMessage: string = "Buscando items..."
+
+  constructor(private fb: FormBuilder, private appService: AppService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.action) {
       this.isEditMode = true;
       this.isNewAction = true;
       this.buildActionForm(this.action);
-      this.form.reset();
-      this.selectedItem = []
+      this.reset(this.action);
+
+      if(this.action != TOKEN_ACTIONS_TYPES.MINT && this.token.type == TOKEN_STANDARD_TYPES.ERC721){
+        this.getMyTokenItems(this.token.hashId)
+      }
     }
 
     if (changes.token) {
@@ -161,6 +170,19 @@ export class TokenActionsComponent implements OnChanges {
     }
   }
 
+  getMyTokenItems(tokenHashId){
+    this.items = null;
+    this.itemsErrorMessage = "Buscando itens..."
+    this.appService.getMyTokenItems(tokenHashId).subscribe(
+      data => {
+        this.items = data;
+      }, 
+      error => {
+        console.log({error})
+        this.itemsErrorMessage = error
+      })
+  }
+
   buildActionForm(action: string){
     this.form = this.fb.group({});
 
@@ -169,7 +191,6 @@ export class TokenActionsComponent implements OnChanges {
     }
 
     this.formStructure[action].forEach(field => {
-      console.log(field.required, field.hide)
       const validators: ValidatorFn[] = [];
       if (field.required && !field.hide) {
         validators.push(Validators.required);
@@ -240,13 +261,55 @@ export class TokenActionsComponent implements OnChanges {
     this.refreshStatus.emit(hashId)
   }
 
+  reset(action: string){
+    this.form.reset();
+    if (this.formDirective) {
+      this.formDirective.resetForm();
+      console.log({formDirective: this.formDirective})
+    }
+    this.buildActionForm(action)
+    this.items = null
+    this.selectedItem = []
+    this.isEditMode = true;
+    this.isNewAction = true;
+  }
+
   setImageFile(file: File){
     this.imageFile = file;
+    this.previewImage(file)
+  }
+
+  previewImage(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.selectedItem = [
+      {
+        imageUrl: reader.result
+      }
+    ]
+    };
+    reader.readAsDataURL(file);
   }
 
   goToScan(scanUrl?: string){
     const url = scanUrl || this.token.scanUrl;
     window.open(url, '_blank');
+  }
+
+  showForm(){
+    switch (this.token.type) {
+      case TOKEN_STANDARD_TYPES.ERC721:
+        if(this.action != TOKEN_ACTIONS_TYPES.MINT && !this.items){
+          console.log("show2", false)
+          return false
+        }
+        console.log("show1", true)
+        return true
+      case TOKEN_STANDARD_TYPES.ERC20:
+          return true
+      default:
+        return false
+    }
   }
 
 }

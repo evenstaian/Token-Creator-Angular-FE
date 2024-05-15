@@ -19,6 +19,7 @@ export class AppService {
     //Endpoints
     _tokenSubscribe = 'tokenSubscribe';
     _getMyTokens = 'getMyTokens';
+    _getMyTokenItems = 'getMyTokenItems'
     _getActionProcess = 'getActionProcess';
     _getWalletData = 'getWalletData';;
     _createERC20 = 'createERC20';
@@ -106,6 +107,10 @@ export class AppService {
         return this.performRequest(RestMethods.POST, this._getMyTokens);
     }
 
+    public getMyTokenItems(tokenHashId: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._getMyTokenItems, { tokenHashId });
+    }
+
     public getActionProcess(hashId: string): Observable<Object | null>{
         return this.performRequest(RestMethods.GET, `${this._getActionProcess}/${hashId}`);
     }
@@ -129,7 +134,7 @@ export class AppService {
         return this.performRequest(RestMethods.POST, this._createERC721, formData);
     }
 
-    public interactERC20(tokenHashId: string, actionType: string, standard: string, form: any, file?: File): Observable<Object | null> {
+    public interact(tokenHashId: string, actionType: string, standard: string, form: any, file?: File): Observable<Object | null> {
         const opEndpoint = () => {
             switch (actionType) {
                 case "MINT":

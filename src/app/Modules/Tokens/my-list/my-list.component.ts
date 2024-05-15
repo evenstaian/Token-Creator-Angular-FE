@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
-import { TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 
 @Component({
   selector: 'app-my-list',
@@ -89,11 +89,11 @@ export class MyListComponent implements OnInit {
       return
     }
 
-    this.interactERC20(actionData.tokenHashId, actionData.standard, actionData.action, actionData.form, actionData.file);
+    this.interact(actionData.tokenHashId, actionData.standard, actionData.action, actionData.form, actionData.file);
   }
 
-  interactERC20(tokenHashId: string, standard: string, type: string, form: any, file: File){
-    this.appService.interactERC20(tokenHashId, type, standard, form, file).subscribe(data => {
+  interact(tokenHashId: string, standard: string, type: string, form: any, file: File){
+    this.appService.interact(tokenHashId, type, standard, form, file).subscribe(data => {
       const response: any = data;
       if (response.hashId){
         this.setTokenSubscribe(tokenHashId, response.hashId, type);

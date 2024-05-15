@@ -28,7 +28,7 @@ export class HttpErrorHandler {
               this.rotas.navigate(['/login'])
               return throwError(error.error.error);
         }
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        errorMessage = error.error.message;
     }
     return throwError(errorMessage);
 }
