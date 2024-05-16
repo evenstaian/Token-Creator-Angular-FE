@@ -4,15 +4,30 @@
 
 <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)" accept="image/*">
 
-<div class="image-box" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
+<div *ngIf="!isMinButtonStyle" class="image-box" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
 (click)="handleClick()" style="cursor: pointer;">
     <div class="wrapper">
         <div class="preview-box">
-            <img [src]="imageSrc" class="preview-image">
+            <img [src]="imageSrc || imagePlaceholder" class="preview-image">
         </div>
 
         <p class="title">{{labels.title}}<br>
         <label class="subtitle">{{labels.subtitle}}</label></p>
     </div>
+</div>
+
+<div *ngIf="isMinButtonStyle">
+
+    <div style="position: relative; width: 220px;">
+        <app-circular-thumb-image imageUrl="{{ imageSrc || imagePlaceholder }}" [imgSize]=200
+        [hasMessage]="false">
+        </app-circular-thumb-image>
+
+        <div class="image-button" (drop)="onDrop($event)" (dragover)="onDragOver($event)" 
+        (click)="handleClick()">
+        <img style="width: 50%; height: 50%;" src="assets/images/icons/ic_edit.svg">
+        </div>
+    </div>
+
 </div>
   

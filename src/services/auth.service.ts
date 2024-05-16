@@ -20,6 +20,7 @@ export class Auth {
     _preSignup = 'pre_signup';
     _signup = 'signup';
     _logout = 'logout';
+    _update = 'user/update';
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler){
     }
@@ -27,7 +28,6 @@ export class Auth {
     private getAuthTokenHeader(): HttpHeaders {
         const authToken = localStorage.getItem('auth_token');
         return new HttpHeaders({
-            'Content-Type': 'application/json',
             'Authorization': authToken ? authToken : ''
         });
     }
@@ -70,6 +70,12 @@ export class Auth {
 
     public signup(email: string, password: string, name: string, otpCode: string): Observable<Object | null>{
         return this.performRequest(RestMethods.POST, this._signup, { email, name, password, otpCode });
+    }
+
+    public update(image: File): Observable<Object | null>{
+        const formData = new FormData();
+        formData.append('file', image);
+        return this.performRequest(RestMethods.POST, this._update, formData);
     }
 
 }

@@ -18,7 +18,6 @@ export class CircularThumbImageComponent implements OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.hasMessage)
     this.getUserData()
   }
 
@@ -37,6 +36,9 @@ export class CircularThumbImageComponent implements OnChanges {
       try {
         userData = JSON.parse(userData);
         this.userName = userData.name;
+        if(this.hasMessage){
+          this.imageUrl = userData.image_url;
+        }
       } catch (e){
         throw e
       }

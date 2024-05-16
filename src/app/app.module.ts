@@ -71,6 +71,7 @@ import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 import { AccountMenuComponent } from './component/molecules/account-menu/account-menu.component';
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 import { CollectionItemsComponent } from './component/organisms/collection-items/collection-items.component';
+import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -113,6 +114,7 @@ export function playerFactory() {
     AccountMenuComponent,
     WalletsComponent,
     CollectionItemsComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

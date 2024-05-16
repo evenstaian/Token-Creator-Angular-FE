@@ -17,10 +17,12 @@ export class ImageSenderComponent implements OnInit {
   @Input() isImageSquad: boolean = true;
   @Input() minimumSize: number;
   @Input() maximumSize: number;
+  @Input() isMinButtonStyle: boolean = false;
+  @Input() imagePlaceholder: string = "assets/images/icons/ic_token_image.svg";
   
   @Output() file: EventEmitter<File> = new EventEmitter<File>();
 
-  imageSrc: any = "assets/images/icons/ic_token_image.svg";
+  imageSrc: any;
 
   alertIcon="warning"
   alertTitle=""

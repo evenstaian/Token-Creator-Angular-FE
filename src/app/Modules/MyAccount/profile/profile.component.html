@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="center">
+        <app-image-sender (file)="setImageFile($event)" [imagePlaceholder]="imagePlaceholder" [isMinButtonStyle]="true" [isImageSquad]="false" [minimumSize]="500" [maximumSize]="4000"></app-image-sender>
+    </div>
+    <div class="center m-3">
+        <p class="text-center">{{user.name}}<br><label class="subtitle">{{user.email}}</label></p>
+    </div>
+</div>

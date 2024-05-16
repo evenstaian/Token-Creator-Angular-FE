@@ -15,6 +15,7 @@ export class MyAccountComponent implements OnInit {
       title: 'Meus Dados',
       icon: 'assets/images/icons/ic_myaccount.svg',
       class: '',
+      router: '/my-account/profile',
       clickable: false,
       isSelected: false,
       show: true,
@@ -56,6 +57,7 @@ export class MyAccountComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.openMenuItem(this.menu[0])
   }
 
   toggleSelection(title: string): void {
@@ -80,6 +82,7 @@ export class MyAccountComponent implements OnInit {
 
   openMenuItem(menuItem: MenuItem){
     if(menuItem?.router){
+      menuItem.isSelected = true;
       this.router.navigate([menuItem.router])
       return
     }

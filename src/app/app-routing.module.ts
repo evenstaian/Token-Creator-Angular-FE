@@ -15,6 +15,7 @@ import { CreateConfirmationComponent } from './Modules/Tokens/create/create-conf
 import { CreateResponseComponent } from './Modules/Tokens/create/create-response/create-response.component';
 import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
+import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
 
 export const Approutes: Routes = [
   {
@@ -73,6 +74,10 @@ export const Approutes: Routes = [
           {
             path: 'wallets',
             component: WalletsComponent
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent
           },
         ],
       },
