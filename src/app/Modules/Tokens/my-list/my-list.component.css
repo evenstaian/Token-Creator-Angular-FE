@@ -10,6 +10,12 @@
     padding-inline: 2rem;
 }
 
+.typeMark {
+    position: absolute; 
+    height: 5rem; 
+    width: 4px;
+}
+
 .token{
     display: flex;
     align-items: center;
