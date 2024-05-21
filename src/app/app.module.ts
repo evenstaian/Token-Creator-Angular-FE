@@ -72,6 +72,9 @@ import { AccountMenuComponent } from './component/molecules/account-menu/account
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 import { CollectionItemsComponent } from './component/organisms/collection-items/collection-items.component';
 import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
+import { PaymentComponent } from './Modules/Payment/payment.component';
+import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
+import { ProductCardComponent } from './component/organisms/product-card/product-card.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -115,6 +118,9 @@ export function playerFactory() {
     WalletsComponent,
     CollectionItemsComponent,
     ProfileComponent,
+    PaymentComponent,
+    PricingComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,

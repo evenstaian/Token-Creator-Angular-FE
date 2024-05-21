@@ -16,6 +16,7 @@ import { CreateResponseComponent } from './Modules/Tokens/create/create-response
 import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
+import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
 
 export const Approutes: Routes = [
   {
@@ -104,5 +105,10 @@ export const Approutes: Routes = [
       },
     ],
     canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'pricing',
+    component: PricingComponent
   }
 ];
