@@ -9,6 +9,11 @@
     align-items: center; 
     cursor: pointer;
     padding-top: 20px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.item:hover {
+    transform: scale(1.10);
 }
 
 .selected {
