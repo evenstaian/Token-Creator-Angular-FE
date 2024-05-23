@@ -291,9 +291,17 @@ export class TokenActionsComponent implements OnChanges {
     reader.readAsDataURL(file);
   }
 
+  getNetwork(network: string){
+    return NETWORK_TYPES[network]
+  }
+
   goToScan(scanUrl?: string){
     const url = scanUrl || this.token.scanUrl;
     window.open(url, '_blank');
+  }
+
+  goToDeployOnMainNet(){
+    window.open("/pricing", '_blank');
   }
 
   showForm(){

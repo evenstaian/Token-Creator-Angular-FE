@@ -11,7 +11,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button *ngIf="this.token.address" type="submit" class="btn btn-secondary px-4" (click)="goToScan()">VER NA SCAN</button>
+                <button *ngIf="this.token.address" type="submit" class="btn btn-secondary px-4 mr-2" (click)="goToScan()">VER NA SCAN</button>
+                <button *ngIf="!getNetwork(this.token.network).isMainNet" type="submit" class="btn btn-primary px-4" (click)="goToDeployOnMainNet()">LANÇAR NA MAINNET</button>
             </div>
         </div>
 
