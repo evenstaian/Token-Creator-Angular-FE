@@ -1,0 +1,133 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 20px;
+    background-color: black;
+    padding: 10px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+main {
+    text-align: center;
+}
+
+main h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.typing-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: .15em solid #fff;
+    white-space: nowrap;
+    letter-spacing: .15em;
+    font-family: Poppins;
+    animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 70% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #fff }
+}
+
+.card {
+    background-color: transparent;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card:hover ~ .card,
+.card:hover ~ .card ~ .card {
+    opacity: 0.5;
+}
+
+.card-container {
+    text-align: start;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+footer {
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.payment-icons img {
+    margin: 0 10px;
+    width: 50px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    main h2 {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .card h3 {
+        font-size: 1rem;
+    }
+
+    .card .price {
+        font-size: 1.2rem;
+    }
+
+    .card button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .payment-icons img {
+        width: 40px;
+    }
+}

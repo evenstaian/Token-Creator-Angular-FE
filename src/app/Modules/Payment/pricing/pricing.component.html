@@ -1,1 +1,30 @@
-<p>pricing works!</p>
+<header>
+    <span class="logo-text">
+        <img src="assets/images/logos/ic-logo-black.svg" style="height: 35px; margin: 10px; margin-left: 100px !important;" class="light-logo" alt="homepage" />
+    </span>
+</header>
+
+<div class="container">
+    <main>
+        <h2 class="typing-text">Crie seus tokens de sucesso na Web3</h2>
+
+        <div class="card-container">
+            <div *ngFor="let product of products">
+                <app-product-card class="card" [product]="product" (addToCart)="goToCheckout($event)"></app-product-card>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<footer>
+    <p>Aceitamos todos as bandeiras de cartão de crédito</p>
+    <div class="payment-icons">
+        <img src="assets/images/icons/ic_visa.svg" alt="Visa">
+        <img src="assets/images/icons/ic_mastercard.svg" alt="Mastercard">
+        <img src="assets/images/icons/ic_amex.svg" alt="American Express">
+        <img src="assets/images/icons/ic_discover.svg" alt="Discover">
+        <img src="assets/images/icons/ic_applepay.svg" alt="Apple Pay">
+    </div>
+    <p>Você pode cancelar a qualquer momento</p>
+</footer>

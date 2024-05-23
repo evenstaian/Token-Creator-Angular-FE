@@ -1,1 +1,20 @@
-<p>product-card works!</p>
+<div class="card">
+    <div class="card-body">
+        <div>
+            <p class="title">{{product.title}} <br>
+            <label class="subtitle">{{product.subtitle}}</label></p>
+        </div>
+
+        <div>
+            <p class="price">{{product.price}}</p>
+            <button ngClass="{{product.button.class}}" class="btn w-100" (click)="buy(product)">{{product.button.title}}</button>
+        </div>
+
+        <div class="list">
+            <div class="list-item" *ngFor="let feature of product.featuresList">
+                <img class="list-icon" src="assets/images/icons/ic_purple_check.svg"> 
+                <p class="list-text">{{feature}}</p>
+            </div>
+        </div>
+    </div>
+</div>
