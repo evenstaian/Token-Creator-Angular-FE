@@ -21,7 +21,7 @@ export class AppService {
     _getMyTokens = 'getMyTokens';
     _getMyTokenItems = 'getMyTokenItems'
     _getActionProcess = 'getActionProcess';
-    _getWalletData = 'getWalletData';;
+    _getWalletData = 'getWalletData';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
     _mintERC20 = 'mintERC20Tokens';

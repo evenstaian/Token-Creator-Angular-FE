@@ -72,6 +72,14 @@ export class TokenActionsComponent implements OnChanges {
     defaultValue: "",
   }
 
+  TOKEN_ITEM_ID_FORM_ITEM = {
+    label: "tokenItemId",
+    placeholder: "Item escolhido",
+    hide: true,
+    required: false,
+    defaultValue: "",
+  }
+
   MINT_FORM = [
     this.IMAGE_FORM_ITEM,
     this.QUANTITY_FORM_ITEM,
@@ -88,10 +96,12 @@ export class TokenActionsComponent implements OnChanges {
   TRANSFER_FORM = [
     this.QUANTITY_FORM_ITEM,
     this.TRANSFER_ADDRESS_TO_FORM_ITEM(),
+    this.TOKEN_ITEM_ID_FORM_ITEM,
   ]
 
   BURN_FORM = [
-    this.QUANTITY_FORM_ITEM
+    this.QUANTITY_FORM_ITEM,
+    this.TOKEN_ITEM_ID_FORM_ITEM,
   ]
 
   formStructure: any = {
@@ -202,7 +212,9 @@ export class TokenActionsComponent implements OnChanges {
       Object.keys(values).forEach((key) => {
         const field = this.formStructure[action].find((f) => f.label === key);
         if (field) {
-          field.defaultValue = values[key];
+          if(!field.hide){
+            field.defaultValue = values[key];
+          }
         }
       });
     });
@@ -249,6 +261,12 @@ export class TokenActionsComponent implements OnChanges {
   setSelectedCollectionItem(item: any){
     this.selectedItem = []
     this.selectedItem.push(item)
+
+    for(let index in this.formStructure[this.action]){
+      if(this.formStructure[this.action][index].label == "tokenItemId"){
+        this.formStructure[this.action][index].defaultValue = this.selectedItem[0].itemId;
+      }
+    }
   }
 
   confirm(formStructure: any){
