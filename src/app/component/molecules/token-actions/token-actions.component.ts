@@ -229,6 +229,12 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   changeMode(){
+    if(this.action != TOKEN_ACTIONS_TYPES.MINT && this.token.type == TOKEN_STANDARD_TYPES.ERC721){
+      if(!this.selectedItem[0]){
+        return
+      }
+    }
+
     if (this.form.valid) {
       this.isEditMode = !this.isEditMode
     } else {

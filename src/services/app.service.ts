@@ -28,8 +28,8 @@ export class AppService {
     _transferERC20 = 'transferERC20Tokens';
     _burnERC20 = 'burnERC20Tokens';
     _mintERC721 = 'mintERC721Token';
-    _transferERC721= 'transferERC721Token';
-    _burnERC721 = 'burnERC721Token';
+    _transferERC721= 'transferERC721Tokens';
+    _burnERC721 = 'burnERC721Tokens';
 
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler ){
