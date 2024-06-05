@@ -19,6 +19,7 @@ export class CreateConfirmationComponent implements OnInit {
   tokenType: any;
   formStructure: any;
   networkType: any;
+  classIdentifier: any;
 
   imageData: File;
   imageSrc: any = "assets/images/icons/ic_token_image.svg";
@@ -49,6 +50,7 @@ export class CreateConfirmationComponent implements OnInit {
       this.tokenType = data;
       this.formStructure = this.tokenType.form;
       this.networkType = this.tokenType.network;
+      this.classIdentifier = this.tokenType.identifier;
       this.saveTokenTypeOnStorage()
     })
 
