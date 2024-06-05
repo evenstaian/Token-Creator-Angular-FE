@@ -21,7 +21,8 @@ export class AppService {
     _getMyTokens = 'getMyTokens';
     _getMyTokenItems = 'getMyTokenItems'
     _getActionProcess = 'getActionProcess';
-    _getWalletData = 'getWalletData';
+    _getPlanCheckout = 'getPlanCheckout';
+    _getUserWallet = 'getUserWallet';
     _createERC20 = 'createERC20';
     _createERC721 = 'createERC721';
     _mintERC20 = 'mintERC20Tokens';
@@ -100,7 +101,7 @@ export class AppService {
     }
 
     public getWalletData(network: string): Observable<any | null>{
-        return this.performRequest(RestMethods.POST, `${this._getWalletData}/${network}`);
+        return this.performRequest(RestMethods.POST, `${this._getUserWallet}/${network}`);
     }
 
     public getMyTokens(): Observable<Object | null>{
@@ -113,6 +114,10 @@ export class AppService {
 
     public getActionProcess(hashId: string): Observable<Object | null>{
         return this.performRequest(RestMethods.GET, `${this._getActionProcess}/${hashId}`);
+    }
+
+    public getPlanCheckout(planName: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.GET, `${this._getPlanCheckout}/${planName}`);
     }
 
     public createToken(standard: string, network: string, form: any, imageFile?: File): Observable<Object | null>{

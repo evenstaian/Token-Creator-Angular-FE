@@ -111,7 +111,7 @@ export class WalletsComponent implements OnInit {
     this.loaderService.showLoader(true)
     this.appService.getWalletData(network).subscribe(
       data => {
-        this.response = data.userWallet as WalletModelResponse;
+        this.response = data as WalletModelResponse;
         this.loaderService.showLoader(false);
         this.makeNetworkSelected(network);
       }, 

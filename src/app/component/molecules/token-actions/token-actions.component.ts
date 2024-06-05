@@ -154,6 +154,7 @@ export class TokenActionsComponent implements OnChanges {
 
       if(this.action != TOKEN_ACTIONS_TYPES.MINT && this.token.type == TOKEN_STANDARD_TYPES.ERC721){
         this.getMyTokenItems(this.token.hashId)
+        this.QUANTITY_FORM_ITEM.required = false;
       }
     }
 

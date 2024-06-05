@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/shared/loader.service';
+import { AppService } from 'src/services/app.service';
 
 interface Product {
   id: number;
   title: string;
   subtitle: string;
   price: string;
+  priceNumber: number;
   checkoutUrl: string;
   button: { title: string, class: string };
   featuresList: string[];
@@ -13,7 +17,10 @@ interface Product {
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
-  styleUrls: ['./pricing.component.css']
+  styleUrls: ['./pricing.component.css'],
+  providers: [
+    AppService
+  ]
 })
 export class PricingComponent implements OnInit {
 
@@ -23,6 +30,7 @@ export class PricingComponent implements OnInit {
       title: "Rookie",
       subtitle: "Para provas de conceito e protótipos em TestNet",
       price: "Grátis",
+      priceNumber: 0,
       checkoutUrl: "",
       button: {
         title: "Continuar Usando",
@@ -41,6 +49,7 @@ export class PricingComponent implements OnInit {
       title: "Startup",
       subtitle: "Para projetos de tokenização em fase de lançamento",
       price: "R$ 199,00/m",
+      priceNumber: 199.00,
       checkoutUrl: "",
       button: {
         title: "Comece Agora",
@@ -60,6 +69,7 @@ export class PricingComponent implements OnInit {
       title: "Enterprise",
       subtitle: "Para empresas e startups escalando projetos de tokenização",
       price: "R$ 499,00/m",
+      priceNumber: 499.00,
       checkoutUrl: "",
       button: {
         title: "Comece Agora",
@@ -76,13 +86,36 @@ export class PricingComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(
+    private loaderService: LoaderService, 
+    private appService: AppService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  getPlanUrl(planName: string){
+    this.loaderService.showLoader(true);
+    this.appService.getPlanCheckout(planName).subscribe(
+      data => {
+        this.loaderService.showLoader(false);
+        const plan: any = data;
+        if(plan.url){
+          window.location.href = plan.url;
+        }
+      },
+      error => {
+        this.loaderService.showLoader(false);
+      }
+    )
+  }
+
   goToCheckout(product: Product){
-    console.log({product})
+    if(!product.priceNumber){
+      this.router.navigate(["/"])
+      return;
+    }
+    this.getPlanUrl(product.title)
   }
 
 }
