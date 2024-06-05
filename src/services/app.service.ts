@@ -120,10 +120,11 @@ export class AppService {
         return this.performRequest(RestMethods.GET, `${this._getPlanCheckout}/${planName}`);
     }
 
-    public createToken(token: any, network: string, form: any, imageFile?: File): Observable<Object | null>{
+    public createToken(classIdentifier: string, token: any, network: string, form: any, imageFile?: File): Observable<Object | null>{
         const formData = new FormData();
         formData.append('file', imageFile);
         formData.append('network', network);
+        formData.append('classIdentifier', classIdentifier);
         formData.append('form', JSON.stringify(form));
 
         const endpoint = token.type == TOKEN_STANDARD_TYPES.ERC20 ? this._createERC20 : this._createERC721;
