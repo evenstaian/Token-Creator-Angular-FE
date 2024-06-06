@@ -87,7 +87,7 @@ export class PricingComponent implements OnInit {
   ]
 
   constructor(
-    private loaderService: LoaderService, 
+    public loaderService: LoaderService, 
     private appService: AppService,
     private router: Router) { }
 
