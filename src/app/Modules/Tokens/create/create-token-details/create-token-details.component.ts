@@ -59,7 +59,7 @@ export class CreateTokenDetailsComponent implements OnInit {
         this.tokenType = this.getCloneTokenFromStorage();
         if(this.tokenType){
           this.formStructure = this.tokenType.form;
-          console.log({form: this.formStructure})
+          this.sharedDataService.setData(this.tokenType.bannerImageUrl);
           this.createForm();
         }
       }
@@ -68,6 +68,7 @@ export class CreateTokenDetailsComponent implements OnInit {
     if(!this.tokenType){
       this.tokenType = this.getTokenTypeFromStorage();
       this.formStructure = this.tokenType.form;
+      this.sharedDataService.setData(this.tokenType.bannerImageUrl);
       this.createForm();
     }
   }

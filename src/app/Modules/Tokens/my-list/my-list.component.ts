@@ -50,9 +50,12 @@ export class MyListComponent implements OnInit {
     this.getMyTokensList();
   }
 
-  saveCloneTokenOnStorage(){
-    const tokenToClone = "";
-    localStorage.setItem("token-to-clone", JSON.stringify(tokenToClone));
+  saveCloneTokenOnStorage(token: any){
+    if(token){
+      const tokenToClone = this.tokenTypeService.formatTokenToTokenTypeObj(token.raw);
+      console.log({tokenToClone})
+      localStorage.setItem("token-to-clone", JSON.stringify(tokenToClone));
+    }
   }
 
   getMyTokensList(){

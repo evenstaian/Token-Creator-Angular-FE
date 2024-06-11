@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
 import { STATUS, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 
+interface TokenTypeModel {
+    label: string;
+    identifier: string;
+    bannerImageUrl: string;
+    type: string;
+    form: any;
+    status: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -74,7 +83,7 @@ export class TokenTypeService {
         },
     ]
 
-    public TokenTypes = [
+    public TokenTypes: TokenTypeModel[] = [
         {
             label: "Fan/Sport Token",
             identifier: "FST",
@@ -134,4 +143,24 @@ export class TokenTypeService {
     ]
 
     constructor() { }
+
+    formatTokenToTokenTypeObj(token: any) {
+        if (!token.class_identifier) {
+            return false;
+        }
+        const tokenType = this.TokenTypes.find(type => type.identifier === token.class_identifier);
+        if(!tokenType){
+            return false;
+        }
+        console.log({token, tokenType})
+
+        Object.keys(token).map(key => {
+            const index = tokenType.form.findIndex(form => form.label === key);
+            if (index !== -1) {
+                tokenType.form[index].defaultValue = token[key];
+            }
+        }).filter(obj => obj !== null);
+
+        return tokenType;
+    }
 }

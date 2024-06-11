@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { Router } from '@angular/router';
 
-import { TOKEN_STANDARD_TYPES, STATUS } from 'criptolab-types';
+import { STATUS } from 'criptolab-types';
 import { SoundService } from 'src/services/sound/sound.service';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
 

@@ -19,6 +19,7 @@ export class TokenActionsComponent implements OnChanges {
   };
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
   @Output() refreshStatus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cloneToMainnet: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('formDirective') formDirective: NgForm;
 
@@ -326,6 +327,7 @@ export class TokenActionsComponent implements OnChanges {
   }
 
   goToDeployOnMainNet(){
+    this.cloneToMainnet.emit(this.token);
     window.open("/pricing", '_blank');
   }
 
