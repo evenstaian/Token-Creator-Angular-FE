@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
@@ -27,7 +27,8 @@ export class CreateTokenDetailsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder, 
-    private sharedDataService: SharedDataService, 
+    private sharedDataService: SharedDataService,
+    private route: ActivatedRoute,
     private router: Router) { 
     
     this.sharedDataService.tokenType.subscribe(data => {
@@ -52,6 +53,18 @@ export class CreateTokenDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const cloneId = params.get('cloneId');
+      if(cloneId){
+        this.tokenType = this.getCloneTokenFromStorage();
+        if(this.tokenType){
+          this.formStructure = this.tokenType.form;
+          console.log({form: this.formStructure})
+          this.createForm();
+        }
+      }
+    });
+    
     if(!this.tokenType){
       this.tokenType = this.getTokenTypeFromStorage();
       this.formStructure = this.tokenType.form;
@@ -70,6 +83,19 @@ export class CreateTokenDetailsComponent implements OnInit {
     } catch (error) {
       return null;
     }
+  }
+
+  getCloneTokenFromStorage(){
+    try {
+      const tokenTypeString = localStorage.getItem("token-to-clone");
+      return JSON.parse(tokenTypeString);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  deleteCloneTokenFromStorage(){
+    localStorage.removeItem("token-to-clone");
   }
 
   createForm(){
@@ -123,6 +149,7 @@ export class CreateTokenDetailsComponent implements OnInit {
       }
 
       this.sharedDataService.setFormStructure(this.formStructure)
+      this.deleteCloneTokenFromStorage();
       this.router.navigate(['/create-token/networks']);
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {

@@ -49,6 +49,10 @@ export const Approutes: Routes = [
         component: CreateTokenDetailsComponent
       },
       {
+        path: 'details/:cloneId',
+        component: CreateTokenDetailsComponent
+      },
+      {
         path: 'networks',
         component: NetworksComponent
       },

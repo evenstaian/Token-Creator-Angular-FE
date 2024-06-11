@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
 import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { TokenTypeService } from 'src/app/shared/token-type.service';
 
 @Component({
   selector: 'app-my-list',
@@ -43,10 +44,15 @@ export class MyListComponent implements OnInit {
   alertTitle;
   alertMessage;
   
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, public tokenTypeService: TokenTypeService) { }
 
   ngOnInit(): void {
     this.getMyTokensList();
+  }
+
+  saveCloneTokenOnStorage(){
+    const tokenToClone = "";
+    localStorage.setItem("token-to-clone", JSON.stringify(tokenToClone));
   }
 
   getMyTokensList(){

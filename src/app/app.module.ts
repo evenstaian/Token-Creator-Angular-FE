@@ -75,6 +75,7 @@ import { ProfileComponent } from './Modules/MyAccount/profile/profile.component'
 import { PaymentComponent } from './Modules/Payment/payment.component';
 import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
 import { ProductCardComponent } from './component/organisms/product-card/product-card.component';
+import { TokenTypeService } from './shared/token-type.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -150,6 +151,7 @@ export function playerFactory() {
     SharedDataService,
     LoaderService,
     SoundService,
+    TokenTypeService,
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
