@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/loader.service';
 import { AppService } from 'src/services/app.service';
+import { Auth } from 'src/services/auth.service';
 
 interface Product {
   id: number;
@@ -19,6 +20,7 @@ interface Product {
   templateUrl: './pricing.component.html',
   styleUrls: ['./pricing.component.css'],
   providers: [
+    Auth,
     AppService
   ]
 })
@@ -87,22 +89,36 @@ export class PricingComponent implements OnInit {
   ]
 
   constructor(
-    public loaderService: LoaderService, 
+    public loaderService: LoaderService,
+    private authService: Auth,
     private appService: AppService,
     private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  getPlanUrl(planName: string){
+  getPlanUrl(planName: string) {
     this.loaderService.showLoader(true);
-    this.appService.getPlanCheckout(planName).subscribe(
+    this.authService.getUserData().subscribe(
       data => {
-        this.loaderService.showLoader(false);
-        const plan: any = data;
-        if(plan.url){
-          window.location.href = plan.url;
+        if(!data.data.addresses){
+          this.loaderService.showLoader(false);
+          this.router.navigate(['my-account/aditional-data'])
+          return
         }
+
+        this.appService.getPlanCheckout(planName).subscribe(
+          data => {
+            this.loaderService.showLoader(false);
+            const plan: any = data;
+            if (plan.url) {
+              window.location.href = plan.url;
+            }
+          },
+          error => {
+            this.loaderService.showLoader(false);
+          }
+        )
       },
       error => {
         this.loaderService.showLoader(false);
@@ -110,8 +126,8 @@ export class PricingComponent implements OnInit {
     )
   }
 
-  goToCheckout(product: Product){
-    if(!product.priceNumber){
+  goToCheckout(product: Product) {
+    if (!product.priceNumber) {
       this.router.navigate(["/"])
       return;
     }

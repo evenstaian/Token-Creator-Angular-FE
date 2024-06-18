@@ -328,17 +328,14 @@ export class TokenActionsComponent implements OnChanges {
 
   goToDeployOnMainNet(){
     this.cloneToMainnet.emit(this.token);
-    window.open("/pricing", '_blank');
   }
 
   showForm(){
     switch (this.token.type) {
       case TOKEN_STANDARD_TYPES.ERC721:
         if(this.action != TOKEN_ACTIONS_TYPES.MINT && !this.items){
-          console.log("show2", false)
           return false
         }
-        console.log("show1", true)
         return true
       case TOKEN_STANDARD_TYPES.ERC20:
           return true

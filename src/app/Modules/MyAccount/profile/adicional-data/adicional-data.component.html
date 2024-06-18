@@ -1,0 +1,34 @@
+<div class="wrapper w-100 px-5" style="color: #fff">
+    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+
+    <form [formGroup]="form" (ngSubmit)="saveAditionalData()">
+
+        <div *ngFor="let field of formStructure" class="form-group">
+            <ng-container *ngIf="field.type !== 'textarea' && field.type !== 'options'">
+                <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required">
+                <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
+                    Este campo é obrigatório.
+                </div>
+            </ng-container>
+            <ng-container *ngIf="field.type == 'textarea'">
+                <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required"></textarea>
+                <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
+                    Este campo é obrigatório.
+                </div>
+            </ng-container>
+            <ng-container *ngIf="field.type == 'options'">
+                <select class="form-control" [formControlName]="field.label" [required]="field.required">
+                    <option value="" disabled selected>{{ field.placeholder }}</option>
+                    <option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+                </select>
+                <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
+                    Este campo é obrigatório.
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-secondary px-4">Aceito e Quero Prosseguir</button>
+        </div>
+      </form>
+</div>

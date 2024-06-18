@@ -45,7 +45,7 @@
             [statusResponse]="myToken.actionsStatus"
             (actionForm)="processAction($event)" 
             (refreshStatus)="refreshActionStatus(myToken.hashId, myToken.actionOpened, $event)"
-            (cloneToMainnet)="saveCloneTokenOnStorage($event)"></app-token-actions>
+            (cloneToMainnet)="goToCreateOnMainNet($event)"></app-token-actions>
         </div>
     </div>
 </div>

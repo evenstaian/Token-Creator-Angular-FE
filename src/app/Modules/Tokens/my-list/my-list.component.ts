@@ -3,12 +3,15 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
 import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
+import { Auth } from 'src/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-list',
   templateUrl: './my-list.component.html',
   styleUrls: ['./my-list.component.css'],
   providers: [
+    Auth,
     AppService
   ]
 })
@@ -44,7 +47,11 @@ export class MyListComponent implements OnInit {
   alertTitle;
   alertMessage;
   
-  constructor(private appService: AppService, public tokenTypeService: TokenTypeService) { }
+  constructor(
+    private authService: Auth,
+    private appService: AppService, 
+    public tokenTypeService: TokenTypeService,
+    public router: Router) { }
 
   ngOnInit(): void {
     this.getMyTokensList();
@@ -56,6 +63,26 @@ export class MyListComponent implements OnInit {
       console.log({tokenToClone})
       localStorage.setItem("token-to-clone", JSON.stringify(tokenToClone));
     }
+  }
+
+  goToCreateOnMainNet(token: any){
+    this.showFullscreenLoader(true);
+    this.saveCloneTokenOnStorage(token);
+    this.authService.getUserData().subscribe(
+      data => {
+        console.log({data})
+        this.showFullscreenLoader(false);
+        if(!data.data.plan){
+          window.open("/pricing", '_blank');
+          return
+        }
+
+        this.router.navigate(['/create-token/details/mainnet'])
+      },
+      error => {
+        this.showFullscreenLoader(false);
+      }
+    )
   }
 
   getMyTokensList(){

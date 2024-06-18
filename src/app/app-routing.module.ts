@@ -17,6 +17,7 @@ import { MyAccountComponent } from './Modules/MyAccount/my-account.component';
 import { WalletsComponent } from './Modules/MyAccount/wallets/wallets.component';
 import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
 import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
+import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
 
 export const Approutes: Routes = [
   {
@@ -83,9 +84,13 @@ export const Approutes: Routes = [
           {
             path: 'profile',
             component: ProfileComponent
-          },
+          }
         ],
       },
+      {
+        path: 'aditional-data',
+        component: AdicionalDataComponent
+      }
     ],
     canActivate: [AuthGuard]
   },

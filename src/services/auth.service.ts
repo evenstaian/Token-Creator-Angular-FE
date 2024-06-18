@@ -20,6 +20,7 @@ export class Auth {
     _preSignup = 'pre_signup';
     _signup = 'signup';
     _logout = 'logout';
+    _user = 'user';
     _update = 'user/update';
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler){
@@ -32,7 +33,7 @@ export class Auth {
         });
     }
 
-    private performRequest(method: RestMethods, endpoint: string, body: any): Observable<any> {
+    private performRequest(method: RestMethods, endpoint: string, body?: any): Observable<any> {
         const httpOptionsWithAuthToken = {
             headers: this.getAuthTokenHeader()
         };
@@ -70,6 +71,10 @@ export class Auth {
 
     public signup(email: string, password: string, name: string, otpCode: string): Observable<Object | null>{
         return this.performRequest(RestMethods.POST, this._signup, { email, name, password, otpCode });
+    }
+
+    public getUserData(){
+        return this.performRequest(RestMethods.GET, this._user);
     }
 
     public update(image: File): Observable<Object | null>{

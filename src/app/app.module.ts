@@ -76,6 +76,7 @@ import { PaymentComponent } from './Modules/Payment/payment.component';
 import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
 import { ProductCardComponent } from './component/organisms/product-card/product-card.component';
 import { TokenTypeService } from './shared/token-type.service';
+import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -122,6 +123,7 @@ export function playerFactory() {
     PaymentComponent,
     PricingComponent,
     ProductCardComponent,
+    AdicionalDataComponent,
   ],
   imports: [
     CommonModule,
