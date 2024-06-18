@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-circular-thumb-image',
@@ -11,14 +12,25 @@ export class CircularThumbImageComponent implements OnChanges {
   @Input() hasMessage: boolean = true;
   @Input() imgSize: number;
 
+  userData: any;
+
   customSize: any;
 
   userName: string;
 
-  constructor() { }
+  showPremiumIcon: boolean = false;
+
+  constructor(private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
-    this.getUserData()
+    if(this.hasMessage){
+      this.getUserData()
+    }
+
+    this.sharedDataService.userData.subscribe( data => {
+      this.userData = JSON.stringify(data);
+      this.getUserData();
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,13 +43,21 @@ export class CircularThumbImageComponent implements OnChanges {
   }
 
   getUserData(){
-    let userData: any = localStorage.getItem('user_data');
+    let userData: any = this.userData || localStorage.getItem('user_data');
     if(userData){
       try {
         userData = JSON.parse(userData);
-        this.userName = userData.name;
-        if(this.hasMessage){
-          this.imageUrl = userData.image_url;
+        if(userData){
+          this.userName = userData.name;
+          if(userData.plan){
+            this.showPremiumIcon = true;
+          } else {
+            this.showPremiumIcon = false;
+          }
+  
+          if(this.hasMessage){
+            this.imageUrl = userData.image_url;
+          }
         }
       } catch (e){
         throw e

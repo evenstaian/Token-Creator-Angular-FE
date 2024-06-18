@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { Auth } from 'src/services/auth.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
 
   user: any = {};
 
-  constructor(private authService: Auth) { }
+  constructor(private authService: Auth, private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
     this.getUserData();
@@ -48,7 +49,13 @@ export class ProfileComponent implements OnInit {
 
   updateUserData(image: File){
     this.authService.update(image).subscribe(
-      data => {},
+      data => {
+        this.authService.getUserData().subscribe(data => {
+          if(data.data){
+            this.sharedDataService.setUserData(data.data);
+          }
+        })
+      },
       error => {
         console.log(error)
       },

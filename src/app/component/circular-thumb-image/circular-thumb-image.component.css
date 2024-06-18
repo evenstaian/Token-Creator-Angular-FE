@@ -13,6 +13,15 @@
     background: linear-gradient(#A511FF, #00C0C0);
 }
 
+.premium-image {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+}
+
 .message {
     color: #fff;
     font-size: 18px;

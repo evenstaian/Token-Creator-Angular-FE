@@ -5,11 +5,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedDataService {
+  private _userData = new BehaviorSubject<any>(null);
   private _tokenType = new BehaviorSubject<any>(null);
   private _bannerDetailsImageUrl = new BehaviorSubject<string>('');
   private _formStructure = new BehaviorSubject<any>('');
   private _tokenImage = new BehaviorSubject<any>('');
   private _createResponse = new BehaviorSubject<any>(null);
+  public userData = this._userData.asObservable();
   public tokenType = this._tokenType.asObservable();
   public bannerDetailsImageUrl = this._bannerDetailsImageUrl.asObservable();
   public formStructure = this._formStructure.asObservable();
@@ -17,6 +19,10 @@ export class SharedDataService {
   public createResponse = this._createResponse.asObservable();
 
   constructor() {}
+
+  setUserData(userData: any) {
+    this._userData.next(userData);
+  }
 
   setTokenType(tokenType: any) {
     this._tokenType.next(tokenType);
