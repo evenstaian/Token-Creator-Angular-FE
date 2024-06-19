@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Controller } from 'src/app/Modules/Payment/pricing/pricing.controller';
+import { LoaderService } from 'src/app/shared/loader.service';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-adicional-data',
   templateUrl: './adicional-data.component.html',
-  styleUrls: ['./adicional-data.component.css']
+  styleUrls: ['./adicional-data.component.css'],
 })
 export class AdicionalDataComponent implements OnInit {
+
+  contextRoute: string;
+  currentController: Controller;
+  dataSource: any;
 
   formStructure: any = [
     {
@@ -93,10 +101,24 @@ export class AdicionalDataComponent implements OnInit {
     subtitle: "Informe os dados solicitados abaixo antes de prosseguir"
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder, 
+    private sharedDataService: SharedDataService,
+    public loaderService: LoaderService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createForm()
+
+    this.sharedDataService.navigationFlow.subscribe( data => {
+      if(data.controller){
+        this.currentController = data.controller;
+      }
+
+      this.contextRoute = data.contextRoute;
+      this.dataSource = data.data;
+    })
+
   }
 
   createForm(){
@@ -137,7 +159,14 @@ export class AdicionalDataComponent implements OnInit {
   }
 
   saveAditionalData(){
-    console.log(this.formStructure)
+    if(!this.currentController){
+      if(this.contextRoute){
+        this.router.navigate([this.contextRoute])
+      }
+      return
+    }
+
+    this.currentController.handle({planName: this.dataSource.planName});
   }
 
 }

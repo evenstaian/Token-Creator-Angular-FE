@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/loader.service';
+import { PlanService } from 'src/app/shared/plan.service';
 import { AppService } from 'src/services/app.service';
 import { Auth } from 'src/services/auth.service';
+import { PricingController } from './pricing.controller';
 
 interface Product {
   id: number;
@@ -90,40 +92,11 @@ export class PricingComponent implements OnInit {
 
   constructor(
     public loaderService: LoaderService,
-    private authService: Auth,
-    private appService: AppService,
+    private planService: PlanService,
+    public pricingController: PricingController,
     private router: Router) { }
 
   ngOnInit(): void {
-  }
-
-  getPlanUrl(planName: string) {
-    this.loaderService.showLoader(true);
-    this.authService.getUserData().subscribe(
-      data => {
-        if(!data.data.addresses){
-          this.loaderService.showLoader(false);
-          this.router.navigate(['my-account/aditional-data'])
-          return
-        }
-
-        this.appService.getPlanCheckout(planName).subscribe(
-          data => {
-            this.loaderService.showLoader(false);
-            const plan: any = data;
-            if (plan.url) {
-              window.location.href = plan.url;
-            }
-          },
-          error => {
-            this.loaderService.showLoader(false);
-          }
-        )
-      },
-      error => {
-        this.loaderService.showLoader(false);
-      }
-    )
   }
 
   goToCheckout(product: Product) {
@@ -131,7 +104,7 @@ export class PricingComponent implements OnInit {
       this.router.navigate(["/"])
       return;
     }
-    this.getPlanUrl(product.title)
+    this.pricingController.handle({planName: product.title})
   }
 
 }

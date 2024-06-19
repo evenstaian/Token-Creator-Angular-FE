@@ -74,9 +74,13 @@ import { CollectionItemsComponent } from './component/organisms/collection-items
 import { ProfileComponent } from './Modules/MyAccount/profile/profile.component';
 import { PaymentComponent } from './Modules/Payment/payment.component';
 import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
+import { PricingController } from './Modules/Payment/pricing/pricing.controller';
 import { ProductCardComponent } from './component/organisms/product-card/product-card.component';
 import { TokenTypeService } from './shared/token-type.service';
+import { PlanService } from './shared/plan.service';
 import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
+import { AppService } from 'src/services/app.service';
+import { Auth } from 'src/services/auth.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -150,10 +154,14 @@ export function playerFactory() {
     HttpErrorHandler, 
     MessageService, 
     Clean, 
+    Auth,
+    AppService,
     SharedDataService,
     LoaderService,
     SoundService,
     TokenTypeService,
+    PlanService,
+    PricingController,
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy

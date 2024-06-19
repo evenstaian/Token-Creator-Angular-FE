@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Controller } from '../Modules/Payment/pricing/pricing.controller';
+
+interface NavigationFlow {
+  contextRoute: string;
+  nextPage: string;
+  data: any;
+  controller?: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +19,25 @@ export class SharedDataService {
   private _formStructure = new BehaviorSubject<any>('');
   private _tokenImage = new BehaviorSubject<any>('');
   private _createResponse = new BehaviorSubject<any>(null);
+  private _navigationFlow = new BehaviorSubject<NavigationFlow>(null);
   public userData = this._userData.asObservable();
   public tokenType = this._tokenType.asObservable();
   public bannerDetailsImageUrl = this._bannerDetailsImageUrl.asObservable();
   public formStructure = this._formStructure.asObservable();
   public tokenImage = this._tokenImage.asObservable();
   public createResponse = this._createResponse.asObservable();
+  public navigationFlow = this._navigationFlow.asObservable();
 
   constructor() {}
+
+  setNavigationFlow(contextRoute: string, nextRoute: string, data: any, controller?: Controller){
+    this._navigationFlow.next({
+      contextRoute,
+      nextPage: nextRoute,
+      data,
+      controller
+    })
+  }
 
   setUserData(userData: any) {
     this._userData.next(userData);
