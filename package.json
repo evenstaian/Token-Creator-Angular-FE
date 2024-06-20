@@ -44,6 +44,7 @@
     "moment": "^2.29.1",
     "ng2-charts": "^2.2.5",
     "ngx-lottie": "^6.4.0",
+    "ngx-mask": "^11.1.0",
     "ngx-perfect-scrollbar": "6.1.0",
     "ngx-skeleton-loader": "^2.5.0",
     "ngx-toggle-switch": "^2.0.5",

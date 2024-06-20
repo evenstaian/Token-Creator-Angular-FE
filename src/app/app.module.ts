@@ -81,6 +81,8 @@ import { PlanService } from './shared/plan.service';
 import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
 import { AppService } from 'src/services/app.service';
 import { Auth } from 'src/services/auth.service';
+import { MaskPipe } from 'src/app/pipes/mask.pipe';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -92,6 +94,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export function playerFactory() {
   return player;
 }
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -128,6 +134,7 @@ export function playerFactory() {
     PricingComponent,
     ProductCardComponent,
     AdicionalDataComponent,
+    MaskPipe,
   ],
   imports: [
     CommonModule,
@@ -145,7 +152,8 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     AngularImageViewerModule,
     ChartsModule,
-    UiSwitchModule
+    UiSwitchModule,
+    NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [
     AuthGuard, 

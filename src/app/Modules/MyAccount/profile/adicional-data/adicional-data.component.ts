@@ -19,17 +19,11 @@ export class AdicionalDataComponent implements OnInit {
   formStructure: any = [
     {
         label: "cpf",
-        placeholder: "informe o numero do seu documento",
+        placeholder: "informe o numero do seu CPF",
         type: "text",
         defaultValue: "",
         required: true,
-    },
-    {
-        label: "celular",
-        placeholder: "qual o número do seu celular?",
-        type: "text",
-        defaultValue: "",
-        required: true,
+        mask: "000.000.000-00",
     },
     {
         label: "mobile",
@@ -37,6 +31,7 @@ export class AdicionalDataComponent implements OnInit {
         type: "text",
         defaultValue: "",
         required: true,
+        mask: "(00) 00000-0000"
     },
     {
       label: "charge",
@@ -65,6 +60,7 @@ export class AdicionalDataComponent implements OnInit {
       type: "text",
       defaultValue: "",
       required: true,
+      mask: "00.000.000/0000-00"
     },
     {
       label: "company_sector",
