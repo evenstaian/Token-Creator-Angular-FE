@@ -16,6 +16,14 @@ interface TokenTypeModel {
 export class TokenTypeService {
     public ERC20_FORM = [
         {
+            label: "classIdentifier",
+            placeholder: "Tipo do seu token",
+            type: "text",
+            defaultValue: "",
+            hide: true,
+            required: false,
+        },
+        {
             label: "name",
             placeholder: "nome do seu token",
             type: "text",
@@ -53,6 +61,14 @@ export class TokenTypeService {
     ]
 
     public ERC721_FORM = [
+        {
+            label: "classIdentifier",
+            placeholder: "Tipo do seu token",
+            type: "text",
+            defaultValue: "",
+            hide: true,
+            required: false,
+        },
         {
             label: "name",
             placeholder: "nome do seu token",

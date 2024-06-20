@@ -122,6 +122,10 @@ export class CreateTokenDetailsComponent implements OnInit {
           field.defaultValue = values[key];
           this.tokenType.form = this.formStructure;
 
+          if(field.label == "classIdentifier"){
+            field.defaultValue = this.tokenType.identifier;
+          }
+
           this.saveTokenTypeOnStorage()
         }
       });
