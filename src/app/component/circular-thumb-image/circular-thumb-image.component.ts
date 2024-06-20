@@ -23,7 +23,8 @@ export class CircularThumbImageComponent implements OnChanges {
   constructor(private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
-    if(this.hasMessage){
+    const authToken = localStorage.getItem('auth_token');
+    if(this.hasMessage && authToken){
       this.getUserData()
     }
 

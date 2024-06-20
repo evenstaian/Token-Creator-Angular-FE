@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Controller } from 'src/app/Modules/Payment/pricing/pricing.controller';
 import { LoaderService } from 'src/app/shared/loader.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-adicional-data',
@@ -18,20 +19,20 @@ export class AdicionalDataComponent implements OnInit {
 
   formStructure: any = [
     {
-        label: "cpf",
-        placeholder: "informe o numero do seu CPF",
-        type: "text",
-        defaultValue: "",
-        required: true,
-        mask: "000.000.000-00",
+      label: "cpf",
+      placeholder: "informe o numero do seu CPF",
+      type: "text",
+      defaultValue: "",
+      required: true,
+      mask: "000.000.000-00",
     },
     {
-        label: "mobile",
-        placeholder: "qual o número do seu celular?",
-        type: "text",
-        defaultValue: "",
-        required: true,
-        mask: "(00) 00000-0000"
+      label: "mobile",
+      placeholder: "qual o número do seu celular?",
+      type: "text",
+      defaultValue: "",
+      required: true,
+      mask: "(00) 00000-0000"
     },
     {
       label: "charge",
@@ -41,11 +42,11 @@ export class AdicionalDataComponent implements OnInit {
       required: true,
     },
     {
-        label: "company",
-        placeholder: "qual é o nome FANTASIA da sua empresa?",
-        type: "text",
-        defaultValue: "",
-        required: true,
+      label: "company",
+      placeholder: "qual é o nome FANTASIA da sua empresa?",
+      type: "text",
+      defaultValue: "",
+      required: true,
     },
     {
       label: "company_social_name",
@@ -89,7 +90,7 @@ export class AdicionalDataComponent implements OnInit {
         'acima de R$ 5 milhões',
       ]
     },
-];
+  ];
   form: FormGroup;
 
   pageTitles = {
@@ -98,16 +99,17 @@ export class AdicionalDataComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private sharedDataService: SharedDataService,
     public loaderService: LoaderService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.createForm()
 
-    this.sharedDataService.navigationFlow.subscribe( data => {
-      if(data.controller){
+    this.sharedDataService.navigationFlow.subscribe(data => {
+      if (data.controller) {
         this.currentController = data.controller;
       }
 
@@ -117,10 +119,10 @@ export class AdicionalDataComponent implements OnInit {
 
   }
 
-  createForm(){
+  createForm() {
     this.form = this.fb.group({});
 
-    if(!this.formStructure){
+    if (!this.formStructure) {
       //this.router.navigate(['/create-token']);
       return
     }
@@ -154,15 +156,17 @@ export class AdicionalDataComponent implements OnInit {
     return field.invalid && (field.dirty || field.touched);
   }
 
-  saveAditionalData(){
-    if(!this.currentController){
-      if(this.contextRoute){
-        this.router.navigate([this.contextRoute])
+  saveAditionalData() {
+    if (!this.currentController) {
+      if (!this.contextRoute) {
+        this.location.back();
+        return
       }
+      this.router.navigate([this.contextRoute])
       return
     }
 
-    this.currentController.handle({planName: this.dataSource.planName});
+    this.currentController.handle({ planName: this.dataSource.planName });
   }
 
 }

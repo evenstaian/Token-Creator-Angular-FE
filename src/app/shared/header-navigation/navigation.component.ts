@@ -30,7 +30,10 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const authToken = localStorage.getItem('auth_token');
+    if(authToken){
       this.getUserData();
+    }
   }
 
   verifyIfIsLogged(){
