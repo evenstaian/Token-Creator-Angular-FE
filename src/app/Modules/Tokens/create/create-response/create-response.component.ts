@@ -63,4 +63,14 @@ export class CreateResponseComponent implements OnInit {
     this.router.navigate(["/my-tokens"])
   }
 
+  goToScan(){
+    if(this.createResponse){
+      const url = this.createResponse.scanUrl;
+      if(!url){
+        return
+      }
+      window.open(url, '_blank');
+    }
+  }
+
 }
