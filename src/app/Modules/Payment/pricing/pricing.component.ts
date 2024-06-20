@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/loader.service';
-import { PlanService } from 'src/app/shared/plan.service';
 import { AppService } from 'src/services/app.service';
 import { Auth } from 'src/services/auth.service';
 import { PricingController } from './pricing.controller';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 interface Product {
   id: number;
@@ -92,18 +92,38 @@ export class PricingComponent implements OnInit {
 
   constructor(
     public loaderService: LoaderService,
-    private planService: PlanService,
     public pricingController: PricingController,
-    private router: Router) { }
+    private router: Router,
+    private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
   }
 
+  isLogged(){
+    const authToken = localStorage.getItem('auth_token');
+    return authToken;
+  }
+
+  goToLogin(){
+    this.router.navigate(["/login"])
+  }
+
+  goToSignup(){
+    this.router.navigate(["/signup"])
+  }
+
   goToCheckout(product: Product) {
+    this.sharedDataService.setNavigationFlow('/pricing', '')
+    
     if (!product.priceNumber) {
       this.router.navigate(["/"])
       return;
     }
+
+    if(!this.isLogged()){
+      this.router.navigate(["/"])
+    }
+
     this.pricingController.handle({planName: product.title})
   }
 

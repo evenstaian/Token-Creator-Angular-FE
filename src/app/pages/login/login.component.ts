@@ -4,6 +4,7 @@ import { Auth } from '../../../services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 import { Router } from '@angular/router'
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
+
+  contextRoute: string;
 
   pageTitles = {
     title: "Entre na sua conta",
@@ -56,11 +59,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: Auth,
-    private router: Router) { 
+    private router: Router,
+    private sharedDataService: SharedDataService) { 
     }
 
   ngOnInit(): void {
     this.changeStep(true, false)
+
+    this.sharedDataService.navigationFlow.subscribe( data => {
+      this.contextRoute = data.contextRoute;
+    })
   }
 
   public preLogin(): void {
@@ -124,7 +132,11 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('auth_token', response.authToken);
     localStorage.setItem('user_data', JSON.stringify(response.user));
     this.showLoader(false);
-    this.router.navigate(['/my-tokens']);
+    if(!this.contextRoute){
+      this.router.navigate(['/my-tokens']);
+      return
+    }
+    this.router.navigate([this.contextRoute]);
   }
 
   changeStep(step1: boolean, step2: boolean){

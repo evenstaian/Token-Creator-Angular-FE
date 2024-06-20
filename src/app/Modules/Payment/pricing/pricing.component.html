@@ -1,7 +1,13 @@
 <header>
-    <span class="logo-text">
-        <img src="assets/images/logos/ic-logo-black.svg" style="height: 35px; margin: 10px; margin-left: 100px !important;" class="light-logo" alt="homepage" />
-    </span>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="logo-text">
+            <img src="assets/images/logos/ic-logo-black.svg" style="height: 35px; margin: 10px; margin-left: 100px !important;" class="light-logo" alt="homepage" />
+        </div>
+        <div *ngIf="!isLogged()" class="auth-btns-container d-flex justify-content-end">
+            <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-secondary px-4 mr-2" (click)="goToLogin()">Entrar</button>
+            <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-primary px-4" (click)="goToSignup()">Cadastre-se</button>
+        </div>
+    </div>
 </header>
 
 <div class="container">

@@ -36,6 +36,12 @@ main h2 {
     animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
 }
 
+.auth-btns-container {
+    height: 35px;
+    margin: 10px;
+    margin-right: 100px !important;
+}
+
 @keyframes typing {
     from { width: 0 }
     to { width: 70% }

@@ -30,7 +30,7 @@ export class SharedDataService {
 
   constructor() {}
 
-  setNavigationFlow(contextRoute: string, nextRoute: string, data: any, controller?: Controller){
+  setNavigationFlow(contextRoute: string, nextRoute: string, data?: any, controller?: Controller){
     this._navigationFlow.next({
       contextRoute,
       nextPage: nextRoute,
