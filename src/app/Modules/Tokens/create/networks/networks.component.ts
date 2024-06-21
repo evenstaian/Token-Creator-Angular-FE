@@ -15,6 +15,16 @@ export class NetworksComponent implements OnInit {
   tokenType: any;
 
   isMainNet: boolean = false;
+  standards: any = [
+    {
+      title: "MainNet",
+      items: []
+    },
+    {
+      title: "TestNet",
+      items: []
+    }
+  ]
 
   pageTitles = {
     title: "Escolha a rede",
@@ -31,6 +41,10 @@ export class NetworksComponent implements OnInit {
 
   ngOnInit(): void {
     this.NetworkTypes = this.toIterable(NETWORK_TYPES);
+    
+    if(!this.isMainNet){
+      this.standards.reverse();
+    }
 
     this.sharedDataService.tokenType.subscribe(data => {
       this.tokenType = data;
@@ -43,10 +57,14 @@ export class NetworksComponent implements OnInit {
 
   toIterable = (networkTypes: any): any[] => {
     return Object.keys(networkTypes).map(key => {
-      if (networkTypes[key].isMainNet === this.isMainNet) {
-        return networkTypes[key];
+      if (networkTypes[key].isMainNet) {
+        networkTypes[key].enable = this.isMainNet;
+        this.standards[0].items.push(networkTypes[key])
+      } else {
+        networkTypes[key].enable = !this.isMainNet;
+        this.standards[1].items.push(networkTypes[key])
       }
-      return null;
+      return networkTypes[key];
     }).filter(obj => obj !== null);
   };
 

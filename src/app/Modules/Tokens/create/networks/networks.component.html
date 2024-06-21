@@ -1,11 +1,18 @@
 <div class="wrapper w-100 px-5" style="color: #fff">
-    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+    <app-page-titles [title]="pageTitles.title" [subtitle]="pageTitles.subtitle"></app-page-titles>
 
-    <div *ngFor="let networkType of NetworkTypes">
-        <div class="item enabled" (mouseover)="onHover()" (click)="proceed(networkType)">
-            <div class="token">
-                <img class="image" src="{{networkType.imageUrl}}">
-                <p>{{networkType.name}}</p></div>
+    <div *ngFor="let standard of standards" style="margin-top: 50px;">
+        <p class="group-title">{{standard.title}}</p>
+        <div *ngFor="let networkType of standard.items">
+            <div [ngClass]="{'enabled': networkType.enable, 'disabled': !networkType.enable}" 
+            class="item" 
+            (mouseover)="networkType.enable ? onHover() : null" 
+            (click)="networkType.enable ? proceed(networkType) : null">
+                <div class="token">
+                    <img class="image" [src]="networkType.imageUrl">
+                    <p>{{networkType.name}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
