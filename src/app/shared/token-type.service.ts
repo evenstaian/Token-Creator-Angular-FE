@@ -179,4 +179,16 @@ export class TokenTypeService {
 
         return tokenType;
     }
+
+    getTokenTypeScheme(classIdentifier?: string){
+        if(classIdentifier){
+            const tokenType = this.TokenTypes.find(type => type.identifier === classIdentifier);
+            if(!tokenType){
+                return false;
+            }
+            return tokenType;
+        }
+
+        return false;
+    }
 }

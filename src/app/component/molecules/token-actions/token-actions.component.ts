@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { TokenTypeService } from 'src/app/shared/token-type.service';
 import { AppService } from 'src/services/app.service';
 
 @Component({
@@ -128,6 +129,11 @@ export class TokenActionsComponent implements OnChanges {
 
   tokenDetails = [
     {
+      name: "classIdentifier",
+      label: "A classe do seu token",
+      value: ""
+    },
+    {
       name: "address",
       label: "Endereço na Blockchain",
       value: ""
@@ -137,6 +143,11 @@ export class TokenActionsComponent implements OnChanges {
       label: "Tipo do Token",
       value: ""
     },
+    {
+      name: "network",
+      label: "Rede do Token",
+      value: ""
+    },
   ]
 
   items: any = [];
@@ -144,7 +155,10 @@ export class TokenActionsComponent implements OnChanges {
 
   itemsErrorMessage: string = "Buscando items..."
 
-  constructor(private fb: FormBuilder, private appService: AppService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private appService: AppService,
+    private tokenTypeService: TokenTypeService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.action) {
@@ -190,7 +204,6 @@ export class TokenActionsComponent implements OnChanges {
         this.items = data;
       }, 
       error => {
-        console.log({error})
         this.itemsErrorMessage = error
       })
   }
@@ -224,10 +237,18 @@ export class TokenActionsComponent implements OnChanges {
 
   buildDetails(token: any){
     return Object.keys(token).map(key => {
+      const classIdentifierIndex = this.tokenDetails.findIndex(detail => detail.name === "classIdentifier");
       const index = this.tokenDetails.findIndex(detail => detail.name === key);
+      
       if (index !== -1) {
         this.tokenDetails[index].value = token[key];
       }
+
+      if (classIdentifierIndex !== -1) {
+        const tokenTypeScheme = this.tokenTypeService.getTokenTypeScheme(token.raw.class_identifier);
+        this.tokenDetails[classIdentifierIndex].value =  tokenTypeScheme ? tokenTypeScheme.label : "";
+      }
+
     }).filter(obj => obj !== null);
   }
 
@@ -291,7 +312,6 @@ export class TokenActionsComponent implements OnChanges {
     this.form.reset();
     if (this.formDirective) {
       this.formDirective.resetForm();
-      console.log({formDirective: this.formDirective})
     }
     this.buildActionForm(action)
     this.items = null
