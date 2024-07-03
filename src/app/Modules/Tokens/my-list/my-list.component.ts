@@ -42,6 +42,7 @@ export class MyListComponent implements OnInit {
 
   loader: boolean = false;
   fullLoader: boolean = false;
+  showFirstTokenCTA: boolean = false;
 
   alertIcon="warning"
   alertTitle;
@@ -85,6 +86,10 @@ export class MyListComponent implements OnInit {
     )
   }
 
+  goToCreateToken(){
+    this.router.navigate(['/create-token'])
+  }
+
   getMyTokensList(){
     this.showLoader(true);
 
@@ -97,6 +102,7 @@ export class MyListComponent implements OnInit {
     },
     error => {
       this.showLoader(false);
+      this.showFirstTokenCTA = true;
     }) 
   }
 

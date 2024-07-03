@@ -1,6 +1,18 @@
 .list{
     margin-bottom: 1rem;
 }
+
+
+.container {
+    margin-top: 100px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .item {
     display: flex;
     align-items: center;

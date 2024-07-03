@@ -48,6 +48,18 @@
             (cloneToMainnet)="goToCreateOnMainNet($event)"></app-token-actions>
         </div>
     </div>
+
+    <div *ngIf="showFirstTokenCTA" class="container">
+        <div class="center">
+            <app-youtube-player></app-youtube-player>
+        </div>
+        <div class="center" style="margin-top: 50px">
+            <p>Você ainda não é proprietário de nenhum Token. Crie um a qualquer momento!</p>
+        </div>
+        <div class="center m-3">
+            <button class="btn-primary" (click)="goToCreateToken()">Criar meu primeiro token</button>
+        </div>
+    </div>
 </div>
 
 <app-full-loader [isLoading]=fullLoader></app-full-loader>

@@ -1,0 +1,34 @@
+import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+
+@Component({
+  selector: 'app-youtube-player',
+  templateUrl: './youtube-player.component.html',
+  styleUrls: ['./youtube-player.component.css']
+})
+export class YoutubePlayerComponent implements OnInit {
+
+  @ViewChild('videoContainer', { static: true }) videoContainer!: ElementRef;
+
+  constructor(private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const iframe = this.videoContainer.nativeElement.querySelector('iframe');
+          const videoSrc = iframe.src;
+
+          if (entry.isIntersecting) {
+            iframe.src = `${videoSrc}&autoplay=1`;
+          } else {
+            iframe.src = videoSrc.replace('&autoplay=1', '');
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(this.videoContainer.nativeElement);
+  }
+
+}

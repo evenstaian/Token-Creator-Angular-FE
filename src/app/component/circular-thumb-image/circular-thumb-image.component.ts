@@ -57,7 +57,9 @@ export class CircularThumbImageComponent implements OnChanges {
           }
   
           if(this.hasMessage){
-            this.imageUrl = userData.image_url;
+            if(userData.image_url){
+              this.imageUrl = userData.image_url;
+            }
           }
         }
       } catch (e){
