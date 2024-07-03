@@ -68,6 +68,10 @@ export class NetworksComponent implements OnInit {
 
   toIterable = (networkTypes: any): any[] => {
     return Object.keys(networkTypes).map(key => {
+      if(networkTypes[key].status == STATUS.disabled){
+        return
+      }
+      
       if (networkTypes[key].isMainNet) {
         networkTypes[key].enable = this.isMainNet;
         this.standards[0].items.push(networkTypes[key])
