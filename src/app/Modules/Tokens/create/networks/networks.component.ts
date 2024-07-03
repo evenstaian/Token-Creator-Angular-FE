@@ -40,15 +40,20 @@ export class NetworksComponent implements OnInit {
     private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
+    this.sharedDataService.tokenType.subscribe(data => {
+      this.tokenType = data;
+      console.log({"chamou": this.tokenType})
+    })
+
+    this.sharedDataService.isMainNetEnvironment.subscribe(data => {
+      this.isMainNet = data
+    })
+
     this.NetworkTypes = this.toIterable(NETWORK_TYPES);
-    
+
     if(!this.isMainNet){
       this.standards.reverse();
     }
-
-    this.sharedDataService.tokenType.subscribe(data => {
-      this.tokenType = data;
-    })
   }
 
   onHover(){
@@ -69,6 +74,7 @@ export class NetworksComponent implements OnInit {
   };
 
   proceed(networkType: any) {
+    console.log({networkType, tokenType: this.tokenType})
     if(networkType){
       this.tokenType.network = networkType;
       this.sharedDataService.setTokenType(this.tokenType);

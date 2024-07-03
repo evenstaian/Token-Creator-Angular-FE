@@ -16,6 +16,7 @@ export class SharedDataService {
   private _userData = new BehaviorSubject<any>(null);
   private _tokenType = new BehaviorSubject<any>(null);
   private _bannerDetailsImageUrl = new BehaviorSubject<string>('');
+  private _isMainNetEnvironment = new BehaviorSubject<boolean>(false);
   private _formStructure = new BehaviorSubject<any>('');
   private _tokenImage = new BehaviorSubject<any>('');
   private _createResponse = new BehaviorSubject<any>(null);
@@ -23,6 +24,7 @@ export class SharedDataService {
   public userData = this._userData.asObservable();
   public tokenType = this._tokenType.asObservable();
   public bannerDetailsImageUrl = this._bannerDetailsImageUrl.asObservable();
+  public isMainNetEnvironment = this._isMainNetEnvironment.asObservable();
   public formStructure = this._formStructure.asObservable();
   public tokenImage = this._tokenImage.asObservable();
   public createResponse = this._createResponse.asObservable();
@@ -57,6 +59,10 @@ export class SharedDataService {
 
   setTokenImage(file: File) {
     this._tokenImage.next(file);
+  }
+
+  setIsMainNetEnvironment(isMainNet: boolean) {
+    this._isMainNetEnvironment.next(isMainNet);
   }
 
   setCreateResponse(data: any) {

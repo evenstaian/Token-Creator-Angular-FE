@@ -174,6 +174,7 @@ export class TokenActionsComponent implements OnChanges {
     }
 
     if (changes.token) {
+      console.log("TOKEN", this.token)
       this.buildDetails(this.token);
       if(this.token.type == TOKEN_STANDARD_TYPES.ERC20){
         this.IMAGE_FORM_ITEM.hide = true

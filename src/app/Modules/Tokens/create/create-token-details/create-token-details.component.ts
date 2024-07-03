@@ -56,6 +56,7 @@ export class CreateTokenDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const cloneId = params.get('cloneId');
       if(cloneId){
+        this.sharedDataService.setIsMainNetEnvironment(true);
         this.tokenType = this.getCloneTokenFromStorage();
         if(this.tokenType){
           this.formStructure = this.tokenType.form;
@@ -148,12 +149,17 @@ export class CreateTokenDetailsComponent implements OnInit {
   }
 
   goToNetworksPage(){
+    if(!this.tokenType){
+      return
+    }
+
     if (this.form.valid) {
       if(this.imageFile){
         this.sharedDataService.setTokenImage(this.imageFile)
       }
 
       this.sharedDataService.setFormStructure(this.formStructure)
+      this.sharedDataService.setTokenType(this.tokenType)
       this.deleteCloneTokenFromStorage();
       this.router.navigate(['/create-token/networks']);
     } else {
