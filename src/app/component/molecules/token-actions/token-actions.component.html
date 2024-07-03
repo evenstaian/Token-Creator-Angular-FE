@@ -22,8 +22,19 @@
                     <app-collection-items [collectionItems]="selectedItem"></app-collection-items>
                 </div>
 
-                <div class="form-content">
+                <div *ngIf="!formResponse" class="form-content">
+                    <p>Você tem certeza que deseja realizar esta transação? Confirme os dados abaixo:</p>
                     <div *ngFor="let form of formStructure[this.action]">
+                        <div *ngIf="form.defaultValue">
+                            <p class="form-item-title">{{form.placeholder}}<br>
+                            <label class="form-item-subtitle">{{form.defaultValue}}</label></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="formResponse" class="form-content">
+                    <p>Transação efetuada com sucesso!</p>
+                    <div *ngFor="let form of formResponse">
                         <div *ngIf="form.defaultValue">
                             <p class="form-item-title">{{form.placeholder}}<br>
                             <label class="form-item-subtitle">{{form.defaultValue}}</label></p>

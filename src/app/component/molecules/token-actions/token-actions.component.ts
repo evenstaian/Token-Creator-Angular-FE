@@ -11,12 +11,16 @@ import { AppService } from 'src/services/app.service';
 })
 export class TokenActionsComponent implements OnChanges {
 
-  @Input() action: string;
-  @Input() token: any;
-  @Input() statusResponse: any = {
+  statusResponseScheme: any = {
     MINT: "PENDING",
     TRANSFER: "PENDING",
     BURN: "PENDING",
+  };
+
+  @Input() action: string;
+  @Input() token: any;
+  @Input() statusResponse: any = {
+    ...this.statusResponseScheme 
   };
   @Output() actionForm: EventEmitter<any> = new EventEmitter<any>();
   @Output() refreshStatus: EventEmitter<any> = new EventEmitter<any>();
@@ -112,6 +116,8 @@ export class TokenActionsComponent implements OnChanges {
     BURN: this.BURN_FORM,
   }
 
+  formResponse: any;
+
   ButtonsTypes = {
     MINT: {
       color: "#00A34B",
@@ -189,9 +195,14 @@ export class TokenActionsComponent implements OnChanges {
       if(changes.statusResponse.currentValue){
         this.isNewAction = false;
 
-        if(this.statusResponse[this.action].txHash){
-          this.TXHASH_URL_FORM_ITEM.defaultValue = this.statusResponse[this.action].txHash
-          this.formStructure[this.action].push(this.TXHASH_URL_FORM_ITEM)
+        console.log({formResponse: this.formResponse})
+
+        if(!this.formResponse && this.statusResponse[this.action].txHash){
+          this.formResponse = [ ...this.formStructure[this.action] ];
+          console.log(this.formResponse);
+          const txHash = this.TXHASH_URL_FORM_ITEM;
+          txHash.defaultValue = this.statusResponse[this.action].txHash;
+          this.formResponse.push(txHash);
         }
       }
     }
@@ -319,6 +330,10 @@ export class TokenActionsComponent implements OnChanges {
     this.selectedItem = []
     this.isEditMode = true;
     this.isNewAction = true;
+    this.formResponse = null;
+    this.statusResponse = {
+      ...this.statusResponseScheme 
+    };
   }
 
   setImageFile(file: File){
