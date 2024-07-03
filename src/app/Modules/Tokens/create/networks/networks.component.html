@@ -3,6 +3,7 @@
 
     <div *ngFor="let standard of standards" style="margin-top: 50px;">
         <p class="group-title">{{standard.title}}</p>
+        <p class="group-subtitle">{{standard.subtitle}}</p>
         <div *ngFor="let networkType of standard.items">
             <div [ngClass]="{'enabled': networkType.enable, 'disabled': !networkType.enable}" 
             class="item" 

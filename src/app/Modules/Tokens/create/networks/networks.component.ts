@@ -18,10 +18,16 @@ export class NetworksComponent implements OnInit {
   standards: any = [
     {
       title: "MainNet",
+      subtitle: `Este ambiente é destinado a operações reais e transações em produção. Todos os dados e transações são permanentes e sujeitos às políticas de segurança e regulamentações aplicáveis. 
+      Utilize com responsabilidade, pois qualquer ação realizada na rede principal é irreversível e pode ter implicações financeiras e legais significativas. 
+      Certifique-se de validar todas as informações e operações antes de prosseguir.`,
       items: []
     },
     {
       title: "TestNet",
+      subtitle: `Este ambiente pode ser usado em testes, 
+      provas de conceito simulações mas não devem ser comercializados, distribuídos ou negociados em produção. 
+      Existe a possibilidade da rede ser descontinuada ou substituída além de oscilações de performance.`,
       items: []
     }
   ]

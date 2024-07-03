@@ -7,6 +7,12 @@
     margin-bottom: 10px;
 }
 
+.group-subtitle {
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
 .item {
     display: flex;
     align-items: center;
