@@ -3,8 +3,10 @@
 
     <div *ngFor="let tokenType of tokenTypeService.TokenTypes">
         <div class="item" [ngClass]="{'enabled': tokenType.status == 'ENABLED'}" (mouseenter)="onHover(tokenType)" (click)="openDetails(tokenType)">
-            {{tokenType.label}}
-
+            <div>
+                <span>{{tokenType.label}}</span>
+                <label>{{tokenType.description}}</label>
+            </div>
             <div class="soon-box" *ngIf="tokenType.status == 'SOON'">
                 em breve
             </div>

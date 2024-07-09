@@ -3,6 +3,7 @@ import { STATUS, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 
 interface TokenTypeModel {
     label: string;
+    description: string;
     identifier: string;
     bannerImageUrl: string;
     type: string;
@@ -101,23 +102,8 @@ export class TokenTypeService {
 
     public TokenTypes: TokenTypeModel[] = [
         {
-            label: "Fan/Sport Token",
-            identifier: "FST",
-            bannerImageUrl: "assets/images/big/basket.png",
-            type: TOKEN_STANDARD_TYPES.ERC20,
-            form: this.ERC20_FORM,
-            status: STATUS.enabled,
-        },
-        {
-            label: "Crédito de Carbono e ESG",
-            identifier: "CCESG",
-            bannerImageUrl: "assets/images/big/nature.png",
-            type: TOKEN_STANDARD_TYPES.ERC20,
-            form: this.ERC20_FORM,
-            status: STATUS.enabled,
-        },
-        {
             label: "Utility Token",
+            description: "Ótimo para acessar produtos ou aplicações exclusivas",
             identifier: "UT",
             bannerImageUrl: "assets/images/big/bull.png",
             type: TOKEN_STANDARD_TYPES.ERC20,
@@ -125,15 +111,53 @@ export class TokenTypeService {
             status: STATUS.enabled,
         },
         {
-            label: "Rewards/Cashback Token",
-            identifier: "RCT",
-            bannerImageUrl: "",
+            label: "Rewards Token",
+            description: "Perfeito para programas de fidelidade descentralizados",
+            identifier: "RT",
+            bannerImageUrl: "assets/images/big/bull.png",
+            type: TOKEN_STANDARD_TYPES.ERC721,
+            form: this.ERC721_FORM,
+            status: STATUS.enabled,
+        },
+        {
+            label: "Payment Token",
+            description: "Ideal para realizar pagamentos dentro de um ecossistema",
+            identifier: "PT",
+            bannerImageUrl: "assets/images/big/bull.png",
             type: TOKEN_STANDARD_TYPES.ERC20,
             form: this.ERC20_FORM,
-            status: STATUS.soon,
+            status: STATUS.enabled,
+        },
+        {
+            label: "Fan/Sport Token",
+            description: "Podem ser usados para aumentar o engajamento de fãs e torcedores",
+            identifier: "FST",
+            bannerImageUrl: "assets/images/big/basket.png",
+            type: TOKEN_STANDARD_TYPES.ERC20,
+            form: this.ERC20_FORM,
+            status: STATUS.enabled,
+        },
+        {
+            label: "Token RWA",
+            description: "Vinculados a ativos reais, oferecendo segurança adicional",
+            identifier: "TRWA",
+            bannerImageUrl: "assets/images/big/bull.png",
+            type: TOKEN_STANDARD_TYPES.ERC20,
+            form: this.ERC20_FORM,
+            status: STATUS.enabled,
+        },
+        {
+            label: "ReFi",
+            description: "Fantástico para finanças regenerativas, como créditos de carbono e reflorestamento",
+            identifier: "RFI",
+            bannerImageUrl: "assets/images/big/nature.png",
+            type: TOKEN_STANDARD_TYPES.ERC20,
+            form: this.ERC20_FORM,
+            status: STATUS.enabled,
         },
         {
             label: "NFT Colecionáveis",
+            description: "Incrível para criar e colecionar arte e itens exclusivos",
             identifier: "NFTC",
             bannerImageUrl: "",
             type: TOKEN_STANDARD_TYPES.ERC721,
@@ -141,16 +165,9 @@ export class TokenTypeService {
             status: STATUS.enabled,
         },
         {
-            label: "Rewards/Cashback Token",
-            identifier: "NFT Badges / Prêmios",
-            bannerImageUrl: "NFTBP",
-            type: TOKEN_STANDARD_TYPES.ERC721,
-            form: this.ERC721_FORM,
-            status: STATUS.soon,
-        },
-        {
-            label: "NFT Arte / Música",
-            identifier: "NFTAM",
+            label: "DeFi",
+            description: "Essencial para operações de finanças descentralizadas, como empréstimos e yield farming",
+            identifier: "DFI",
             bannerImageUrl: "",
             type: TOKEN_STANDARD_TYPES.ERC721,
             form: this.ERC721_FORM,
@@ -165,10 +182,10 @@ export class TokenTypeService {
             return false;
         }
         const tokenType = this.TokenTypes.find(type => type.identifier === token.class_identifier);
-        if(!tokenType){
+        if (!tokenType) {
             return false;
         }
-        console.log({token, tokenType})
+        console.log({ token, tokenType })
 
         Object.keys(token).map(key => {
             const index = tokenType.form.findIndex(form => form.label === key);
@@ -180,10 +197,10 @@ export class TokenTypeService {
         return tokenType;
     }
 
-    getTokenTypeScheme(classIdentifier?: string){
-        if(classIdentifier){
+    getTokenTypeScheme(classIdentifier?: string) {
+        if (classIdentifier) {
             const tokenType = this.TokenTypes.find(type => type.identifier === classIdentifier);
-            if(!tokenType){
+            if (!tokenType) {
                 return false;
             }
             return tokenType;
