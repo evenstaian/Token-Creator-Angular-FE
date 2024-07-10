@@ -5,11 +5,15 @@ import { Controller } from 'src/app/Modules/Payment/pricing/pricing.controller';
 import { LoaderService } from 'src/app/shared/loader.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { Location } from '@angular/common';
+import { Auth } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-adicional-data',
   templateUrl: './adicional-data.component.html',
   styleUrls: ['./adicional-data.component.css'],
+  providers: [
+    Auth
+  ]
 })
 export class AdicionalDataComponent implements OnInit {
 
@@ -100,6 +104,7 @@ export class AdicionalDataComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authService: Auth,
     private sharedDataService: SharedDataService,
     public loaderService: LoaderService,
     private router: Router,
@@ -156,8 +161,39 @@ export class AdicionalDataComponent implements OnInit {
     return field.invalid && (field.dirty || field.touched);
   }
 
-  saveAditionalData() {
+  createRequestBody(form: FormGroup) {
+    const params = {
+      cpf: form.get('cpf')?.value,
+      cnpj: form.get('cnpj')?.value,
+      phone: form.get('mobile')?.value,
+      companyName: form.get('company')?.value,
+      companySocialName: form.get('company_social_name')?.value,
+      companySector: form.get('company_sector')?.value,
+      companyCharge: form.get('charge')?.value,
+      companyActivityTime: form.get('company_activity_time')?.value,
+      companyAnualProfit: form.get('company_anual_profit')?.value
+    }
+
+    if (
+      !params.cpf ||
+      !params.cnpj ||
+      !params.phone ||
+      !params.companyName ||
+      !params.companySocialName ||
+      !params.companySector ||
+      !params.companyCharge ||
+      !params.companyActivityTime ||
+      !params.companyAnualProfit
+    ) {
+      return false;
+    }
+
+    return params
+  }
+
+  async saveAditionalData() {
     if (!this.currentController) {
+      console.log("no currentController")
       if (!this.contextRoute) {
         this.location.back();
         return
@@ -166,7 +202,26 @@ export class AdicionalDataComponent implements OnInit {
       return
     }
 
-    this.currentController.handle({ planName: this.dataSource.planName });
+    const params = this.createRequestBody(this.form)
+    if (!params) {
+      console.log("params are missing");
+      return
+    }
+
+    this.sendAditionalData(params);
+  }
+
+  async sendAditionalData(params: any) {
+    this.loaderService.showLoader(true);
+
+    this.authService.saveAditionalData(params).subscribe(
+      data => {
+        this.currentController.handle({ planName: this.dataSource.planName });
+      },
+      error => {
+        this.loaderService.showLoader(false);
+      }
+    )
   }
 
 }

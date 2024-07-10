@@ -23,7 +23,7 @@ export class PlanService {
         
         this.authService.getUserData().subscribe(
           data => {
-            if(!data.data.addresses){
+            if(!data.data.aditionalData){
               this.loaderService.showLoader(false);
               this.sharedDataService.setNavigationFlow('/pricing', '', { planName }, controller)
               this.router.navigate(['my-account/aditional-data'])

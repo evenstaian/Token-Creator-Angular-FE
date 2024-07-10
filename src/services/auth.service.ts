@@ -22,6 +22,7 @@ export class Auth {
     _logout = 'logout';
     _user = 'user';
     _update = 'user/update';
+    _aditionalData = 'user/aditional_data'
 
     constructor(private http: HttpClient, private errorHandler: HttpErrorHandler){
     }
@@ -75,6 +76,10 @@ export class Auth {
 
     public getUserData(){
         return this.performRequest(RestMethods.GET, this._user);
+    }
+
+    public saveAditionalData(params: any): Observable<Object | null>{
+        return this.performRequest(RestMethods.POST, this._aditionalData, params);
     }
 
     public update(image: File): Observable<Object | null>{
