@@ -9,6 +9,8 @@ export class YoutubePlayerComponent implements OnInit {
 
   @ViewChild('videoContainer', { static: true }) videoContainer!: ElementRef;
 
+  videoUrl: string = "https://www.youtube.com/embed/gNHSKhph99g?enablejsapi=1";
+
   constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
@@ -19,7 +21,7 @@ export class YoutubePlayerComponent implements OnInit {
           const videoSrc = iframe.src;
 
           if (entry.isIntersecting) {
-            iframe.src = `${videoSrc}&autoplay=1`;
+            iframe.src = `${this.videoUrl}&autoplay=1`;
           } else {
             iframe.src = videoSrc.replace('&autoplay=1', '');
           }
