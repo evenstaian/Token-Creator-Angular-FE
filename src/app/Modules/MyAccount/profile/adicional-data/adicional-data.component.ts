@@ -6,6 +6,7 @@ import { LoaderService } from 'src/app/shared/loader.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { Location } from '@angular/common';
 import { Auth } from 'src/services/auth.service';
+import { cpfValidator, cnpjValidator } from '../../../../../utils/Validators/validators';
 
 @Component({
   selector: 'app-adicional-data',
@@ -29,6 +30,7 @@ export class AdicionalDataComponent implements OnInit {
       defaultValue: "",
       required: true,
       mask: "000.000.000-00",
+      validators: [cpfValidator]
     },
     {
       label: "mobile",
@@ -65,7 +67,8 @@ export class AdicionalDataComponent implements OnInit {
       type: "text",
       defaultValue: "",
       required: true,
-      mask: "00.000.000/0000-00"
+      mask: "00.000.000/0000-00",
+      validators: [cnpjValidator]
     },
     {
       label: "company_sector",
@@ -136,6 +139,9 @@ export class AdicionalDataComponent implements OnInit {
       const validators: ValidatorFn[] = [];
       if (field.required) {
         validators.push(Validators.required);
+      }
+      if (field.validators) {
+        validators.push(...field.validators);
       }
       this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
     });
