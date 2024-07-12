@@ -8,7 +8,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 export class FullLoaderComponent implements OnChanges {
 
   @Input() isLoading: boolean = false;
-  @Input() loaderJson: string = "crypto_loader.json";
+  @Input() loaderJson: string = "infinity_loader.json";
 
   constructor() {
    }
