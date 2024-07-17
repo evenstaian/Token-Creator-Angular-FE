@@ -145,7 +145,12 @@ export class MyListComponent implements OnInit {
       this.showFullscreenLoader(false);
     },
     error => {
+      console.log(error);
       this.showFullscreenLoader(false);
+      if(error.status){
+        this.showAlert(false, "Ocorreu um erro", error.message)
+        return
+      }
       this.showAlert(false, "Ocorreu um erro", "Tente novamente em outro momento")
     }) 
   }

@@ -86,8 +86,18 @@ export class TokenActionsComponent implements OnChanges {
     defaultValue: "",
   }
 
+  TOKEN_ITEM_NAME_FORM_ITEM = {
+    label: "tokenItemName",
+    placeholder: "Nome do Item",
+    type: "text",
+    required: true,
+    defaultValue: "",
+    hide: false,
+  }
+
   MINT_FORM = [
     this.IMAGE_FORM_ITEM,
+    this.TOKEN_ITEM_NAME_FORM_ITEM,
     this.QUANTITY_FORM_ITEM,
     this.ADDRESS_TO_FORM_ITEM,
   ]
@@ -184,6 +194,7 @@ export class TokenActionsComponent implements OnChanges {
       this.buildDetails(this.token);
       if(this.token.type == TOKEN_STANDARD_TYPES.ERC20){
         this.IMAGE_FORM_ITEM.hide = true
+        this.TOKEN_ITEM_NAME_FORM_ITEM.hide = true
       }
       if(this.token.type == TOKEN_STANDARD_TYPES.ERC721){
         this.QUANTITY_FORM_ITEM.hide = true

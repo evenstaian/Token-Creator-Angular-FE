@@ -27,6 +27,8 @@ export class HttpErrorHandler {
               this.negarAcesso.cleanAll()
               this.rotas.navigate(['/login'])
               return throwError(error.error.error);
+            case 410:
+              return throwError({status: error.status, message: error.error.message})
         }
         errorMessage = error.error.message;
     }

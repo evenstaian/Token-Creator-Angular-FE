@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:  `https://criptolab-auth-service-prod-dot-pandapay.rj.r.appspot.com`, //`http://localhost:8082`, //`https://criptolab-auth-service-dot-pandapay.rj.r.appspot.com`,
-  apiTokenUrl: `https://criptolab-token-api-prod-dot-pandapay.rj.r.appspot.com`, //`http://localhost:8081`,
+  apiUrl:  `https://criptolab-auth-service-dot-pandapay.rj.r.appspot.com`, //`http://localhost:8082`, //`https://criptolab-auth-service-prod-dot-pandapay.rj.r.appspot.com`,
+  apiTokenUrl: `http://localhost:8081`, // `https://criptolab-token-api-prod-dot-pandapay.rj.r.appspot.com`,
   // apiTokenUrl: `https://criptolab-token-api-dot-pandapay.rj.r.appspot.com`,
   apiEventsUrl: `https://events.coins-external.com:8088`,
 };
