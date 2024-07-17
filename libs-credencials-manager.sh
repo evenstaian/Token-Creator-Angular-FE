@@ -22,17 +22,17 @@ fi
 if [ -f "package.json" ]; then
 
     dependencies=$(jq -r '.dependencies | keys | .[]' package.json)
-    # for dependency in $dependencies; do
+    for dependency in $dependencies; do
 
-    #     value=$(jq -r ".dependencies[\"$dependency\"]" package.json)
-    #     if [[ $value == *"git+https://gitlab.com"* ]]; then
+        value=$(jq -r ".dependencies[\"$dependency\"]" package.json)
+        if [[ $value == *"git+https://gitlab.com"* ]]; then
 
-    #         credentials=$GITLAB_TOKEN_ACCESS
-    #         new_value=$(echo "$value" | sed "s/git+https:\/\/gitlab.com/git+https:\/\/$credentials\@gitlab.com/")
-    #         jq --arg dependency "$dependency" --arg new_value "$new_value" '.dependencies[$dependency] = $new_value' package.json > temp.json && mv temp.json package.json
-    #     fi
-    # done
-    # echo "Dependências atualizadas com sucesso!"
+            credentials=$GITLAB_TOKEN_ACCESS
+            new_value=$(echo "$value" | sed "s/git+https:\/\/gitlab.com/git+https:\/\/$credentials\@gitlab.com/")
+            jq --arg dependency "$dependency" --arg new_value "$new_value" '.dependencies[$dependency] = $new_value' package.json > temp.json && mv temp.json package.json
+        fi
+    done
+    echo "Dependências atualizadas com sucesso!"
 
     for dependency in $dependencies; do
 
