@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  NPM_TOKEN: $CI_JOB_TOKEN
+  NPM_TOKEN: $GITLAB_TOKEN_ACCESS
   CI_SERVER_HOST: gitlab.com
 
 build_homol:
