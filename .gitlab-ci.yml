@@ -36,7 +36,6 @@ deploy_homol:
     - build_homol
   script:
     - cd dist/homol
-    - sh set-gcloud-servicename.sh
     - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_GCLOUD_STAG.json
     - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_GCLOUD_STAG.json
     - gcloud --quiet --project $PROJECT_ID app deploy app.yaml --verbosity=debug
@@ -51,7 +50,6 @@ deploy_production:
     - build_production
   script:
     - cd dist/prod
-    - sh set-gcloud-servicename.sh
     - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_GCLOUD_STAG.json
     - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_GCLOUD_STAG.json
     - gcloud --quiet --project $PROJECT_ID app deploy app.yaml --verbosity=debug
