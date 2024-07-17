@@ -43,10 +43,11 @@ export class TokenActionsComponent implements OnChanges {
   QUANTITY_FORM_ITEM = {
     label: "quantity",
     placeholder: "qual a quantidade?",
-    type: "number",
+    type: "text",
     defaultValue: "",
     required: true,
     hide: false,
+    mask: "separator.0",
   }
 
   ADDRESS_TO_FORM_ITEM = {

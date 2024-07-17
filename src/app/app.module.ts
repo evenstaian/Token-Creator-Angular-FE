@@ -98,6 +98,7 @@ export function playerFactory() {
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
+  thousandSeparator: '.',
 };
 
 @NgModule({

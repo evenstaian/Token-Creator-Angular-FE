@@ -30,6 +30,7 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            maxLength: 50,
         },
         {
             label: "symbol",
@@ -37,6 +38,7 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            maxLength: 10,
         },
         {
             label: "description",
@@ -44,13 +46,16 @@ export class TokenTypeService {
             type: "textarea",
             defaultValue: "",
             required: true,
+            maxLength: 5000,
         },
         {
             label: "quantity",
             placeholder: "qual é a quantidade emitida?",
-            type: "number",
+            type: "text",
             defaultValue: "",
             required: true,
+            mask: "separator.0",
+            maxLength: 50,
         },
         {
             label: "company",
@@ -58,6 +63,7 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            maxLength: 100,
         },
     ]
 

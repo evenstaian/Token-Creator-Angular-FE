@@ -7,7 +7,7 @@
         <div *ngFor="let field of formStructure" class="form-group">
             <div *ngIf="!field.hide">
                 <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
-                    <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required">
+                    <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required" [mask]="field.mask" [attr.maxlength]="field.maxLength">
                     <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
                         Este campo é obrigatório.
                     </div>
