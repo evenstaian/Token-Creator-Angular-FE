@@ -20,10 +20,6 @@ build_production:
   image: node:12.22.12-alpine
   before_script:
     - echo "//gitlab.com/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
-    - echo "//gitlab.com/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
-    - echo "@criptolab:registry=https://gitlab.com" >> .npmrc
-    - echo "//gitlab.com/:_authToken=${NPM_TOKEN}" >> .npmrc
-    - sh libs-credencials-manager.sh
     - npm install
   script:
     - ng build --configuration=production --output-path=dist/prod
