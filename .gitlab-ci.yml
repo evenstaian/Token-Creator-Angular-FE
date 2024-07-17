@@ -23,7 +23,7 @@ build_production:
   image: node:12.22.12-alpine
   before_script:
     - echo $NPM_TOKEN
-    - echo "//gitlab.com/_registry/:_authToken=$NPM_TOKEN" > .npmrc
+    - echo "//gitlab.com/_registry/:_authToken=glpat-JMKvzhxUKZUTzG5EWQUS" > .npmrc
     - npm install
   script:
     - ng build --configuration=production --output-path=dist/prod
