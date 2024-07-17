@@ -1,4 +1,4 @@
-service: cripto-lab-ng
+service: cripto-lab-ng-prod
 runtime: python310
 
 handlers:
