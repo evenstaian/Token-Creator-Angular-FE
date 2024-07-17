@@ -18,6 +18,9 @@ build_homol:
 build_production:
   stage: build
   image: node:12.22.12-alpine
+  before_script:
+    - echo "//${CI_SERVER_HOST}/_registry/:_authToken=${GITLAB_TOKEN_ACCESS}" > .npmrc
+    - npm install
   script:
     - sh libs-credencials-manager.sh
     - npm install
