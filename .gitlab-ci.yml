@@ -25,6 +25,8 @@ build_production:
     - echo $NPM_TOKEN
     - echo "@cripto-lab:registry=https://gitlab.com" >> .npmrc
     - echo "//gitlab.com/_registry/:_authToken=$NPM_TOKEN" >> .npmrc
+    - cat .npmrc
+    - export NPM_CONFIG_USERCONFIG=$(pwd)/.npmrc
     - npm install
   script:
     - ng build --configuration=production --output-path=dist/prod
