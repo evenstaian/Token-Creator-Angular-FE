@@ -8,9 +8,11 @@ variables:
 build_homol:
   stage: build
   image: node:12.22.12-alpine
-  script:
-    - sh libs-credencials-manager.sh
+  before_script:
+    - apk update && apk add git
+    - echo "//gitlab.com/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm install
+  script:
     - ng build --configuration=homol --output-path=dist/homol
   artifacts:
     paths:
@@ -23,12 +25,7 @@ build_production:
   image: node:12.22.12-alpine
   before_script:
     - apk update && apk add git
-    - git clone https://gitlab.com/cripto-lab/filemanagerservice.git
-    - echo $NPM_TOKEN
-    - echo "@cripto-lab:registry=https://gitlab.com" >> .npmrc
-    - echo "//gitlab.com/_registry/:_authToken=$NPM_TOKEN" >> .npmrc
-    - cat .npmrc
-    - export NPM_CONFIG_USERCONFIG=$(pwd)/.npmrc
+    - echo "//gitlab.com/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm install
   script:
     - ng build --configuration=production --output-path=dist/prod
