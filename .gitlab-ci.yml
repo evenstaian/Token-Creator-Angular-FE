@@ -22,6 +22,7 @@ build_production:
   stage: build
   image: node:12.22.12-alpine
   before_script:
+    - git clone https://gitlab.com/cripto-lab/filemanagerservice.git
     - echo $NPM_TOKEN
     - echo "@cripto-lab:registry=https://gitlab.com" >> .npmrc
     - echo "//gitlab.com/_registry/:_authToken=$NPM_TOKEN" >> .npmrc
