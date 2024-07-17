@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  NPM_TOKEN: $NPM_TOKEN
+  NPM_TOKEN: "glpat-supFTiFMqJihp_BAiNxb"
 
 build_homol:
   stage: build
