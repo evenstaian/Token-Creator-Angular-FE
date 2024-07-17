@@ -10,7 +10,7 @@ build_homol:
     - sh libs-credencials-manager.sh
     - npm install
   script:
-    - ng build --configuration=homol --output-path=dist/homol
+    - ./node_modules/.bin/ng build --configuration=homol --output-path=dist/homol
   artifacts:
     paths:
       - dist/homol
@@ -25,7 +25,7 @@ build_production:
     - sh libs-credencials-manager.sh
     - npm install
   script:
-    - ng build --configuration=production --output-path=dist/prod
+    - ./node_modules/.bin/ng build --configuration=production --output-path=dist/prod
   artifacts:
     paths:
       - dist/prod
