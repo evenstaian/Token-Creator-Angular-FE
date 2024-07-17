@@ -37,8 +37,8 @@ if [ -f "package.json" ]; then
     for dependency in $dependencies; do
 
         value=$(jq -r ".dependencies[\"$dependency\"]" package.json)
-        if [[ $value == *"gitlab.com"* ]]; then
-
+        if [[ $value == *"gitlab"* ]]; then
+            echo "Dependências encontrada!"
             echo $value
         fi
     done
