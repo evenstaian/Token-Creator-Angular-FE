@@ -2,6 +2,10 @@ stages:
   - build
   - deploy
 
+variables:
+  NPM_TOKEN: $CI_JOB_TOKEN
+  CI_SERVER_HOST: gitlab.com
+
 build_homol:
   stage: build
   image: node:12.22.12-alpine
@@ -19,11 +23,9 @@ build_production:
   stage: build
   image: node:12.22.12-alpine
   before_script:
-    - echo "//${CI_SERVER_HOST}/_registry/:_authToken=${GITLAB_TOKEN_ACCESS}" > .npmrc
+    - echo "//${CI_SERVER_HOST}/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm install
   script:
-    - sh libs-credencials-manager.sh
-    - npm install
     - ng build --configuration=production --output-path=dist/prod
   artifacts:
     paths:
