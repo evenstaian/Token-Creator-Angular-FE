@@ -21,7 +21,7 @@ fi
 # Verifica se o arquivo package.json existe
 if [ -f "package.json" ]; then
 
-    # dependencies=$(jq -r '.dependencies | keys | .[]' package.json)
+    dependencies=$(jq -r '.dependencies | keys | .[]' package.json)
     # for dependency in $dependencies; do
 
     #     value=$(jq -r ".dependencies[\"$dependency\"]" package.json)
