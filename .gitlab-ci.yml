@@ -6,7 +6,6 @@ build_homol:
   stage: build
   image: node:12.22.12-alpine
   script:
-    - npm install -g @angular/cli
     - npm install
     - ng build --configuration=homol --output-path=dist/homol
   artifacts:
@@ -19,7 +18,6 @@ build_production:
   stage: build
   image: node:12.22.12-alpine
   script:
-    - npm install -g @angular/cli
     - npm install
     - ng build --configuration=production --output-path=dist/prod
   artifacts:
