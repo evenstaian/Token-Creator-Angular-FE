@@ -1,5 +1,6 @@
 /node_modules
 src/.DS_Store
 .DS_Store
+/dist
 /dist/prod/cripto-lab-ng
 /package-lock.json
