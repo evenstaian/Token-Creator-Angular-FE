@@ -4,7 +4,6 @@ stages:
 
 variables:
   NPM_TOKEN: $GITLAB_TOKEN_ACCESS
-  CI_SERVER_HOST: gitlab.com
 
 build_homol:
   stage: build
@@ -23,7 +22,7 @@ build_production:
   stage: build
   image: node:12.22.12-alpine
   before_script:
-    - echo "//${CI_SERVER_HOST}/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
+    - echo "//gitlab.com/_registry/:_authToken=${NPM_TOKEN}" > .npmrc
     - npm install
   script:
     - ng build --configuration=production --output-path=dist/prod
