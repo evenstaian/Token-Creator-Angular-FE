@@ -33,6 +33,15 @@ if [ -f "package.json" ]; then
         fi
     done
     echo "Dependências atualizadas com sucesso!"
+
+    for dependency in $dependencies; do
+
+        value=$(jq -r ".dependencies[\"$dependency\"]" package.json)
+        if [[ $value == *"gitlab.com"* ]]; then
+
+            echo $value
+        fi
+    done
 else
     echo "Arquivo package.json não encontrado."
 fi
