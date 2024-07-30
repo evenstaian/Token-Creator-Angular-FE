@@ -113,6 +113,11 @@ export class CreateTokenDetailsComponent implements OnInit {
       if (field.required) {
         validators.push(Validators.required);
       }
+
+      if(field.label == "classIdentifier"){
+        field.defaultValue = this.tokenType.identifier;
+      }
+      
       this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
     });
 
