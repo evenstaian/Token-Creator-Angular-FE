@@ -39,7 +39,7 @@ export const Approutes: Routes = [
 
   {
     path: 'create-token',
-    component: InsiderComponent,
+    component: FullComponent,
     children: [
       {
         path: '',
@@ -71,7 +71,7 @@ export const Approutes: Routes = [
 
   {
     path: 'my-account',
-    component: InsiderComponent,
+    component: FullComponent,
     children: [
       {
         path: '',

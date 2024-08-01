@@ -22,7 +22,7 @@ export class MyListComponent implements OnInit {
   imagePlaceholder="assets/images/icons/ic_token_image.svg";
 
   pageTitles = {
-    title: "Seus tokens",
+    title: "Meus tokens",
     subtitle: "Veja os tokens que você já criou"
   }
 

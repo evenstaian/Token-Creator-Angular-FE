@@ -63,8 +63,17 @@ export class SidebarComponent implements OnInit {
           },
           {
             path: '/my-tokens',
-            title: 'Seus Tokens',
+            title: 'Meus Tokens',
             icon: 'mdi mdi-format-list-bulleted',
+            class: '',
+            extralink: false,
+            show: 1,
+            submenu: []
+          },
+          {
+            path: '/my-tokens',
+            title: 'Tutoriais',
+            icon: 'mdi mdi-play',
             class: '',
             extralink: false,
             show: 1,
