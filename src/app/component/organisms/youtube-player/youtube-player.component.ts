@@ -20,11 +20,11 @@ export class YoutubePlayerComponent implements OnInit {
           const iframe = this.videoContainer.nativeElement.querySelector('iframe');
           const videoSrc = iframe.src;
 
-          if (entry.isIntersecting) {
-            iframe.src = `${this.videoUrl}&autoplay=1`;
-          } else {
-            iframe.src = videoSrc.replace('&autoplay=1', '');
-          }
+          // if (entry.isIntersecting) {
+          //   iframe.src = `${this.videoUrl}&autoplay=1`;
+          // } else {
+          //   iframe.src = videoSrc.replace('&autoplay=1', '');
+          // }
         });
       },
       { threshold: 0.5 }
