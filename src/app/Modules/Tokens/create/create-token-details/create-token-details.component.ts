@@ -10,6 +10,7 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 })
 export class CreateTokenDetailsComponent implements OnInit {
 
+  isMainNet: boolean = false;
   tokenType: any;
 
   networkType: any;
@@ -56,7 +57,8 @@ export class CreateTokenDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const cloneId = params.get('cloneId');
       if(cloneId){
-        this.sharedDataService.setIsMainNetEnvironment(true);
+        this.isMainNet = true;
+        this.sharedDataService.setIsMainNetEnvironment(this.isMainNet);
         this.tokenType = this.getCloneTokenFromStorage();
         if(this.tokenType){
           this.formStructure = this.tokenType.form;
@@ -117,7 +119,7 @@ export class CreateTokenDetailsComponent implements OnInit {
       if(field.label == "classIdentifier"){
         field.defaultValue = this.tokenType.identifier;
       }
-      
+
       this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
     });
 
