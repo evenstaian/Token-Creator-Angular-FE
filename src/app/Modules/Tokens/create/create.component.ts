@@ -40,12 +40,12 @@ export class CreateComponent implements OnInit {
     if(tokenType.status != STATUS.enabled){
       return
     }
-    this.soundService.playHoverSound(this.soundService.SoundTypes.SELECTION);
+    //this.soundService.playHoverSound(this.soundService.SoundTypes.SELECTION);
   }
 
   openDetails(tokenType: any){
     if(tokenType.status != STATUS.enabled){
-      this.soundService.playHoverSound(this.soundService.SoundTypes.ERROR);
+      //this.soundService.playHoverSound(this.soundService.SoundTypes.ERROR);
       return
     }
     this.sharedDataService.setTokenType(tokenType);
