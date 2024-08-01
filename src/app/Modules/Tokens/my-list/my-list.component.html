@@ -12,7 +12,7 @@
     </div>
 
     <div class="list" *ngFor="let myToken of myTokensList">
-        <div class="typeMark" [ngStyle]="{'background-color': myToken.isMainNet ? '#A511FF' : '#00C0C0'}"></div>
+        <div class="typeMark" [ngStyle]="{'background-color': myToken.raw.is_mainnet ? '#A511FF' : '#00C0C0'}"></div>
         <div class="item">
             <div class="token">
                 <app-circular-thumb-image imageUrl="{{ myToken.imgUrl || imagePlaceholder }}" [hasMessage]="false"></app-circular-thumb-image>
