@@ -54,49 +54,49 @@ export class BannerSlideshowComponent implements OnInit {
 
   images = [
     {
-      url: 'assets/images/big/white-monkey.png',
+      url: 'assets/images/big/seutoken.jpg',
       state: HIDE,
     },
-    {
-      url: 'assets/images/big/vangogh.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/woman.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/monkey-yellow.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/isometric.jpeg',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/realist.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/bear.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/astronaut.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/greece.png',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/canudo.jpeg',
-      state: HIDE,
-    },
-    {
-      url: 'assets/images/big/mona-cyber.png',
-      state: HIDE,
-    },
+    // {
+    //   url: 'assets/images/big/vangogh.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/woman.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/monkey-yellow.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/isometric.jpeg',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/realist.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/bear.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/astronaut.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/greece.png',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/canudo.jpeg',
+    //   state: HIDE,
+    // },
+    // {
+    //   url: 'assets/images/big/mona-cyber.png',
+    //   state: HIDE,
+    // },
   ];
 
   counter = 0;

@@ -20,9 +20,15 @@
                 class="fullscreen-image"
                 [src]="image.url"
                 [@fade]="image.state"
-                [@zoom]="image.state"
                 (@fade.done)="onDone($event)"
         />
+            <!--img
+                class="fullscreen-image"
+                [src]="image.url"
+                [@fade]="image.state"
+                [@zoom]="image.state"
+                (@fade.done)="onDone($event)"
+        /-->
         </div>
     </div>
   </div>
