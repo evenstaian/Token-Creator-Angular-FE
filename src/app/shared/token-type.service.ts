@@ -121,8 +121,8 @@ export class TokenTypeService {
             description: "Perfeito para programas de fidelidade descentralizados",
             identifier: "RT",
             bannerImageUrl: "assets/images/big/bull.png",
-            type: TOKEN_STANDARD_TYPES.ERC721,
-            form: this.ERC721_FORM,
+            type: TOKEN_STANDARD_TYPES.ERC20,
+            form: this.ERC20_FORM,
             status: STATUS.enabled,
         },
         {
