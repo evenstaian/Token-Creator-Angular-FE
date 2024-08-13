@@ -156,21 +156,21 @@ export class SignupComponent implements OnInit {
       return
     }
 
-    // this.auth.preSignup(this.formPreSignup.value.email, this.formPreSignup.value.password)
-    //   .subscribe(data => {
-    //     const response: any = data;
-    //     if (response.user) {
-    //       this.logged(response)
-    //       return
-    //     }
+    this.auth.preSignup(this.formPreSignup.value.email, this.formPreSignup.value.password)
+      .subscribe(data => {
+        const response: any = data;
+        if (response.user) {
+          this.logged(response)
+          return
+        }
 
-    //     this.changeStep(false, true);
-    //   },
-    //     error => {
-    //       console.log(error)
-    //       this.showLoader(false);
-    //       this.showAlert(false, "Dados Incorretos", error);
-    //     })
+        this.changeStep(false, true);
+      },
+        error => {
+          console.log(error)
+          this.showLoader(false);
+          this.showAlert(false, "Dados Incorretos", error);
+        })
   }
 
   public signup() {
