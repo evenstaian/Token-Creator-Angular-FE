@@ -71,16 +71,23 @@ export class SidebarComponent implements OnInit {
             submenu: []
           },
           {
-            path: '/my-tokens',
+            path: 'https://www.finchain.academy/',
             title: 'Tutoriais',
             icon: 'mdi mdi-play',
             class: '',
-            extralink: false,
+            extralink: true,
             show: 1,
             submenu: []
           }
         ]
       },
     ]
+  }
+
+  openPath(path: string){
+    if (path.startsWith('http')) {
+      window.open(path, '_blank');
+      return
+    }
   }
 }

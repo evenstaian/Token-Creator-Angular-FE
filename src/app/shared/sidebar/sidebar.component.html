@@ -33,7 +33,7 @@
             <!-- Second level menu -->
             <ul class="collapse first-level in">
                 <li class="sidebar-item" *ngFor="let sidebarnavSubItem of sidebarnavItem.submenu">
-                    <a class="sidebar-link waves-effect waves-dark" [routerLink]="sidebarnavSubItem.path"
+                    <a class="sidebar-link waves-effect waves-dark" [routerLink]="!sidebarnavSubItem.extralink ? sidebarnavSubItem.path : null" (click)="openPath(sidebarnavSubItem.path)"
                         [routerLinkActive]="sidebarnavSubItem.length != 0 ? '' : 'active'" *ngIf="sidebarnavSubItem.show === 1">
                         <i [ngClass]="[sidebarnavSubItem.icon]"></i>
                         <div *ngIf="sidebarnavSubItem.new" style="padding: 3px; padding-left: 6px; padding-right: 6px; color: #fff; background-color: red; border-radius: 10px; float: left; margin-right: 10px; font-size: 10px;">Novo</div>
