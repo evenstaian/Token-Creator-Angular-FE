@@ -54,7 +54,7 @@ export class BannerSlideshowComponent implements OnInit {
 
   images = [
     {
-      url: 'assets/images/big/seutoken.jpg',
+      url: 'assets/images/big/ftcbanner.jpg',
       state: HIDE,
     },
     // {
