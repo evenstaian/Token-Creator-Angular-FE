@@ -84,6 +84,7 @@ import { AppService } from 'src/services/app.service';
 import { Auth } from 'src/services/auth.service';
 import { MaskPipe } from 'src/app/pipes/mask.pipe';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -157,6 +158,7 @@ const maskConfig: Partial<IConfig> = {
     ChartsModule,
     UiSwitchModule,
     NgxMaskModule.forRoot(maskConfig),
+    PdfViewerModule,
   ],
   providers: [
     AuthGuard, 

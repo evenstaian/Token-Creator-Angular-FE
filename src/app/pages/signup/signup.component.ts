@@ -15,6 +15,9 @@ export class SignupComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
+  pdfSrc = "assets/documents/FTC_TERMOS_DE_USO_AGOSTO24.pdf"
+  isTermsShowing = false;
+
   step1Titles = {
     title: "Crie uma conta",
     subtitle: "Informe seus dados abaixo"
@@ -134,6 +137,10 @@ export class SignupComponent implements OnInit {
 
   showLoader(status: boolean) {
     this.loader = status
+  }
+
+  showTerms(){
+    this.isTermsShowing = !this.isTermsShowing;
   }
 
   showAlert(success: boolean, title: string, message: string){

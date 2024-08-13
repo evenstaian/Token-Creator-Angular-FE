@@ -65,7 +65,7 @@ p{
 
 .resend{
     font-weight: 700;
-    color: #6735d3;
+    color: #7d47f2;
     cursor: pointer;
 }
 
@@ -73,3 +73,12 @@ p{
     font-size: 12px;
     margin-top: 10px;
 }
+
+.pdf-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+  }
