@@ -1,8 +1,8 @@
-.content{
+.content {
     background-color: #3D3D3D;
     width: 100%;
     height: 100vh;
-    background-size :100% 100%;
+    background-size: 100% 100%;
     position: relative;
 }
 
@@ -10,11 +10,11 @@
     margin-top: 200px;
 }
 
-form{
- width: 100%;
+form {
+    width: 100%;
 }
 
-.form-control{
+.form-control {
     border: 1px solid #FFFFFF;
     background-color: #545353;
     border-radius: 0;
@@ -24,8 +24,8 @@ form{
     height: 3.5rem;
 }
 
-.fullscreen{
-    z-index: 999; 
+.fullscreen {
+    z-index: 999;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -33,7 +33,7 @@ form{
     height: 100%;
 }
 
-.fullscreen_shadow{
+.fullscreen_shadow {
     z-index: 999;
     position: fixed;
     top: 0px;
@@ -58,18 +58,18 @@ form{
     border-radius: 100px;
 }
 
-p{
+p {
     font-family: 'Poppins', sans-serif;
     color: #FFFFFF;
 }
 
-.resend{
+.resend {
     font-weight: 700;
     color: #7d47f2;
     cursor: pointer;
 }
 
-.help{
+.help {
     font-size: 12px;
     margin-top: 10px;
 }
@@ -81,4 +81,37 @@ p{
     right: 0;
     bottom: 0;
     z-index: 1000;
-  }
+}
+
+.password-strength-meter {
+    margin-top: 10px;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.weak {
+    background-color: red;
+}
+
+.medium {
+    background-color: yellow;
+}
+
+.strong {
+    background-color: green;
+}
+
+.valid-password {
+    color: green
+}
+
+.invalid-password {
+    color: red
+}

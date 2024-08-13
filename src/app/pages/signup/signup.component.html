@@ -17,7 +17,19 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="confirme sua senha"
-                        formControlName="confirmPassword" required>
+                        formControlName="confirmPassword" (onChange)="confirmPasswordValidator" required>
+
+                        <div class="password-strength-meter">
+                            <div class="strength-bar" [ngClass]="passwordStrength"></div>
+                        </div>
+                        <div class="password-rules" style="font-size: 12px; line-height: 0.5; margin-top: 20px;">
+                            <p [ngClass]="{ 'valid-password': passwordRules.hasUpperCase, 'invalid': !passwordRules.hasUpperCase }">Ter letra maiúscula</p>
+                            <p [ngClass]="{ 'valid-password': passwordRules.hasLowerCase, 'invalid': !passwordRules.hasLowerCase }">Ter letra minúscula</p>
+                            <p [ngClass]="{ 'valid-password': passwordRules.hasNumbers, 'invalid': !passwordRules.hasNumbers }">Ter números</p>
+                            <p [ngClass]="{ 'valid-password': passwordRules.hasSpecialChars, 'invalid': !passwordRules.hasSpecialChars }">Ter caracteres especiais</p>
+                            <p [ngClass]="{ 'valid-password': passwordRules.lengthValid, 'invalid': !passwordRules.lengthValid }">Pelo menos 8 caracteres</p>
+                            <p [ngClass]="{ 'valid-password': passwordRules.confirmPassword, 'invalid': !passwordRules.confirmPassword }">Senhas devem coincidir</p>
+                        </div>
                 </div>
 
                 <div class="d-flex justify-content-end">
