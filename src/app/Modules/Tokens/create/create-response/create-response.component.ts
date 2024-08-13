@@ -34,6 +34,9 @@ export class CreateResponseComponent implements OnInit {
 
         if(this.createResponse.hashId){
           this.setTokenSubscribe(this.createResponse.hashId);
+          setTimeout(() => {
+            this.goToMyTokensList()
+          }, 5000);
         }
       }
     })
