@@ -31,7 +31,7 @@
 .token{
     display: flex;
     align-items: center;
-    width: 10rem;
+    width: 100%;
 }
 
 .detailsBtn {
