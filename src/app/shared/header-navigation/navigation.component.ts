@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   toggleSidebar = new EventEmitter<void>();
 
   @Input() showLogo: boolean = true;
+  @Input() showAuthBox: boolean = false;
   isLogged: boolean = false;
 
   public showSearch = false;
@@ -56,6 +57,14 @@ export class NavigationComponent implements OnInit {
         console.log({error})
       }
     )
+  }
+
+  goToLogin(){
+    this.router.navigate(["/login"])
+  }
+
+  goToSignup(){
+    this.router.navigate(["/signup"])
   }
 
   logout(){

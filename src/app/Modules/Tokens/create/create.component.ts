@@ -43,7 +43,17 @@ export class CreateComponent implements OnInit {
     //this.soundService.playHoverSound(this.soundService.SoundTypes.SELECTION);
   }
 
+  isLogged(){
+    const authToken = localStorage.getItem('auth_token');
+    return authToken;
+  }
+
   openDetails(tokenType: any){
+    if(!this.isLogged()){
+      this.router.navigate(["/login"]);
+      return
+    }
+
     if(tokenType.status != STATUS.enabled){
       //this.soundService.playHoverSound(this.soundService.SoundTypes.ERROR);
       return

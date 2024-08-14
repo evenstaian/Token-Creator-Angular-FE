@@ -21,6 +21,15 @@
 
 <ul class="navbar-nav float-right">
     <!-- ============================================================== -->
+    <!-- Auth Box -->
+    <!-- ============================================================== -->
+    <div *ngIf="!this.isLogged && this.showAuthBox" style="height: 35px; margin: 10px; margin-right: 100px !important" 
+    class="d-flex justify-content-end">
+        <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-secondary px-4 mr-2" (click)="goToLogin()">Entrar</button>
+        <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-primary px-4" (click)="goToSignup()">Cadastre-se</button>
+    </div>
+
+    <!-- ============================================================== -->
     <!-- User welcome -->
     <!-- ============================================================== -->
     

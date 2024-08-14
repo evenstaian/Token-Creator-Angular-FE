@@ -47,7 +47,8 @@ export const Approutes: Routes = [
       },
       {
         path: 'details',
-        component: CreateTokenDetailsComponent
+        component: CreateTokenDetailsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'details/:cloneId',
@@ -55,18 +56,20 @@ export const Approutes: Routes = [
       },
       {
         path: 'networks',
-        component: NetworksComponent
+        component: NetworksComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'confirmation',
-        component: CreateConfirmationComponent
+        component: CreateConfirmationComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'success',
-        component: CreateResponseComponent
+        component: CreateResponseComponent,
+        canActivate: [AuthGuard]
       },
     ],
-    canActivate: [AuthGuard]
   },
 
   {
