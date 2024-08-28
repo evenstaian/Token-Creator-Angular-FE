@@ -121,7 +121,18 @@ export class SignupComponent implements OnInit {
     return null
   }
 
+  prepareDataLayerGTM(formName: string, formId: string) {
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      'event': 'form_submit',
+      'formName': formName,
+      'formId': formId
+    });
+  }
+
   public preSignup(): void {
+    this.prepareDataLayerGTM('SIGNUP_STEP_1', 'PRESIGNUP');
+
     this.showLoader(true);
 
     if (!this.formPreSignup.value.email
@@ -174,6 +185,8 @@ export class SignupComponent implements OnInit {
   }
 
   public signup() {
+    this.prepareDataLayerGTM('SIGNUP_STEP_2', 'SIGNUP');
+
     this.showLoader(true);
     this.auth.signup(this.formPreSignup.value.email, this.formPreSignup.value.password, this.formSignup.value.name, this.formSignup.value.code)
       .subscribe(data => {

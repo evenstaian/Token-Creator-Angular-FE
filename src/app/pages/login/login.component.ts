@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
     subtitle: "Agora você deve informar o código enviado para seu email cadastrado."
   }
 
-  alertIcon="warning"
-  alertTitle="TEste"
-  alertMessage="Teste"
+  alertIcon = "warning"
+  alertTitle = "TEste"
+  alertMessage = "Teste"
 
   public formLogin: FormGroup = new FormGroup({
     'email': new FormControl(null),
@@ -53,29 +53,40 @@ export class LoginComponent implements OnInit {
   public cpf: string;
   public password: string;
 
-  public errorMessage : string
+  public errorMessage: string
 
   loader: boolean = false
 
   constructor(
     private auth: Auth,
     private router: Router,
-    private sharedDataService: SharedDataService) { 
-    }
+    private sharedDataService: SharedDataService) {
+  }
 
   ngOnInit(): void {
     this.changeStep(true, false)
 
-    this.sharedDataService.navigationFlow.subscribe( data => {
+    this.sharedDataService.navigationFlow.subscribe(data => {
       this.contextRoute = data.contextRoute;
     })
   }
 
+  prepareDataLayerGTM(formName: string, formId: string) {
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      'event': 'form_submit',
+      'formName': formName,
+      'formId': formId
+    });
+  }
+
   public preLogin(): void {
+    this.prepareDataLayerGTM('PRELOGIN', 'PRELOGIN');
+
     this.showLoader(true);
 
-    if(!this.formLogin.value.email 
-      || !this.formLogin.value.password){
+    if (!this.formLogin.value.email
+      || !this.formLogin.value.password) {
       this.showAlert(false, "Informe todos os dados", "Não esqueça nenhum dado solicitado.");
       return
     }
@@ -83,37 +94,39 @@ export class LoginComponent implements OnInit {
     this.auth.preLogin(this.formLogin.value.email, this.formLogin.value.password)
       .subscribe(data => {
         const response: any = data;
-        if(response.user){
+        if (response.user) {
           this.logged(response)
           return
         }
 
         this.changeStep(false, true);
       },
-      error => {
-        console.log(error)
-        this.showLoader(false);
-        this.showAlert(false, "Dados Incorretos", error);
-      })
+        error => {
+          console.log(error)
+          this.showLoader(false);
+          this.showAlert(false, "Dados Incorretos", error);
+        })
   }
 
-  public login(){
+  public login() {
+    this.prepareDataLayerGTM('LOGIN', 'LOGIN');
+
     this.showLoader(true);
     this.auth.login(this.formLogin.value.email, this.formLogin.value.password, this.formCode.value.code || " ")
       .subscribe(data => {
         const response: any = data;
-        if(response.user){
+        if (response.user) {
           this.logged(response)
         }
       },
-      error => {
-        console.log(error)
-        this.showLoader(false);
-        this.showAlert(false, "Dados Incorretos", error);
-      })
+        error => {
+          console.log(error)
+          this.showLoader(false);
+          this.showAlert(false, "Dados Incorretos", error);
+        })
   }
 
-  resendCode(){
+  resendCode() {
     this.showLoader(true);
     this.auth.preLogin(this.formLogin.value.email, this.formLogin.value.password)
       .subscribe(data => {
@@ -121,25 +134,25 @@ export class LoginComponent implements OnInit {
         this.changeStep(false, true);
         this.showLoader(false);
       },
-      error => {
-        console.log(error)
-        this.showLoader(false);
-        this.showAlert(false, "Dados Incorretos", error);
-      })
+        error => {
+          console.log(error)
+          this.showLoader(false);
+          this.showAlert(false, "Dados Incorretos", error);
+        })
   }
 
-  logged(response: any){
+  logged(response: any) {
     localStorage.setItem('auth_token', response.authToken);
     localStorage.setItem('user_data', JSON.stringify(response.user));
     this.showLoader(false);
-    if(!this.contextRoute){
+    if (!this.contextRoute) {
       this.router.navigate(['/my-tokens']);
       return
     }
     this.router.navigate([this.contextRoute]);
   }
 
-  changeStep(step1: boolean, step2: boolean){
+  changeStep(step1: boolean, step2: boolean) {
     this.showLoader(false);
     this.step1 = step1;
     this.step2 = step2;
@@ -149,7 +162,7 @@ export class LoginComponent implements OnInit {
     this.loader = status
   }
 
-  showAlert(success: boolean, title: string, message: string){
+  showAlert(success: boolean, title: string, message: string) {
     this.showLoader(false);
     this.alertIcon = success ? "success" : "warning";
     this.alertTitle = title;
