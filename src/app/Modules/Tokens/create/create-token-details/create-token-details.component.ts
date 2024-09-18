@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { uppercaseValidator } from 'src/utils/Validators/validators';
 
 @Component({
   selector: 'app-create-token-details',
@@ -102,12 +103,12 @@ export class CreateTokenDetailsComponent implements OnInit {
     localStorage.removeItem("token-to-clone");
   }
 
-  createForm(){
+  createForm() {
     this.form = this.fb.group({});
 
-    if(!this.formStructure){
+    if (!this.formStructure) {
       this.router.navigate(['/create-token']);
-      return
+      return;
     }
 
     this.formStructure.forEach(field => {
@@ -120,11 +121,38 @@ export class CreateTokenDetailsComponent implements OnInit {
         validators.push(...field.validators);
       }
 
-      if(field.label == "classIdentifier"){
+      if (field.label == "classIdentifier") {
         field.defaultValue = this.tokenType.identifier;
       }
 
-      this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
+      // Ensure placeholder has a default value
+      field.placeholder = field.placeholder || `Enter ${field.label}`;
+
+      const control = this.fb.control(field.defaultValue || '', validators);
+
+      if (field.caseMode) {
+        control.valueChanges.subscribe(value => {
+          if (value) {
+            let transformedValue = value;
+            switch (field.caseMode) {
+              case 'UPPERCASE':
+                transformedValue = value.toUpperCase();
+                break;
+              case 'LOWERCASE':
+                transformedValue = value.toLowerCase();
+                break;
+              case 'FIRST_LETTERS_UPPERCASE':
+                transformedValue = value.replace(/\b\w/g, l => l.toUpperCase());
+                break;
+            }
+            if (transformedValue !== value) {
+              control.setValue(transformedValue, { emitEvent: false });
+            }
+          }
+        });
+      }
+
+      this.form.addControl(field.label, control);
     });
 
     this.form.valueChanges.subscribe((values) => {
@@ -134,11 +162,11 @@ export class CreateTokenDetailsComponent implements OnInit {
           field.defaultValue = values[key];
           this.tokenType.form = this.formStructure;
 
-          if(field.label == "classIdentifier"){
+          if (field.label == "classIdentifier") {
             field.defaultValue = this.tokenType.identifier;
           }
 
-          this.saveTokenTypeOnStorage()
+          this.saveTokenTypeOnStorage();
         }
       });
     });
@@ -156,26 +184,27 @@ export class CreateTokenDetailsComponent implements OnInit {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.form.get(fieldName);
-    return field.invalid && (field.dirty || field.touched);
+    return field ? field.invalid && (field.dirty || field.touched) : false;
   }
 
-  goToNetworksPage(){
-    if(!this.tokenType){
-      return
+  goToNetworksPage() {
+    if (!this.tokenType) {
+      return;
     }
 
     if (this.form.valid) {
-      if(this.imageFile){
-        this.sharedDataService.setTokenImage(this.imageFile)
+      if (this.imageFile) {
+        this.sharedDataService.setTokenImage(this.imageFile);
       }
 
-      this.sharedDataService.setFormStructure(this.formStructure)
-      this.sharedDataService.setTokenType(this.tokenType)
+      this.sharedDataService.setFormStructure(this.formStructure);
+      this.sharedDataService.setTokenType(this.tokenType);
       this.deleteCloneTokenFromStorage();
       this.router.navigate(['/create-token/networks']);
     } else {
       Object.keys(this.form.controls).forEach(fieldName => {
-        if (this.form.get(fieldName).errors && this.form.get(fieldName).errors.required) {
+        const control = this.form.get(fieldName);
+        if (control && control.errors && control.errors.required) {
           this.makeFieldInvalid(fieldName);
         }
       });

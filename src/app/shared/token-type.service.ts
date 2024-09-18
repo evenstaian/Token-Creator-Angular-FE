@@ -24,6 +24,7 @@ export class TokenTypeService {
             defaultValue: "",
             hide: true,
             required: false,
+            errorMessage: "",
         },
         {
             label: "name",
@@ -32,6 +33,8 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 50,
+            caseMode: "FIRST_LETTERS_UPPERCASE",
+            errorMessage: "O nome do token é obrigatório e deve ter no máximo 50 caracteres.",
         },
         {
             label: "symbol",
@@ -40,7 +43,9 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 10,
-            validators: [ symbolValidator ]
+            validators: [ symbolValidator ],
+            caseMode: "UPPERCASE",
+            errorMessage: "O símbolo deve conter de 3 a 5 letras maiúsculas, sem espaços ou caracteres especiais.",
         },
         {
             label: "description",
@@ -49,6 +54,7 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 5000,
+            errorMessage: "A descrição é obrigatória e deve ter no máximo 5000 caracteres.",
         },
         {
             label: "quantity",
@@ -58,6 +64,7 @@ export class TokenTypeService {
             required: true,
             mask: "separator.0",
             maxLength: 50,
+            errorMessage: "A quantidade emitida é obrigatória e deve ser um número válido.",
         },
         {
             label: "company",
@@ -66,6 +73,7 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 100,
+            errorMessage: "O nome da empresa é obrigatório e deve ter no máximo 100 caracteres.",
         },
     ]
 
@@ -77,6 +85,7 @@ export class TokenTypeService {
             defaultValue: "",
             hide: true,
             required: false,
+            errorMessage: "",
         },
         {
             label: "name",
@@ -84,6 +93,8 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            caseMode: "FIRST_LETTERS_UPPERCASE",
+            errorMessage: "O nome do token é obrigatório.",
         },
         {
             label: "symbol",
@@ -92,7 +103,9 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 10,
-            validators: [ symbolValidator ]
+            validators: [ symbolValidator ],
+            caseMode: "UPPERCASE",
+            errorMessage: "O símbolo deve conter de 3 a 5 letras maiúsculas, sem espaços ou caracteres especiais.",
         },
         {
             label: "description",
@@ -100,6 +113,7 @@ export class TokenTypeService {
             type: "textarea",
             defaultValue: "",
             required: true,
+            errorMessage: "A descrição é obrigatória.",
         },
         {
             label: "company",
@@ -107,6 +121,7 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            errorMessage: "O nome da empresa é obrigatório.",
         },
     ]
 

@@ -32,6 +32,14 @@ export function symbolValidator(control: AbstractControl): ValidationErrors | nu
     return null;
 };
 
+export function uppercaseValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value && value !== value.toUpperCase()) {
+        return { uppercase: true };
+    }
+    return null;
+}
+
 function validateCPF(cpfInput: string): boolean {
     const cpf = cpfInput.replace(/[^\d]+/g, '');
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {

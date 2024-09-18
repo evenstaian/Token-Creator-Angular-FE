@@ -1,5 +1,5 @@
 <div class="wrapper w-100 px-5" style="color: #fff">
-    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+    <app-page-titles [title]="pageTitles.title" [subtitle]="pageTitles.subtitle"></app-page-titles>
 
     <form [formGroup]="form" (ngSubmit)="goToNetworksPage()">
         <app-image-sender (file)="setImageFile($event)" style="margin: 40px;"></app-image-sender>
@@ -7,15 +7,15 @@
         <div *ngFor="let field of formStructure" class="form-group">
             <div *ngIf="!field.hide">
                 <ng-container *ngIf="field.type !== 'textarea'; else textareaField">
-                    <input [type]="field.type" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required" [mask]="field.mask" [attr.maxlength]="field.maxLength">
-                    <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
-                        Este campo é obrigatório.
+                    <input [type]="field.type || 'text'" class="form-control" [placeholder]="field.placeholder || ''" [formControlName]="field.label" [required]="field.required" [mask]="field.mask" [attr.maxlength]="field.maxLength">
+                    <div class="error-message" *ngIf="isFieldInvalid(field.label) && form.get(field.label)?.touched">
+                        {{ field.errorMessage }}
                     </div>
                 </ng-container>
                 <ng-template #textareaField>
-                    <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder" [formControlName]="field.label" [required]="field.required"></textarea>
-                    <div class="required-message" *ngIf="field.required && isFieldInvalid(field.label) && form.get(field.label).touched">
-                        Este campo é obrigatório.
+                    <textarea class="form-control text-area" rows="4" [placeholder]="field.placeholder || ''" [formControlName]="field.label" [required]="field.required"></textarea>
+                    <div class="error-message" *ngIf="isFieldInvalid(field.label) && form.get(field.label)?.touched">
+                        {{ field.errorMessage }}
                     </div>
                 </ng-template>
             </div>
@@ -24,5 +24,5 @@
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-secondary px-4">Lançar Token na {{ isMainNet ? 'MainNet': 'TestNet'}}</button>
         </div>
-      </form>
+    </form>
 </div>
