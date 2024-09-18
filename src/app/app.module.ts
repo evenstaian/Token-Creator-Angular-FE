@@ -85,6 +85,7 @@ import { Auth } from 'src/services/auth.service';
 import { MaskPipe } from 'src/app/pipes/mask.pipe';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SubscriptionComponent } from './Modules/MyAccount/subscription/subscription.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -139,6 +140,7 @@ const maskConfig: Partial<IConfig> = {
     AdicionalDataComponent,
     YoutubePlayerComponent,
     MaskPipe,
+    SubscriptionComponent,
   ],
   imports: [
     CommonModule,

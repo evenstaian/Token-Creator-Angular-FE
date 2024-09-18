@@ -1,0 +1,36 @@
+<div class="subscription-container">
+  <div class="subscription-info">
+    <div class="info-item">
+      <span class="info-label">Plano Atual:</span>
+      <span class="info-value">{{ currentPlan.title }}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Preço:</span>
+      <span class="info-value">{{ currentPlan.price }}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Data de Compra:</span>
+      <span class="info-value">{{ purchaseDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Próxima Renovação:</span>
+      <span class="info-value">{{ renewalDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+
+  <div class="subscription-features">
+    <h3>Recursos do Plano</h3>
+    <ul>
+      <li *ngFor="let feature of currentPlan.featuresList">{{ feature }}</li>
+    </ul>
+  </div>
+
+  <div class="subscription-action">
+    <button *ngIf="currentPlan.title === 'Rookie'" class="btn btn-primary" (click)="upgradePlan()">
+      Adquirir Plano Premium
+    </button>
+    <button *ngIf="currentPlan.title !== 'Rookie'" class="btn btn-secondary" (click)="upgradePlan()">
+      Fazer Upgrade
+    </button>
+  </div>
+</div>

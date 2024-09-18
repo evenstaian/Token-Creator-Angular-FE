@@ -37,6 +37,7 @@ export class MyAccountComponent implements OnInit {
       title: 'Assinatura',
       icon: 'assets/images/icons/ic_subscription.svg',
       class: '',
+      router: '/my-account/subscription',
       clickable: false,
       isSelected: false,
       show: true,
