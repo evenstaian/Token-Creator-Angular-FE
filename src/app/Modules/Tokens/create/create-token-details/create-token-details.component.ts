@@ -116,6 +116,10 @@ export class CreateTokenDetailsComponent implements OnInit {
         validators.push(Validators.required);
       }
 
+      if (field.validators) {
+        validators.push(...field.validators);
+      }
+
       if(field.label == "classIdentifier"){
         field.defaultValue = this.tokenType.identifier;
       }

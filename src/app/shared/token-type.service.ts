@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { STATUS, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { symbolValidator } from 'src/utils/Validators/validators';
 
 interface TokenTypeModel {
     label: string;
@@ -39,6 +40,7 @@ export class TokenTypeService {
             defaultValue: "",
             required: true,
             maxLength: 10,
+            validators: [ symbolValidator ]
         },
         {
             label: "description",
@@ -89,6 +91,8 @@ export class TokenTypeService {
             type: "text",
             defaultValue: "",
             required: true,
+            maxLength: 10,
+            validators: [ symbolValidator ]
         },
         {
             label: "description",

@@ -14,6 +14,24 @@ export function cnpjValidator(control: AbstractControl): ValidationErrors | null
     return isValid ? null : { invalidCNPJ: true };
 }
 
+export function symbolValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (!value) {
+        return null;
+    }
+
+    const isValidSymbol = /^[A-Z0-9]{3,5}$/.test(value);
+
+    if (!isValidSymbol) {
+        return {
+            symbolInvalid: 'Symbol must be 3-5 uppercase letters, without spaces or special characters'
+        };
+    }
+
+    return null;
+};
+
 function validateCPF(cpfInput: string): boolean {
     const cpf = cpfInput.replace(/[^\d]+/g, '');
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
