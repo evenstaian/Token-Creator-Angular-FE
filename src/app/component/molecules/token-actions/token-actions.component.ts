@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angula
 import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
 import { AppService } from 'src/services/app.service';
+import { ethAddressValidator } from 'src/utils/Validators/validators';
 
 @Component({
   selector: 'app-token-actions',
@@ -56,6 +57,8 @@ export class TokenActionsComponent implements OnChanges {
     type: "text",
     defaultValue: "",
     required: false,
+    validators: [ ethAddressValidator ],
+    errorMessage: "Se preenchido, o endereço deve começar com '0x' seguido por 40 caracteres hexadecimais."
   }
 
   IMAGE_FORM_ITEM = {
@@ -107,6 +110,7 @@ export class TokenActionsComponent implements OnChanges {
     let FORM = { ...this.ADDRESS_TO_FORM_ITEM };
     FORM.placeholder = "para qual endereço?"
     FORM.required = true
+    FORM.errorMessage = "Endereço Ethereum inválido. Deve começar com '0x' seguido por 40 caracteres hexadecimais."
     return FORM
   }
 
@@ -243,6 +247,9 @@ export class TokenActionsComponent implements OnChanges {
       const validators: ValidatorFn[] = [];
       if (field.required && !field.hide) {
         validators.push(Validators.required);
+      }
+      if (field.validators) {
+        validators.push(...field.validators);
       }
       this.form.addControl(field.label, this.fb.control(field.defaultValue, validators));
     });

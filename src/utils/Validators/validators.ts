@@ -40,6 +40,22 @@ export function uppercaseValidator(control: AbstractControl): ValidationErrors |
     return null;
 }
 
+export function ethAddressValidator(control: AbstractControl): ValidationErrors | null {
+    const address = control.value;
+    if (!address) {
+        return null; // Permite valores vazios
+    }
+    
+    // Ethereum address regex pattern
+    const ethAddressPattern = /^0x[a-fA-F0-9]{40}$/;
+    
+    if (!ethAddressPattern.test(address)) {
+        return { invalidEthAddress: true };
+    }
+    
+    return null;
+}
+
 function validateCPF(cpfInput: string): boolean {
     const cpf = cpfInput.replace(/[^\d]+/g, '');
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
