@@ -48,6 +48,7 @@ export class MyAccountComponent implements OnInit {
       title: 'Sobre',
       icon: 'assets/images/icons/ic_about.svg',
       class: '',
+      router: '/my-account/about',
       clickable: false,
       isSelected: false,
       show: true,

@@ -19,6 +19,7 @@ import { ProfileComponent } from './Modules/MyAccount/profile/profile.component'
 import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
 import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
 import { SubscriptionComponent } from './Modules/MyAccount/subscription/subscription.component';
+import { AboutComponent } from './Modules/MyAccount/about/about.component';
 
 export const Approutes: Routes = [
   {
@@ -92,6 +93,10 @@ export const Approutes: Routes = [
           {
             path: 'subscription',
             component: SubscriptionComponent
+          },
+          {
+            path: 'about',
+            component: AboutComponent
           }
         ],
       },
