@@ -87,8 +87,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SubscriptionComponent } from './Modules/MyAccount/subscription/subscription.component';
 import { AboutComponent } from './Modules/MyAccount/about/about.component';
 
-import { NotificationComponent } from './component/notification/notification.component';
-import { NotificationService } from '../services/notification.service';
+import { NotificationComponent } from './component/molecules/notification/notification.component';
+import { NotificationService } from './services/notification.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,

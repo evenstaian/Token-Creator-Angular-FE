@@ -5,7 +5,7 @@ import { TOKEN_ACTIONS_TYPES } from 'criptolab-types';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
 import { Auth } from 'src/services/auth.service';
 import { Router } from '@angular/router';
-import { NotificationService } from 'src/services/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-my-list',
@@ -164,18 +164,17 @@ export class MyListComponent implements OnInit {
         const response: any = data;
         if(response.status && actionHashId) {
           this.refreshActionStatus(tokenHashId, actionType, actionHashId);
-          this.notificationService.showSuccess('Ação realizada com sucesso!');
+          if(response.status == "CONFIRMED"){
+            this.notificationService.showSuccess(`[${actionType}] Ação realizada com sucesso!`);
+          }
           return;
         }
       }, 
-      error => {
-        this.notificationService.showError('Ocorreu um erro ao realizar a ação.');
-      }
+      error => {}
     );
   }
 
   refreshActionStatus(tokenHashId: string, action: string, hashId: string){
-    this.notificationService.showSuccess('Ação realizada com sucesso!');
     console.log({tokenHashId, action, hashId})
     this.appService.getActionProcess(hashId).subscribe(data => {
       const response: any = data;

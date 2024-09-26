@@ -8,7 +8,7 @@ export const environment = {
   apiTokenUrl: `https://criptolab-token-api-prod-dot-pandapay.rj.r.appspot.com`,
   //apiTokenUrl: `http://localhost:8081`,
   //apiTokenUrl: `https://criptolab-token-api-dot-pandapay.rj.r.appspot.com`,
-  apiEventsUrl: `https://events.coins-external.com:8088`,
+  apiEventsUrl: `https://events.coins-external.com:8081`,
 };
 
 /*

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { AppService } from 'src/services/app.service';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-create-response',
@@ -25,7 +26,8 @@ export class CreateResponseComponent implements OnInit {
   constructor(
     private sharedDataService: SharedDataService,
     private appService: AppService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
     ) {
     this.sharedDataService.createResponse.subscribe(data => {
       if (data){
@@ -36,7 +38,7 @@ export class CreateResponseComponent implements OnInit {
           this.setTokenSubscribe(this.createResponse.hashId);
           setTimeout(() => {
             this.goToMyTokensList()
-          }, 5000);
+          }, 15000);
         }
       }
     })
@@ -57,6 +59,9 @@ export class CreateResponseComponent implements OnInit {
       data => { 
         const response: any = data;
         this.createResponse.status = response.status;
+        if(response.status == "CONFIRMED"){
+          this.notificationService.showSuccess(`[DEPLOY] Token lançado com sucesso!`);
+        }
         console.log(data);
       }, 
       error => {})
