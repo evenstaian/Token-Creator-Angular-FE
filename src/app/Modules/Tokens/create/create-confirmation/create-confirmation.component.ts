@@ -16,6 +16,7 @@ export class CreateConfirmationComponent implements OnInit {
 
   @ViewChild('swalWarningDefault') private alertSwal: SwalComponent
 
+  isMainNet: boolean = false;
   tokenType: any;
   formStructure: any;
   networkType: any;
@@ -48,6 +49,8 @@ export class CreateConfirmationComponent implements OnInit {
       }
 
       this.tokenType = data;
+      console.log("network", this.tokenType.network)
+      this.isMainNet = this.tokenType.network.isMainNet;
       this.formStructure = this.tokenType.form;
       this.networkType = this.tokenType.network;
       this.classIdentifier = this.tokenType.identifier;

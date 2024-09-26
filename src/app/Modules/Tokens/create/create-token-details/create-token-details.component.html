@@ -1,6 +1,13 @@
 <div class="wrapper w-100 px-5" style="color: #fff">
     <app-page-titles [title]="pageTitles.title" [subtitle]="pageTitles.subtitle"></app-page-titles>
 
+    <div *ngIf="!isMainNet" class="alert alert-outline-success mt-3 mb-4 d-flex align-items-center">
+        <div>
+            <h4 class="alert-heading text-success mb-2">Área de testes gratuita</h4>
+            <p class="mb-0">Você está na área <span class="text-success font-weight-bold">TESTNET</span>. Aqui você pode <span class="text-success">experimentar e testar a criação de tokens sem nenhum custo</span>. Todas as operações nesta área são simuladas e não terão efeito na rede principal.</p>
+        </div>
+    </div>
+
     <form [formGroup]="form" (ngSubmit)="goToNetworksPage()">
         <app-image-sender (file)="setImageFile($event)" style="margin: 40px;"></app-image-sender>
 
@@ -22,7 +29,9 @@
         </div>
 
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-secondary px-4">Lançar Token na {{ isMainNet ? 'MainNet': 'TestNet'}}</button>
+            <button type="submit" class="btn btn-secondary px-4">
+                Revisar os dados do seu token {{ isMainNet ? 'MainNet' : 'TestNet' }}
+            </button>
         </div>
     </form>
 </div>

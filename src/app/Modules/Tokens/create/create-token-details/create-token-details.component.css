@@ -48,3 +48,25 @@ form{
     margin-top: 5px;
     font-size: 10px;
 }
+
+.alert-outline-success {
+    border: 1px solid #28a745;
+    background-color: transparent;
+    color: #fff;
+    padding: 1rem;
+}
+
+.alert-outline-success .alert-heading {
+    color: #28a745;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.alert-outline-success p {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.alert-outline-success .text-success {
+    color: #28a745 !important;
+}
