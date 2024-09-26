@@ -69,3 +69,37 @@ p{
     font-size: 12px;
     margin-top: 10px;
 }
+
+.marketing-text {
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 0 15px 0;
+}
+
+.marketing-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.marketing-title .line {
+    display: block;
+}
+
+.marketing-title .highlight {
+    color: #9a6cff;
+}
+
+.small-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .marketing-title {
+        font-size: 50px;
+    }
+}

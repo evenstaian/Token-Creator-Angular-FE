@@ -3,6 +3,17 @@
 
 <div class="wrapper w-100 px-5 d-flex justify-content-center align-items-center">
     <div style="width: 100%">
+
+        <div class="login-container">
+            <div class="marketing-text">
+                <h1 class="marketing-title">
+                    <span class="line">Crie seu token</span>
+                    <span class="line">em apenas <span class="highlight">2 minutos</span></span>
+                    <span class="line">e 100% gratuito.</span>
+                </h1>
+                <p class="small-text">Gratuidade disponível apenas para tokens de testes</p>
+            </div>
+        </div>
         
         <div *ngIf="step1 && !step2">
             <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
@@ -39,8 +50,6 @@
             <p class="help">Não tem uma conta? <a class="resend" href="/signup">Crie uma agora</a></p>
         </div>
     </div>
-    
-    
 </div>
 
 <app-full-loader [isLoading]=loader></app-full-loader>
