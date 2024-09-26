@@ -1,4 +1,3 @@
-// import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -88,6 +87,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SubscriptionComponent } from './Modules/MyAccount/subscription/subscription.component';
 import { AboutComponent } from './Modules/MyAccount/about/about.component';
 
+import { NotificationComponent } from './component/notification/notification.component';
+import { NotificationService } from '../services/notification.service';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 1,
@@ -143,6 +145,7 @@ const maskConfig: Partial<IConfig> = {
     MaskPipe,
     SubscriptionComponent,
     AboutComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
@@ -187,7 +190,8 @@ const maskConfig: Partial<IConfig> = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    { provide: LOCALE_ID, useValue: 'pt-PT' }
+    { provide: LOCALE_ID, useValue: 'pt-PT' },
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

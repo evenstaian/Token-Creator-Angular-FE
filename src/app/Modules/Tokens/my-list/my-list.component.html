@@ -29,7 +29,7 @@
                 </div>
     
                 <div *ngIf="myToken.status == 'PENDING'">
-                    <app-process-status-tag [processStatus]=myToken.status></app-process-status-tag>
+                    <app-process-status-tag (click)="refreshActionStatus(myToken.hashId, 'DEPLOY', myToken.hashId)" [processStatus]=myToken.status></app-process-status-tag>
                 </div>
     
                 <div class="d-flex px-2 align-items-center">

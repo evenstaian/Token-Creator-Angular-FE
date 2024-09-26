@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { AppService } from 'src/services/app.service';
-import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
+import { TOKEN_ACTIONS_TYPES } from 'criptolab-types';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
 import { Auth } from 'src/services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-my-list',
@@ -52,7 +53,9 @@ export class MyListComponent implements OnInit {
     private authService: Auth,
     private appService: AppService, 
     public tokenTypeService: TokenTypeService,
-    public router: Router) { }
+    public router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit(): void {
     this.getMyTokensList();
@@ -160,15 +163,19 @@ export class MyListComponent implements OnInit {
       data => { 
         const response: any = data;
         if(response.status && actionHashId) {
-          this.refreshActionStatus(tokenHashId, actionType, actionHashId)
-          return
-          //this.createTokenActionStatusResponse(tokenHashId, actionHashId, actionType, response.status);
+          this.refreshActionStatus(tokenHashId, actionType, actionHashId);
+          this.notificationService.showSuccess('Ação realizada com sucesso!');
+          return;
         }
       }, 
-      error => {})
+      error => {
+        this.notificationService.showError('Ocorreu um erro ao realizar a ação.');
+      }
+    );
   }
 
   refreshActionStatus(tokenHashId: string, action: string, hashId: string){
+    this.notificationService.showSuccess('Ação realizada com sucesso!');
     console.log({tokenHashId, action, hashId})
     this.appService.getActionProcess(hashId).subscribe(data => {
       const response: any = data;
