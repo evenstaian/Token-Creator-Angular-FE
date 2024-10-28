@@ -10,7 +10,7 @@ build_homol:
     - sh libs-credencials-manager.sh
     - npm install
   script:
-    - ./node_modules/.bin/ng build --configuration=homol --output-path=dist/homol --verbose
+    - ./node_modules/.bin/ng build --configuration=homol --output-path=dist/homol/cryptolab-ng --verbose
   artifacts:
     paths:
       - dist/homol
@@ -25,7 +25,7 @@ build_production:
     - sh libs-credencials-manager.sh
     - npm install
   script:
-    - ./node_modules/.bin/ng build --prod --output-path=dist/prod --verbose
+    - ./node_modules/.bin/ng build --prod --output-path=dist/prod/cryptolab-ng --verbose
   artifacts:
     paths:
       - dist/prod
