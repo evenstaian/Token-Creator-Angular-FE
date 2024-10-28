@@ -23,6 +23,37 @@ export function symbolValidator(control: AbstractControl): ValidationErrors | nu
 
     const isValidSymbol = /^[A-Z0-9]{3,5}$/.test(value);
 
+    const cryptoSymbolsForbidden = [
+        'BTC', 
+        'ETH', 
+        'USDT', 
+        'USDC', 
+        'BNB', 
+        'XRP', 
+        'ADA', 
+        'SOL', 
+        'DOT', 
+        'LTC', 
+        'BCH', 
+        'XLM', 
+        'LINK', 
+        'XMR', 
+        'EOS', 
+        'TRX', 
+        'BTCB', 
+        'DOGE',
+        'SHIB',
+        'MATIC',
+        'AVAX',
+        'UNI',
+    ];
+
+    if (cryptoSymbolsForbidden.includes(value)) {
+        return {
+            symbolInvalid: 'This symbol is not allowed. Please choose another one.'
+        };
+    }
+
     if (!isValidSymbol) {
         return {
             symbolInvalid: 'Symbol must be 3-5 uppercase letters, without spaces or special characters'
