@@ -2,6 +2,11 @@ service: cripto-lab-ng-prod
 runtime: python310
 
 handlers:
+  - url: /sitemap.xml
+    secure: always
+    static_files: cripto-lab-ng/assets/sitemap.xml
+    upload: cripto-lab-ng/assets/sitemap.xml
+
   - url: /
     secure: always
     static_files: cripto-lab-ng/index.html
