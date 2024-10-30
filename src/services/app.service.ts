@@ -20,6 +20,7 @@ export class AppService {
     _tokenSubscribe = 'tokenSubscribe';
     _getMyTokens = 'getMyTokens';
     _getMyTokenItems = 'getMyTokenItems'
+    _getTokenPublicInfo = 'getToken'
     _getActionProcess = 'getActionProcess';
     _getPlanCheckout = 'getPlanCheckout';
     _getUserWallet = 'getUserWallet';
@@ -110,6 +111,10 @@ export class AppService {
 
     public getMyTokenItems(tokenHashId: string): Observable<Object | null>{
         return this.performRequest(RestMethods.POST, this._getMyTokenItems, { tokenHashId });
+    }
+
+    public getTokenPublicInfo(contractAddress: string): Observable<Object | null>{
+        return this.performRequest(RestMethods.GET, `${this._getTokenPublicInfo}/${contractAddress}`);
     }
 
     public getActionProcess(hashId: string): Observable<Object | null>{

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NETWORK_TYPES, TOKEN_ACTIONS_TYPES, TOKEN_STANDARD_TYPES } from 'criptolab-types';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
 import { AppService } from 'src/services/app.service';
@@ -179,7 +180,8 @@ export class TokenActionsComponent implements OnChanges {
   constructor(
     private fb: FormBuilder, 
     private appService: AppService,
-    private tokenTypeService: TokenTypeService) { }
+    private tokenTypeService: TokenTypeService,
+    private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.action) {
@@ -379,6 +381,11 @@ export class TokenActionsComponent implements OnChanges {
   goToScan(scanUrl?: string){
     const url = scanUrl || this.token.scanUrl;
     window.open(url, '_blank');
+  }
+
+  goToPublicPage(){
+    this.token.address
+    window.open(`/token/${this.token.address}`, '_blank');
   }
 
   goToDeployOnMainNet(){

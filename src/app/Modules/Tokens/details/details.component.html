@@ -1,0 +1,210 @@
+<header>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="logo-text">
+            <img src="assets/images/logos/FinchainSecondary.svg" style="height: 35px; margin: 10px; margin-left: 100px !important;" class="light-logo" alt="homepage" />
+        </div>
+        <div *ngIf="!isLogged()" class="auth-btns-container d-flex justify-content-end">
+            <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-secondary px-4 mr-2" (click)="goToLogin()">Entrar</button>
+            <button style="font-size: 12px; display: flex; align-items: center; justify-content: center;" class="btn btn-primary px-4" (click)="goToSignup()">Cadastre-se</button>
+        </div>
+    </div>
+</header>
+
+<div style="width: 100%; height: 100%; background-color: #1a1a1a; padding-top: 90px;">
+    <!-- Shimmer Loading State -->
+    <div class="token-details-container" *ngIf="loading">
+        <!-- Banner Shimmer -->
+        <div class="banner-section">
+            <div class="banner-image shimmer"></div>
+        </div>
+
+        <!-- Token Info Shimmer -->
+        <div class="token-info-section">
+            <div class="token-image shimmer"></div>
+            <div class="token-basic-info">
+                <div class="shimmer" style="width: 200px; height: 36px; margin-bottom: 12px;"></div>
+                <div class="shimmer" style="width: 100px; height: 24px; margin-bottom: 12px;"></div>
+                <div class="shimmer" style="width: 150px; height: 20px;"></div>
+            </div>
+        </div>
+
+        <!-- About Token Section Shimmer -->
+        <div class="about-token-section">
+            <div class="shimmer" style="width: 150px; height: 28px; margin-bottom: 24px;"></div>
+            <div class="token-stats">
+                <div class="stat-item shimmer"></div>
+                <div class="stat-item shimmer"></div>
+                <div class="stat-item shimmer"></div>
+                <div class="stat-item shimmer"></div>
+            </div>
+        </div>
+
+        <!-- Tabs Section Shimmer -->
+        <div class="mints-section">
+            <div class="tabs-container">
+                <div class="tabs shimmer" style="width: 300px; height: 40px;"></div>
+            </div>
+            
+            <div class="shimmer-table">
+                <div class="shimmer-row header">
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                </div>
+                <div class="shimmer-row" *ngFor="let i of [1,2,3,4,5]">
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                    <div class="shimmer-cell"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actual Content -->
+    <div class="token-details-container" *ngIf="!loading">
+        <!-- Banner Section -->
+        <div class="banner-section">
+          <div class="banner-image" [ngStyle]="getBackgroundStyle()">
+            <div class="banner-overlay"></div>
+          </div>
+        </div>
+      
+        <!-- Token Info Section -->
+        <div class="token-info-section">
+          <div class="token-image" [ngStyle]="{'background-color': !token?.image_url ? '#6b46c1' : 'transparent'}">
+            <img [src]="getTokenImageUrl()" [alt]="token?.name">
+          </div>
+          
+          <div class="token-basic-info">
+            <div class="d-flex align-items-center">
+              <h1 class="token-name">{{token?.name}}</h1>
+              <span class="network-badge" [class.testnet]="isTestnet()">
+                {{isTestnet() ? 'Testnet' : 'Mainnet'}}
+              </span>
+            </div>
+            <p class="token-symbol">{{token?.symbol}}</p>
+            <div class="token-address">
+              <span>{{getShortAddress(token?.token_address)}}</span>
+              <button class="copy-button" (click)="copyToClipboard(token?.token_address)">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Nova seção Sobre o Token -->
+        <div class="about-token-section">
+          <h2>Sobre o Token</h2>
+          <div class="token-stats">
+            <div class="stat-item">
+              <span class="stat-label">Supply Inicial</span>
+              <span class="stat-value">{{token?.supply || 'N/A'}}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Tipo</span>
+              <span class="stat-value">{{isERC721 ? 'ERC-721' : 'ERC-20'}}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Data de Criação</span>
+              <span class="stat-value">{{token?.created_at | date:'dd/MM/yyyy' || 'N/A'}}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Rede</span>
+              <span class="stat-value">{{token?.network || 'N/A'}}</span>
+            </div>
+          </div>
+          <div class="token-description" *ngIf="token?.description">
+            <p>{{token?.description}}</p>
+          </div>
+        </div>
+      
+        <!-- Mints Section -->
+        <div class="mints-section">
+          <div class="tabs-container">
+            <div class="tabs">
+              <button 
+                class="tab-button" 
+                [class.active]="activeTab === 'mints'"
+                (click)="setActiveTab('mints')">
+                Mints
+              </button>
+              <button 
+                class="tab-button" 
+                [class.active]="activeTab === 'burns'"
+                (click)="setActiveTab('burns')">
+                Burns
+              </button>
+              <button 
+                class="tab-button" 
+                [class.active]="activeTab === 'transfers'"
+                (click)="setActiveTab('transfers')">
+                Transfers
+              </button>
+            </div>
+          </div>
+      
+          <!-- Loading State -->
+          <div class="shimmer-table" *ngIf="isLoading">
+            <div class="shimmer-row header">
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+            </div>
+            <div class="shimmer-row" *ngFor="let i of [1,2,3,4,5]">
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+              <div class="shimmer-cell"></div>
+            </div>
+          </div>
+      
+          <!-- Empty States -->
+          <div class="empty-state" *ngIf="!isLoading && shouldShowEmptyState()">
+            <i [class]="getEmptyStateIcon()"></i>
+            <p>{{getEmptyStateMessage()}}</p>
+          </div>
+      
+          <!-- Table for ERC20 Tokens -->
+          <table class="transactions-table" *ngIf="!isLoading && !isERC721 && getCurrentTabData().length > 0">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th *ngIf="activeTab === 'transfers'">De</th>
+                <th>Para</th>
+                <th>Quantidade</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of getCurrentTabData()">
+                <td>{{item.created_at | date:'medium'}}</td>
+                <td *ngIf="activeTab === 'transfers'">{{getShortAddress(item.from)}}</td>
+                <td>{{getShortAddress(item.to)}}</td>
+                <td>{{item.amount}}</td>
+                <td>
+                  <a [href]="item.txUrl" target="_blank">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      
+          <!-- Grid for ERC721 Tokens -->
+          <div class="nft-grid" *ngIf="!isLoading && isERC721 && getCurrentTabData().length > 0">
+            <div class="nft-card" *ngFor="let item of getCurrentTabData()">
+              <img [src]="item.image_url" [alt]="item.item_id">
+              <div class="nft-info">
+                <p class="nft-id">#{{item.item_id}}</p>
+                <p class="nft-owner">{{item.item_name}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="loading-spinner" *ngIf="loading">
+        <span>Loading...</span>
+      </div>      
+</div>

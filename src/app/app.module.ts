@@ -89,6 +89,7 @@ import { AboutComponent } from './Modules/MyAccount/about/about.component';
 
 import { NotificationComponent } from './component/molecules/notification/notification.component';
 import { NotificationService } from './services/notification.service';
+import { DetailsComponent } from './Modules/Tokens/details/details.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -145,7 +146,8 @@ const maskConfig: Partial<IConfig> = {
     MaskPipe,
     SubscriptionComponent,
     AboutComponent,
-    NotificationComponent
+    NotificationComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

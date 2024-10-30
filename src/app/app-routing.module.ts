@@ -20,6 +20,7 @@ import { PricingComponent } from './Modules/Payment/pricing/pricing.component';
 import { AdicionalDataComponent } from './Modules/MyAccount/profile/adicional-data/adicional-data.component';
 import { SubscriptionComponent } from './Modules/MyAccount/subscription/subscription.component';
 import { AboutComponent } from './Modules/MyAccount/about/about.component';
+import { DetailsComponent } from './Modules/Tokens/details/details.component';
 
 export const Approutes: Routes = [
   {
@@ -37,6 +38,12 @@ export const Approutes: Routes = [
       },
     ],
     canActivate: [AuthGuardIn]
+  },
+
+  {
+    path: 'token/:contractAddress',
+    component: DetailsComponent,
+    canActivate: [AuthGuard]
   },
 
   {
@@ -123,7 +130,7 @@ export const Approutes: Routes = [
       },
       {
         path: 'my-tokens',
-        component: MyListComponent
+        component: MyListComponent,
       },
     ],
     canActivate: [AuthGuard]

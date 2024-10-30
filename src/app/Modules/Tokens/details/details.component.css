@@ -1,0 +1,514 @@
+.token-details-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.auth-btns-container {
+    height: 35px;
+    margin: 10px;
+    margin-right: 100px !important;
+}
+
+header {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    padding: 10px;
+}
+
+.banner-section {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  margin-bottom: -75px;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  position: relative;
+  filter: blur(8px);
+  transform: scale(1.1);
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.3), #1a1a1a);
+  border-radius: 16px;
+}
+
+.token-info-section {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.token-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #1a1a1a;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6b46c1;
+}
+
+.token-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.token-basic-info {
+  margin-left: 20px;
+}
+
+.token-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.token-symbol {
+  font-size: 18px;
+  color: #9e9e9e;
+  margin: 8px 0;
+}
+
+.token-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  color: #9e9e9e;
+}
+
+.copy-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9e9e9e;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+/* ERC20 Table Styles */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 20px;
+  background: #252525;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  color: #ffffff;
+}
+
+.transactions-table th {
+  background-color: #1a1a1a;
+  font-weight: 500;
+  color: #9e9e9e;
+  font-size: 14px;
+}
+
+.transactions-table td {
+  font-size: 14px;
+}
+
+.transactions-table tr:hover {
+  background-color: #2a2a2a;
+}
+
+.transactions-table tr:last-child td {
+  border-bottom: none;
+}
+
+.transactions-table a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.transactions-table a:hover {
+  text-decoration: underline;
+}
+
+/* ERC721 Grid Styles */
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px;
+}
+
+.nft-card {
+  background: #252525;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nft-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  background: #2a2a2a;
+}
+
+.nft-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.nft-info {
+  padding: 16px;
+}
+
+.nft-id {
+  font-weight: bold;
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.nft-owner {
+  font-size: 14px;
+  color: #9e9e9e;
+  margin: 4px 0 0;
+}
+
+.loading-spinner {
+  display: none;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 0%,
+    #252525 50%,
+    #1a1a1a 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* ERC20 Table Shimmer */
+.shimmer-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.shimmer-row {
+  display: flex;
+  padding: 12px;
+  gap: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.shimmer-row.header {
+  background-color: #252525;
+}
+
+.shimmer-cell {
+  flex: 1;
+  height: 20px;
+  border-radius: 4px;
+  composes: shimmer-base;
+}
+
+/* ERC721 Grid Shimmer */
+.shimmer-card {
+  background: #252525;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.shimmer-image {
+  width: 100%;
+  height: 200px;
+  composes: shimmer-base;
+}
+
+.shimmer-content {
+  padding: 12px;
+}
+
+.shimmer-line {
+  height: 16px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  composes: shimmer-base;
+}
+
+.shimmer-line:last-child {
+  width: 60%;
+}
+
+/* Efeito de shimmer base */
+.shimmer-element {
+  background: linear-gradient(90deg, 
+    #f0f0f0 25%, 
+    #e0e0e0 50%, 
+    #f0f0f0 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.about-token-section {
+  background: #252525;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 0 20px 40px;
+}
+
+.about-token-section h2 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  color: #ffffff;
+}
+
+.token-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: #1a1a1a;
+  border-radius: 12px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #9e9e9e;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.token-description {
+  color: #9e9e9e;
+  line-height: 1.6;
+  font-size: 16px;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.mints-section h2 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  color: #ffffff;
+  padding: 0 20px;
+}
+
+.tabs-container {
+  margin: 0 20px 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 1px;
+  background: #1a1a1a;
+  padding: 4px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.tab-button {
+  padding: 8px 24px;
+  border: none;
+  background: transparent;
+  color: #9e9e9e;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background: #252525;
+  color: #ffffff;
+}
+
+.tab-button:hover:not(.active) {
+  color: #ffffff;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background: #252525;
+  border-radius: 12px;
+  margin: 0 20px;
+  min-height: 200px;
+  border: 1px dashed #333;
+}
+
+.empty-state i {
+  font-size: 48px;
+  color: #666;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.empty-state p {
+  color: #9e9e9e;
+  font-size: 16px;
+  margin: 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Adicionar uma animação suave ao empty state */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.empty-state {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.banner-image {
+  transition: filter 0.3s ease;
+}
+
+/* Adicione os estilos para a badge */
+.network-badge {
+  margin-left: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #2ecc71; /* Verde para Mainnet */
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.network-badge.testnet {
+  background-color: #e74c3c; /* Vermelho para Testnet */
+}
+
+/* Ajuste o layout do título com a badge */
+.token-basic-info .d-flex {
+  gap: 12px;
+  align-items: center;
+}
+
+.token-name {
+  margin: 0;
+}
+
+/* Ajustes específicos para elementos shimmer */
+.banner-section.shimmer {
+  height: 300px;
+  border-radius: 16px;
+}
+
+.token-image.shimmer {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.stat-item.shimmer {
+  height: 80px;
+}
+
+.shimmer-table {
+  margin: 20px;
+  background: #252525;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.shimmer-row {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.shimmer-row.header {
+  background-color: #1a1a1a;
+}
+
+.shimmer-cell {
+  flex: 1;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    #252525 0%,
+    #333333 50%,
+    #252525 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Remova o antigo loading spinner */
+.loading-spinner {
+  display: none;
+}

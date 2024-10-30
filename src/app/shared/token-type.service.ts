@@ -45,7 +45,7 @@ export class TokenTypeService {
             maxLength: 10,
             validators: [ symbolValidator ],
             caseMode: "UPPERCASE",
-            errorMessage: "O símbolo deve conter de 3 a 5 letras maiúsculas, sem espaços ou caracteres especiais.",
+            errorMessage: "O símbolo deve conter de 3 a 5 letras maiúsculas, sem espaços ou caracteres especiais. Não pode ser o simbolo de um token popular.",
         },
         {
             label: "description",
