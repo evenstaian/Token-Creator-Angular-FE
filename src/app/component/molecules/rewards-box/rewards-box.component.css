@@ -1,0 +1,111 @@
+.rewards-container {
+  background: #2A2A2A;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.rewards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rewards-header h3 {
+  color: #fff;
+  margin: 0;
+}
+
+.level {
+  color: #A511FF;
+  font-weight: 500;
+}
+
+.progress-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #3D3D3D;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #A511FF 0%, #00C0C0 100%);
+  transition: width 0.3s ease;
+}
+
+.milestones {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 20px;
+}
+
+.milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  opacity: 0.5;
+}
+
+.milestone.achieved {
+  opacity: 1;
+}
+
+.milestone.current {
+  opacity: 1;
+}
+
+.milestone-icon {
+  width: 32px;
+  height: 32px;
+  background: #3D3D3D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.milestone-icon i {
+  font-size: 20px;
+  color: #808080;
+}
+
+.milestone.achieved .milestone-icon {
+  background: #A511FF;
+}
+
+.milestone.achieved .milestone-icon i {
+  color: #fff;
+}
+
+.milestone-info {
+  text-align: center;
+}
+
+.points {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.title {
+  display: block;
+  color: #808080;
+  font-size: 11px;
+}
+
+.points-info {
+  text-align: center;
+  color: #808080;
+  font-size: 14px;
+}

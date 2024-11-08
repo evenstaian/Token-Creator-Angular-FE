@@ -1,0 +1,32 @@
+<div class="rewards-container">
+  <div class="rewards-header">
+    <h3>Rewards</h3>
+    <span class="level">Nível {{currentLevel}}</span>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="progressPercentage"></div>
+    </div>
+    
+    <div class="milestones">
+      <div *ngFor="let milestone of milestones" 
+           class="milestone" 
+           [class.achieved]="milestone.points <= currentPoints"
+           [class.current]="isCurrentMilestone(milestone)">
+        <div class="milestone-icon">
+            <app-loader *ngIf="isCurrentMilestone(milestone)" loaderJson="ic_star.json" style="transform: scale(3)"></app-loader>
+            <i *ngIf="!isCurrentMilestone(milestone)" class="{{milestone.icon}}"></i>
+        </div>
+        <div class="milestone-info">
+          <span class="points">{{milestone.points}} FTC</span>
+          <span class="title">{{milestone.title}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="points-info">
+    <span>{{currentPoints}} / {{nextMilestone?.points}} pontos</span>
+  </div>
+</div>

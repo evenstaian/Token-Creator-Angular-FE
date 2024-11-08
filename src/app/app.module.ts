@@ -90,6 +90,7 @@ import { AboutComponent } from './Modules/MyAccount/about/about.component';
 import { NotificationComponent } from './component/molecules/notification/notification.component';
 import { NotificationService } from './services/notification.service';
 import { DetailsComponent } from './Modules/Tokens/details/details.component';
+import { RewardsBoxComponent } from './component/molecules/rewards-box/rewards-box.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -147,7 +148,8 @@ const maskConfig: Partial<IConfig> = {
     SubscriptionComponent,
     AboutComponent,
     NotificationComponent,
-    DetailsComponent
+    DetailsComponent,
+    RewardsBoxComponent
   ],
   imports: [
     CommonModule,
@@ -167,7 +169,7 @@ const maskConfig: Partial<IConfig> = {
     ChartsModule,
     UiSwitchModule,
     NgxMaskModule.forRoot(maskConfig),
-    PdfViewerModule,
+    PdfViewerModule
   ],
   providers: [
     AuthGuard, 
