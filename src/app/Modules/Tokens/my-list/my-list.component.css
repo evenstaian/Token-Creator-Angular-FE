@@ -2,7 +2,6 @@
     margin-bottom: 1rem;
 }
 
-
 .container {
     margin-top: 20px;
 }
@@ -58,4 +57,28 @@
 
 p{
     margin-bottom: 0;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .w-100.px-5 {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .item {
+        padding-inline: 0.75rem;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    .w-100.px-5 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .item {
+        padding-inline: 0.5rem;
+    }
 }

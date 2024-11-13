@@ -26,7 +26,25 @@ export class RewardsBoxComponent implements OnInit {
 
   userRewards: any[] = [];
 
+  isHidden: boolean = false;
+
+  toggleVisibility() {
+    this.isHidden = !this.isHidden;
+    localStorage.setItem('rewards-box-hidden', this.isHidden.toString());
+
+    if (!this.isHidden && window.innerWidth <= 768) {
+      setTimeout(() => {
+        this.scrollToCurrentMilestone();
+      }, 300);
+    }
+  }
+
   ngOnInit() {
+    const savedState = localStorage.getItem('rewards-box-hidden');
+    if (savedState !== null) {
+      this.isHidden = savedState === 'true';
+    }
+    
     this.createMilestoneList();
     this.userRewards = this.getUserRewards();
     this.rebuildMilestones();
@@ -129,7 +147,6 @@ export class RewardsBoxComponent implements OnInit {
 
   calculateProgress() {
     const userRewards = this.getUserRewards();
-    // Encontra o próximo milestone
     const currentMilestone = this.getCurrentMilestone();
     this.currentPoints = currentMilestone?.earnedPoints || 0;
 
@@ -170,17 +187,14 @@ export class RewardsBoxComponent implements OnInit {
   }
 
   rebuildMilestones() {
-    // Encontra o primeiro milestone recebido
     const firstReceivedIndex = this.milestones.findIndex(m => 
       this.userRewards.some(reward => reward.milestoneName === m.name)
     );
 
-    // Filtra os milestones a partir do primeiro recebido
     this.milestones = this.milestones.filter((milestone, index) => {
       return index >= firstReceivedIndex && firstReceivedIndex !== -1;
     });
 
-    // Calcula os pontos acumulados para cada milestone
     this.milestones = this.milestones.map((milestone, index) => {
       if (index === 0) {
         milestone.earnedPoints = milestone.points;
@@ -201,7 +215,6 @@ export class RewardsBoxComponent implements OnInit {
         const milestoneLeft = currentMilestone.offsetLeft;
         const milestoneWidth = currentMilestone.clientWidth;
         
-        // Centraliza o milestone atual
         const scrollPosition = milestoneLeft - (containerWidth / 2) + (milestoneWidth / 2);
         
         milestonesContainer.scrollTo({

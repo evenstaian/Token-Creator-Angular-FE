@@ -4,13 +4,19 @@
   padding: 20px;
   margin-bottom: 24px;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.rewards-container.hidden {
+  padding: 15px 20px;
+  margin-bottom: 10px;
 }
 
 .rewards-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .rewards-header h3 {
@@ -18,14 +24,41 @@
   margin: 0;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .level {
   color: #A511FF;
   font-weight: 500;
 }
 
-.progress-container {
-  position: relative;
-  margin-bottom: 15px;
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: #A511FF;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(165, 17, 255, 0.1);
+}
+
+.toggle-btn i {
+  font-size: 20px;
+}
+
+.toggle-text {
+  white-space: nowrap;
 }
 
 .progress-bar {
@@ -33,12 +66,32 @@
   background: #3D3D3D;
   border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .progress {
   height: 100%;
   background: linear-gradient(90deg, #A511FF 0%, #00C0C0 100%);
   transition: width 0.3s ease;
+}
+
+.rewards-content {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.rewards-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-container {
+  position: relative;
+  margin-bottom: 15px;
 }
 
 .milestones {
@@ -48,79 +101,13 @@
   padding: 10px 20px;
 }
 
-/* Estilos específicos para mobile */
-@media (max-width: 768px) {
-  .milestones {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    gap: 20px;
-    justify-content: flex-start;
-  }
-
-  .milestones::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Efeito de fade nas bordas apenas no mobile */
-  .progress-container::before,
-  .progress-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50px;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .progress-container::before {
-    left: 0;
-    background: linear-gradient(to right, #2A2A2A 0%, transparent 100%);
-  }
-
-  .progress-container::after {
-    right: 0;
-    background: linear-gradient(to left, #2A2A2A 0%, transparent 100%);
-  }
-
-  .milestone {
-    flex: 0 0 auto;
-    min-width: 100px;
-  }
-
-  .milestone-info {
-    width: 100px;
-  }
-}
-
-/* Estilos para desktop */
-@media (min-width: 769px) {
-  .milestones {
-    justify-content: space-between;
-    overflow-x: visible;
-    gap: 10px;
-  }
-
-  .milestone {
-    flex: 1;
-  }
-
-  .milestone-info {
-    width: auto;
-    max-width: 150px;
-  }
-}
-
 .milestone {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   opacity: 0.5;
-  flex: 0 0 auto;
-  min-width: 120px; /* Largura mínima para cada milestone */
+  min-width: 120px;
   transition: transform 0.3s ease;
 }
 
@@ -158,7 +145,7 @@
 
 .milestone-info {
   text-align: center;
-  width: 120px; /* Largura fixa para melhor alinhamento */
+  width: 120px;
 }
 
 .points {
@@ -195,17 +182,90 @@
   font-size: 14px;
 }
 
-/* Ajustes específicos para telas muito pequenas */
-@media (max-width: 480px) {
-  .rewards-container {
-    padding: 10px;
+/* Estilos para desktop */
+@media (min-width: 769px) {
+  .milestones {
+    justify-content: space-between;
+    overflow-x: visible;
+    gap: 10px;
   }
 
   .milestone {
-    min-width: 90px;
+    flex: 1;
   }
 
   .milestone-info {
-    width: 90px;
+    width: auto;
+    max-width: 150px;
+  }
+}
+
+/* Estilos específicos para mobile */
+@media (max-width: 768px) {
+  .milestones {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .milestones::-webkit-scrollbar {
+    display: none;
+  }
+
+  .progress-container::before,
+  .progress-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .progress-container::before {
+    left: 0;
+    background: linear-gradient(to right, #2A2A2A 0%, transparent 100%);
+  }
+
+  .progress-container::after {
+    right: 0;
+    background: linear-gradient(to left, #2A2A2A 0%, transparent 100%);
+  }
+
+  .milestone {
+    flex: 0 0 auto;
+    min-width: 85px;
+  }
+
+  .milestone-info {
+    width: 85px;
+  }
+
+  .toggle-text {
+    display: none;
+  }
+
+  .toggle-btn {
+    padding: 5px;
+  }
+}
+
+/* Ajustes específicos para telas muito pequenas */
+@media (max-width: 480px) {
+  .progress-container::before,
+  .progress-container::after {
+    width: 35px;
+  }
+
+  .milestone {
+    min-width: 80px;
+  }
+
+  .milestone-info {
+    width: 80px;
   }
 }

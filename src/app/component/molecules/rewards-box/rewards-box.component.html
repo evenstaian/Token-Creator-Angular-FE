@@ -1,33 +1,41 @@
-<div class="rewards-container">
+<div class="rewards-container" [class.hidden]="isHidden">
   <div class="rewards-header">
     <h3>Rewards</h3>
-    <span class="level">Nível {{currentLevel}}</span>
+    <div class="header-right">
+      <span class="level">Nível {{currentLevel}}</span>
+      <button class="toggle-btn" (click)="toggleVisibility()">
+        <i class="mdi" [class.mdi-chevron-up]="!isHidden" [class.mdi-chevron-down]="isHidden"></i>
+        <span class="toggle-text">{{isHidden ? 'Expandir' : 'Recolher'}} rewards</span>
+      </button>
+    </div>
   </div>
 
-  <div class="progress-container">
-    <div class="progress-bar">
-      <div class="progress" [style.width.%]="progressPercentage"></div>
-    </div>
-    
-    <div class="milestones">
-      <div *ngFor="let milestone of milestones" 
-           class="milestone" 
-           [class.achieved]="milestone.earnedPoints <= currentPoints"
-           [class.current]="isCurrentMilestone(milestone)">
-        <div class="milestone-icon">
-            <app-loader *ngIf="isCurrentMilestone(milestone)" loaderJson="ic_star.json" style="transform: scale(3)"></app-loader>
-            <i *ngIf="!isCurrentMilestone(milestone)" class="{{milestone.icon}}"></i>
-        </div>
-        <div class="milestone-info">
-          <span class="points">{{milestone.earnedPoints <= currentPoints ? 'Você acumulou:' : 'Você irá acumular:'}} {{milestone.earnedPoints}} {{milestone.tokenSymbol}}</span>
-          <span class="item-points">+ {{milestone.points}} {{milestone.tokenSymbol}}</span>
-          <span class="title">{{milestone.title}}</span>
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="progressPercentage"></div>
+  </div>
+
+  <div class="rewards-content" [class.collapsed]="isHidden">
+    <div class="progress-container">
+      <div class="milestones">
+        <div *ngFor="let milestone of milestones" 
+             class="milestone" 
+             [class.achieved]="milestone.earnedPoints <= currentPoints"
+             [class.current]="isCurrentMilestone(milestone)">
+          <div class="milestone-icon">
+              <app-loader *ngIf="isCurrentMilestone(milestone)" loaderJson="ic_star.json" style="transform: scale(3)"></app-loader>
+              <i *ngIf="!isCurrentMilestone(milestone)" class="{{milestone.icon}}"></i>
+          </div>
+          <div class="milestone-info">
+            <span class="points">{{milestone.earnedPoints <= currentPoints ? 'Você acumulou:' : 'Você irá acumular:'}} <br>{{milestone.earnedPoints}} {{milestone.tokenSymbol}}</span>
+            <span class="item-points">+ {{milestone.points}} {{milestone.tokenSymbol}}</span>
+            <span class="title">{{milestone.title}}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="points-info">
-    <span>Pontos Atuais: {{currentPoints}} | {{nextMilestone?.points ? 'Próximos Pontos: ' + nextMilestone?.points + ' pontos' : 'Pronto para resgatar'}}</span>
+    <div class="points-info">
+      <span>Pontos Atuais: {{currentPoints}} {{nextMilestone?.tokenSymbol}} | {{nextMilestone?.points ? 'Próximos Pontos: +' + nextMilestone?.points + ' ' + nextMilestone?.tokenSymbol : 'Pronto para resgatar'}}</span>
+    </div>
   </div>
 </div>
