@@ -2,10 +2,11 @@
 </swal>
 
 <div class="w-100 px-5" style="color: #fff">
-    <!-- Adicionando o componente rewards-box -->
     <app-rewards-box></app-rewards-box>
 
-    <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+    <div style="margin-top: 25px !important;">
+        <app-page-titles title="{{pageTitles.title}}" subtitle="{{pageTitles.subtitle}}"></app-page-titles>
+    </div>
 
     <div *ngIf="loader" class="w-100">
         <div class="w-100" style="width: 200px; height: 200px;">
@@ -19,48 +20,53 @@
         <div class="item">
             <div class="token">
                 <app-circular-thumb-image imageUrl="{{ myToken.imgUrl || imagePlaceholder }}" [hasMessage]="false"></app-circular-thumb-image>
-                <p><span style="font-weight: 500;">{{myToken.name}}</span> <br><span style="color: #c6c6c6; font-size: 12px;">{{myToken.ticker}}</span></p></div>
+                <p>
+                    <span style="font-weight: 500;">{{myToken.name}}</span>
+                    <br>
+                    <span style="color: #c6c6c6; font-size: 12px;">{{myToken.ticker}}</span>
+                </p>
+            </div>
                 
-                
-            <div class="d-flex">
-                <div *ngIf="myToken.status == 'CONFIRMED'" class="d-flex">
+            <div class="actions-container">
+                <div *ngIf="myToken.status == 'CONFIRMED'" class="action-buttons">
                     <div *ngFor="let action of myToken.actions">
-                        <button class="btn mx-2" style="color: #fff; width: 100px;" 
-                        [ngStyle]="{ 'background-color': ButtonsTypes[action].color }"
-                        (click)="showAction(myToken, action)">{{action}}</button>
+                        <button class="btn action-btn" 
+                            style="color: #fff;" 
+                            [ngStyle]="{ 'background-color': ButtonsTypes[action].color }"
+                            (click)="showAction(myToken, action)">{{action}}</button>
                     </div>
                 </div>
     
                 <div *ngIf="myToken.status == 'PENDING'">
-                    <app-process-status-tag (click)="refreshActionStatus(myToken.hashId, 'DEPLOY', myToken.hashId)" [processStatus]=myToken.status></app-process-status-tag>
+                    <app-process-status-tag 
+                        (click)="refreshActionStatus(myToken.hashId, 'DEPLOY', myToken.hashId)" 
+                        [processStatus]=myToken.status>
+                    </app-process-status-tag>
                 </div>
     
-                <div class="d-flex px-2 align-items-center">
+                <div class="d-flex align-items-center">
                     <p class="detailsBtn" (click)="showAction(myToken, 'DETAILS')">Ver Detalhes</p>
                 </div>
             </div>   
-            
         </div>
+
         <div *ngIf="myToken.actionOpened">
             <app-token-actions 
-            [token]="myToken" 
-            [action]="myToken.actionOpened" 
-            [statusResponse]="myToken.actionsStatus"
-            (actionForm)="processAction($event)" 
-            (refreshStatus)="refreshActionStatus(myToken.hashId, myToken.actionOpened, $event)"
-            (cloneToMainnet)="goToCreateOnMainNet($event)"></app-token-actions>
+                [token]="myToken" 
+                [action]="myToken.actionOpened" 
+                [statusResponse]="myToken.actionsStatus"
+                (actionForm)="processAction($event)" 
+                (refreshStatus)="refreshActionStatus(myToken.hashId, myToken.actionOpened, $event)"
+                (cloneToMainnet)="goToCreateOnMainNet($event)">
+            </app-token-actions>
         </div>
     </div>
 
     <div *ngIf="showFirstTokenCTA" class="container">
         <div class="center">
             <app-youtube-player></app-youtube-player>
-        </div>
-        <div class="center" style="margin-top: 50px">
-            <p>Você ainda não é proprietário de nenhum Token. Crie um a qualquer momento!</p>
-        </div>
-        <div class="center m-3">
-            <button class="btn-primary" (click)="goToCreateToken()">Criar meu primeiro token</button>
+            <p class="mt-5">Você ainda não é proprietário de nenhum Token. Crie um a qualquer momento!</p>
+            <button class="btn-primary mt-3" (click)="goToCreateToken()">Criar meu primeiro token</button>
         </div>
     </div>
 </div>

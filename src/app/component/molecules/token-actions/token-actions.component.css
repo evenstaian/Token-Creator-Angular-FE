@@ -1,6 +1,10 @@
 .wrapper {
-    background-color: #434242; 
-    width: 100%
+    background-color: #434242;
+    width: 100%;
+}
+
+.action-content {
+    padding: 25px;
 }
 
 .form-item-title {
@@ -12,6 +16,11 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 25px;
+    word-break: break-word;
+}
+
+.form-content {
+    margin-bottom: 20px;
 }
 
 .form-control {
@@ -22,6 +31,7 @@
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     height: 3.5rem;
+    width: 100%;
 }
 
 .form-control::placeholder {
@@ -30,4 +40,54 @@
 
 .form-control:focus {
     border-color: #A511FF;
+}
+
+/* Estilos base para os botões */
+.details-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.details-buttons button {
+    flex: 1;
+    min-width: 140px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px 15px;
+}
+
+/* Estilos específicos para mobile */
+@media (max-width: 768px) {
+    .action-content {
+        padding: 15px;
+    }
+
+    .form-item-subtitle {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    .form-content {
+        padding: 0 5px;
+    }
+
+    .form-group {
+        padding: 0 5px;
+    }
+}
+
+/* Estilos para desktop */
+@media (min-width: 769px) {
+    .details-buttons button {
+        flex: 0 0 auto;
+        margin-left: 20px;
+    }
+
+    .details-buttons button:first-child {
+        margin-left: 0;
+    }
 }

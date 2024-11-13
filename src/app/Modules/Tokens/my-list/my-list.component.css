@@ -1,5 +1,6 @@
-.list{
+.list {
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .container {
@@ -10,32 +11,61 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 5rem;
+    min-height: 5rem;
     background-color: #545353;
-    padding-inline: 2rem;
+    padding: 0.75rem;
+    padding-left: calc(0.75rem + 4px);
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
 }
 
 .typeMark {
     position: absolute; 
-    height: 5rem; 
+    height: 100%; 
     width: 4px;
+    left: 0;
+    top: 0;
+    z-index: 1;
 }
 
-.token{
+.token {
     display: flex;
     align-items: center;
-    width: 100%;
+    gap: 10px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.actions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    min-width: 100px;
 }
 
 .detailsBtn {
     cursor: pointer;
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .processing {
@@ -45,7 +75,7 @@
     font-size: 12px;
 }
 
-.processing-loader{
+.processing-loader {
     width: 50px;
     height: 50px;
 }
@@ -55,30 +85,68 @@
     height: 200px;
 }
 
-p{
+p {
     margin-bottom: 0;
 }
 
-/* Ajustes para mobile */
+/* Estilos para mobile */
 @media (max-width: 768px) {
-    .w-100.px-5 {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-
-    .item {
-        padding-inline: 0.75rem;
-    }
-}
-
-/* Ajustes para telas muito pequenas */
-@media (max-width: 480px) {
     .w-100.px-5 {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
 
+    app-rewards-box {
+        padding-left: 5px;
+        padding-right: 5px;
+        display: block;
+        margin-top: -10px;
+    }
+
+    app-page-titles {
+        display: block;
+        margin: 25px 0;
+        padding: 0 5px;
+    }
+
+    .list {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
     .item {
-        padding-inline: 0.5rem;
+        padding: 0.75rem;
+        padding-left: calc(0.75rem + 4px);
+        flex-wrap: wrap;
+    }
+
+    .actions-container {
+        flex-wrap: wrap;
+    }
+
+    .action-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+/* Estilos para desktop */
+@media (min-width: 769px) {
+    .w-100.px-5 {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+    }
+
+    .item {
+        padding: 0 2rem;
+        padding-left: calc(2rem + 4px);
+        flex-wrap: nowrap;
+    }
+
+    .actions-container {
+        flex-wrap: nowrap;
+    }
+
+    .action-buttons {
+        flex-wrap: nowrap;
     }
 }
