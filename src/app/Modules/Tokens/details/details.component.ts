@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/services/app.service';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NETWORK_TYPES } from 'criptolab-types';
 
 @Component({
   selector: 'app-details',
@@ -18,12 +20,20 @@ export class DetailsComponent implements OnInit {
   isLoading: boolean = false;
   isERC721: boolean = false;
   activeTab: 'mints' | 'burns' | 'transfers' = 'mints';
+  isEditingLinks: boolean = false;
+  linkForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private appService: AppService,
-    private tokenTypeService: TokenTypeService
-  ) { }
+    private tokenTypeService: TokenTypeService,
+    private fb: FormBuilder
+  ) {
+    this.linkForm = this.fb.group({
+      website_url: ['', [Validators.pattern('https?://.+')]],
+      whitepaper_url: ['', [Validators.pattern('https?://.+')]]
+    });
+  }
 
   ngOnInit(): void {
     const contractAddress = this.route.snapshot.paramMap.get('contractAddress');
@@ -35,9 +45,9 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  isLogged(){
+  isLogged(): boolean {
     const authToken = localStorage.getItem('auth_token');
-    return authToken;
+    return !!authToken;
   }
 
   setActiveTab(tab: 'mints' | 'burns' | 'transfers') {
@@ -50,6 +60,7 @@ export class DetailsComponent implements OnInit {
     this.appService.getTokenPublicInfo(contractAddress).subscribe(
       (data: any) => {
         this.token = data.token;
+        this.token.scanUrl = `${NETWORK_TYPES[this.token.network].scanUrl}/address/${this.token.token_address}`;
         this.isERC721 = this.token.standard === 'ERC721';
         this.tokenMints = data.mints;
         this.tokenBurns = data.burns;
@@ -181,5 +192,60 @@ export class DetailsComponent implements OnInit {
 
   isTestnet(): boolean {
     return this.token?.is_mainnet === 0;
+  }
+
+  formatSupply(supply: string | number | null): string {
+    if (!supply) return 'N/A';
+    
+    // Converte para número caso seja string
+    const numSupply = typeof supply === 'string' ? parseFloat(supply) : supply;
+    
+    // Formata o número usando Intl.NumberFormat
+    return new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 8,
+      useGrouping: true
+    }).format(numSupply);
+  }
+
+  toggleEditLinks(): void {
+    console.log('Toggle Edit Links called');
+    console.log('isLogged:', this.isLogged());
+    
+    if (!this.isLogged()) {
+      console.log('User not logged in');
+      return;
+    }
+    
+    this.isEditingLinks = !this.isEditingLinks;
+    console.log('isEditingLinks:', this.isEditingLinks);
+    
+    if (this.isEditingLinks) {
+      this.linkForm.patchValue({
+        website_url: this.token?.website_url || '',
+        whitepaper_url: this.token?.whitepaper_url || ''
+      });
+      console.log('Form values:', this.linkForm.value);
+    }
+  }
+
+  saveLinks() {
+    if (!this.isLogged()) {
+      return; // Não permite salvar se não estiver logado
+    }
+
+    if (this.linkForm.valid) {
+      const updates = this.linkForm.value;
+      // this.appService.updateTokenLinks(this.token.token_address, updates).subscribe(
+      //   (response) => {
+      //     this.token = { ...this.token, ...updates };
+      //     this.isEditingLinks = false;
+      //   },
+      //   (error) => {
+      //     console.error('Error updating links:', error);
+      //     // Aqui você pode adicionar uma notificação de erro
+      //   }
+      // );
+    }
   }
 }

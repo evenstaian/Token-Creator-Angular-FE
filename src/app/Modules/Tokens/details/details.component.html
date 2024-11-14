@@ -100,7 +100,7 @@
           <div class="token-stats">
             <div class="stat-item">
               <span class="stat-label">Supply Inicial</span>
-              <span class="stat-value">{{token?.supply || 'N/A'}}</span>
+              <span class="stat-value">{{formatSupply(token?.supply)}}</span>
             </div>
             <div class="stat-item">
               <span class="stat-label">Tipo</span>
@@ -118,6 +118,89 @@
           <div class="token-description" *ngIf="token?.description">
             <p>{{token?.description}}</p>
           </div>
+        </div>
+      
+        <!-- Nova seção Links Importantes -->
+        <div class="important-links-section">
+          <div class="section-header">
+            <h2>Links Importantes</h2>
+            <button *ngIf="isLogged()" 
+                    class="edit-button"
+                    [class.editing]="isEditingLinks"
+                    type="button"
+                    (click)="toggleEditLinks()">
+              <i class="fas" [ngClass]="isEditingLinks ? 'fa-times' : 'fa-plus'"></i>
+              <span class="edit-button-text">{{isEditingLinks ? 'Cancelar' : 'Editar Links'}}</span>
+            </button>
+          </div>
+
+          <!-- Modo de Visualização -->
+          <div class="links-grid" *ngIf="!isEditingLinks">
+            <a href="{{token?.scanUrl}}" 
+               target="_blank" 
+               class="link-item">
+              <i class="fas fa-search"></i>
+              <span class="link-label">Scan</span>
+              <i class="fas fa-external-link-alt external-icon"></i>
+            </a>
+            
+            <a *ngIf="token?.website_url" 
+               [href]="token?.website_url" 
+               target="_blank" 
+               class="link-item">
+              <i class="fas fa-globe"></i>
+              <span class="link-label">Website</span>
+              <i class="fas fa-external-link-alt external-icon"></i>
+            </a>
+            
+            <a *ngIf="token?.whitepaper_url" 
+               [href]="token?.whitepaper_url" 
+               target="_blank" 
+               class="link-item">
+              <i class="fas fa-file-alt"></i>
+              <span class="link-label">Whitepaper</span>
+              <i class="fas fa-external-link-alt external-icon"></i>
+            </a>
+          </div>
+
+          <!-- Modo de Edição -->
+          <form [formGroup]="linkForm" *ngIf="isEditingLinks" class="links-edit-form">
+            <div class="form-group">
+              <label>Website URL</label>
+              <input type="url" 
+                     formControlName="website_url" 
+                     placeholder="https://example.com"
+                     class="form-control">
+              <div class="error-message" *ngIf="linkForm.get('website_url')?.errors?.pattern">
+                URL inválida. Deve começar com http:// ou https://
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Whitepaper URL</label>
+              <input type="url" 
+                     formControlName="whitepaper_url" 
+                     placeholder="https://example.com/whitepaper"
+                     class="form-control">
+              <div class="error-message" *ngIf="linkForm.get('whitepaper_url')?.errors?.pattern">
+                URL inválida. Deve começar com http:// ou https://
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" 
+                      class="btn btn-secondary" 
+                      (click)="toggleEditLinks()">
+                Cancelar
+              </button>
+              <button type="button" 
+                      class="btn btn-primary" 
+                      [disabled]="!linkForm.valid"
+                      (click)="saveLinks()">
+                Salvar
+              </button>
+            </div>
+          </form>
         </div>
       
         <!-- Mints Section -->
