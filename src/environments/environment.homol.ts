@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: `https://criptolab-auth-service-dot-pandapay.rj.r.appspot.com`,
-  apiTokenUrl: `https://criptolab-token-api-dot-pandapay.rj.r.appspot.com`,
-  apiEventsUrl: `https://events.coins-external.com:8088`,
+  apiUrl: `HOMOL_API_AUTH`,
+  apiTokenUrl: `HOMOL_TOKEN_API`,
+  apiEventsUrl: `HOMOL_EVENTS_API`,
 };

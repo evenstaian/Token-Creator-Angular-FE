@@ -170,4 +170,8 @@ export class AppService {
         }
     }
 
+    updateTokenBanner(tokenAddress: string, formData: FormData): Observable<any> {
+        return this.http.post(`${this.apiUrl}/tokens/${tokenAddress}/banner`, formData);
+    }
+
 }

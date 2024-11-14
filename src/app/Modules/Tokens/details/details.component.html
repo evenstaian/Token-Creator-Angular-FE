@@ -66,9 +66,17 @@
     <div class="token-details-container" *ngIf="!loading">
         <!-- Banner Section -->
         <div class="banner-section">
-          <div class="banner-image" [ngStyle]="getBackgroundStyle()">
-            <div class="banner-overlay"></div>
+          <div class="banner-image" 
+               [ngClass]="{'has-image': token?.banner_url}"
+               [ngStyle]="getBannerStyle()">
           </div>
+          <div class="banner-overlay"></div>
+          <button *ngIf="isLogged()" 
+                  class="edit-banner-button"
+                  (click)="openBannerModal()">
+            <i class="fas fa-camera"></i>
+            Editar Banner
+          </button>
         </div>
       
         <!-- Token Info Section -->
@@ -290,4 +298,42 @@
       <div class="loading-spinner" *ngIf="loading">
         <span>Loading...</span>
       </div>      
+</div>
+
+<!-- Adicione o modal no final do template, antes do fechamento da div principal -->
+<div class="banner-modal" *ngIf="showBannerModal">
+  <div class="banner-modal-content">
+    <div class="banner-modal-header">
+      <h3>Alterar Banner</h3>
+      <button class="banner-modal-close" (click)="closeBannerModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="banner-upload-area" 
+         (click)="triggerFileInput()"
+         (dragover)="onDragOver($event)"
+         (drop)="onDrop($event)">
+      <input type="file" 
+             #fileInput 
+             (change)="onFileSelected($event)"
+             accept="image/*" 
+             style="display: none">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Clique ou arraste uma imagem aqui</p>
+    </div>
+
+    <div class="banner-preview" *ngIf="previewImage">
+      <img [src]="previewImage" alt="Preview">
+    </div>
+
+    <div class="banner-modal-actions">
+      <button class="btn btn-secondary" (click)="closeBannerModal()">Cancelar</button>
+      <button class="btn btn-primary" 
+              [disabled]="!selectedFile"
+              (click)="uploadBanner()">
+        Salvar
+      </button>
+    </div>
+  </div>
 </div>

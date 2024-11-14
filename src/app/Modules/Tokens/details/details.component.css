@@ -52,6 +52,8 @@ header {
   bottom: 0;
   background: linear-gradient(to bottom, rgba(26, 26, 26, 0.3), #1a1a1a);
   border-radius: 16px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .token-info-section {
@@ -747,4 +749,155 @@ header {
     width: auto;
     min-width: 120px;
   }
+}
+
+.banner-section {
+  position: relative;
+}
+
+/* Mobile First - Edit Banner Button */
+.edit-banner-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  background: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+.edit-banner-button i {
+  font-size: 12px;
+}
+
+.edit-banner-button:hover {
+  background: rgba(38, 38, 38, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.edit-banner-button:active {
+  transform: translateY(1px);
+}
+
+/* Desktop styles */
+@media screen and (min-width: 768px) {
+  .edit-banner-button {
+    top: 12px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .edit-banner-button i {
+    font-size: 13px;
+  }
+}
+
+/* Modal styles */
+.banner-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.banner-modal-content {
+  background: #252525;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.banner-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.banner-modal-header h3 {
+  margin: 0;
+  color: white;
+}
+
+.banner-modal-close {
+  background: none;
+  border: none;
+  color: #9e9e9e;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.banner-modal-close:hover {
+  color: white;
+}
+
+.banner-upload-area {
+  border: 2px dashed #333;
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.banner-upload-area:hover {
+  border-color: #666;
+}
+
+.banner-upload-area i {
+  font-size: 32px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.banner-upload-area p {
+  margin: 0;
+  color: #9e9e9e;
+}
+
+.banner-preview {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.banner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Ajuste para o banner sem blur quando houver imagem */
+.banner-image.has-image {
+  filter: none;
+  transform: none;
 }

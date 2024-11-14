@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/services/app.service';
 import { TokenTypeService } from 'src/app/shared/token-type.service';
@@ -22,6 +22,10 @@ export class DetailsComponent implements OnInit {
   activeTab: 'mints' | 'burns' | 'transfers' = 'mints';
   isEditingLinks: boolean = false;
   linkForm: FormGroup;
+  showBannerModal: boolean = false;
+  selectedFile: File | null = null;
+  previewImage: string | null = null;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -247,5 +251,85 @@ export class DetailsComponent implements OnInit {
       //   }
       // );
     }
+  }
+
+  getBannerStyle(): any {
+    if (this.token?.banner_url) {
+      return {
+        'background-image': `url(${this.token.banner_url})`,
+        'background-color': 'transparent'
+      };
+    }
+    return this.getBackgroundStyle();
+  }
+
+  openBannerModal(): void {
+    this.showBannerModal = true;
+  }
+
+  closeBannerModal(): void {
+    this.showBannerModal = false;
+    this.selectedFile = null;
+    this.previewImage = null;
+  }
+
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.handleFile(file);
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const file = event.dataTransfer?.files[0];
+    if (file) {
+      this.handleFile(file);
+    }
+  }
+
+  private handleFile(file: File): void {
+    if (file.type.startsWith('image/')) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.previewImage = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Você pode adicionar uma notificação de erro aqui
+      console.error('Por favor, selecione apenas arquivos de imagem.');
+    }
+  }
+
+  uploadBanner(): void {
+    if (!this.selectedFile || !this.token?.token_address) return;
+
+    const formData = new FormData();
+    formData.append('banner', this.selectedFile);
+    this.closeBannerModal();
+
+    this.appService.updateTokenBanner(this.token.token_address, formData).subscribe(
+      (response: any) => {
+        this.token.banner_url = response.banner_url;
+        this.closeBannerModal();
+        // Você pode adicionar uma notificação de sucesso aqui
+      },
+      (error) => {
+        console.error('Error uploading banner:', error);
+        // Você pode adicionar uma notificação de erro aqui
+      }
+    );
   }
 }
